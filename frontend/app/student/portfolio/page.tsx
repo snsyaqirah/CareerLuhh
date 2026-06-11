@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FolderGit2, GitBranch, Award, Trophy, Plus, Sparkles, X } from "lucide-react";
+import { FolderGit2, GitBranch, Award, Trophy, Plus, Sparkles, X, ExternalLink } from "lucide-react";
 import { AgentCard } from "@/components/agent-card/AgentCard";
 import { portfolioItems, type PortfolioItem } from "@/lib/mock-data/student";
 
@@ -12,30 +12,59 @@ const TYPE_META: Record<PortfolioItem["type"], { icon: React.ReactNode; label: s
   competition: { icon: <Trophy size={16} />, label: "Competition", color: "bg-red text-white" },
 };
 
+const TYPE_URL_PLACEHOLDER: Record<PortfolioItem["type"], string> = {
+  project: "https://github.com/username/project or live URL",
+  github: "https://github.com/username",
+  cert: "https://cert-issuer.com/verify/...",
+  competition: "https://devfolio.co/... or certificate link",
+};
+
 export default function PortfolioPage() {
   const [items, setItems] = useState(portfolioItems);
   const [showForm, setShowForm] = useState(false);
+  const [type, setType] = useState<PortfolioItem["type"]>("project");
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [type, setType] = useState<PortfolioItem["type"]>("project");
+  const [techInput, setTechInput] = useState("");
+  const [date, setDate] = useState("");
+  const [dateEnd, setDateEnd] = useState("");
+  const [url, setUrl] = useState("");
+  const [certId, setCertId] = useState("");
+
+  function resetForm() {
+    setTitle("");
+    setDesc("");
+    setTechInput("");
+    setDate("");
+    setDateEnd("");
+    setUrl("");
+    setCertId("");
+  }
 
   function addItem(e: React.FormEvent) {
     e.preventDefault();
+    const techStack = techInput
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
     setItems((s) => [
       {
         id: `pf_${Date.now()}`,
         type,
         title,
         description: desc,
-        skillsUsed: [],
-        date: "Just now",
+        techStack,
+        date: date || "Just now",
+        dateEnd: dateEnd || undefined,
+        url: url || undefined,
+        certId: type === "cert" && certId ? certId : undefined,
         aiSummary:
           "The Auditor will summarise this for employers once Stage 2 agents are live — for now it counts toward your readiness score.",
       },
       ...s,
     ]);
-    setTitle("");
-    setDesc("");
+    resetForm();
     setShowForm(false);
   }
 
@@ -52,13 +81,18 @@ export default function PortfolioPage() {
             student to senior — you never start from scratch again.
           </p>
         </div>
-        <button onClick={() => setShowForm(!showForm)} className="btn-yellow px-4 py-2 text-xs">
-          {showForm ? <X size={14} /> : <Plus size={14} />} {showForm ? "Cancel" : "Add Item"}
+        <button
+          onClick={() => { setShowForm(!showForm); resetForm(); }}
+          className="btn-yellow px-4 py-2 text-xs"
+        >
+          {showForm ? <X size={14} /> : <Plus size={14} />}{" "}
+          {showForm ? "Cancel" : "Add Item"}
         </button>
       </div>
 
       {showForm && (
         <form onSubmit={addItem} className="card mb-8 space-y-4">
+          {/* Row 1: Type + Title */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label className="label-bauhaus">Type</label>
@@ -68,7 +102,7 @@ export default function PortfolioPage() {
                 onChange={(e) => setType(e.target.value as PortfolioItem["type"])}
               >
                 <option value="project">Project</option>
-                <option value="github">GitHub</option>
+                <option value="github">GitHub Profile</option>
                 <option value="cert">Certificate</option>
                 <option value="competition">Competition</option>
               </select>
@@ -80,19 +114,116 @@ export default function PortfolioPage() {
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="e.g. Personal finance tracker"
+                placeholder={
+                  type === "github"
+                    ? "github.com/yourusername"
+                    : type === "cert"
+                    ? "e.g. AWS Cloud Practitioner"
+                    : "e.g. Personal finance tracker"
+                }
               />
             </div>
           </div>
+
+          {/* Row 2: Description */}
           <div>
             <label className="label-bauhaus">Description</label>
             <input
               className="input-bauhaus"
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
-              placeholder="One line on what it is and what you used"
+              placeholder="One line on what it is and what you built"
             />
           </div>
+
+          {/* Row 3: Tech Stack */}
+          <div>
+            <label className="label-bauhaus">
+              Tech Stack
+              <span className="ml-2 font-normal normal-case tracking-normal text-ink/50">
+                — separate with commas
+              </span>
+            </label>
+            <input
+              className="input-bauhaus"
+              value={techInput}
+              onChange={(e) => setTechInput(e.target.value)}
+              placeholder={
+                type === "github"
+                  ? "JavaScript, Python, Git"
+                  : type === "cert"
+                  ? "AWS, Cloud Infrastructure"
+                  : "React, Node.js, PostgreSQL"
+              }
+            />
+          </div>
+
+          {/* Row 4: Dates */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className="label-bauhaus">
+                {type === "cert" ? "Issued" : "Start Date"}
+              </label>
+              <input
+                className="input-bauhaus"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                placeholder="e.g. Mar 2026"
+              />
+            </div>
+            {type !== "cert" && (
+              <div>
+                <label className="label-bauhaus">End Date</label>
+                <input
+                  className="input-bauhaus"
+                  value={dateEnd}
+                  onChange={(e) => setDateEnd(e.target.value)}
+                  placeholder="e.g. Jun 2026 or Ongoing"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Row 5: URL */}
+          <div>
+            <label className="label-bauhaus">
+              {type === "github" ? "GitHub Profile URL" : "Project / Cert URL"}
+              <span className="ml-2 font-normal normal-case tracking-normal text-ink/50">
+                — optional
+              </span>
+            </label>
+            <input
+              className="input-bauhaus"
+              type="url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              placeholder={TYPE_URL_PLACEHOLDER[type]}
+            />
+            {type === "github" && (
+              <p className="mt-1 text-[11px] font-semibold text-ink/50">
+                Stage 2: auto-fetch repo count, languages, and last commit via GitHub API
+              </p>
+            )}
+          </div>
+
+          {/* Row 6: Cert ID (only for cert type) */}
+          {type === "cert" && (
+            <div>
+              <label className="label-bauhaus">
+                Certificate ID
+                <span className="ml-2 font-normal normal-case tracking-normal text-ink/50">
+                  — optional
+                </span>
+              </label>
+              <input
+                className="input-bauhaus"
+                value={certId}
+                onChange={(e) => setCertId(e.target.value)}
+                placeholder="e.g. AWS-CLF-2026-123456 or fCC-RWD-001"
+              />
+            </div>
+          )}
+
           <button type="submit" className="btn-blue px-5 py-2 text-xs">
             Add to Portfolio <Plus size={14} />
           </button>
@@ -106,23 +237,43 @@ export default function PortfolioPage() {
             <AgentCard
               key={item.id}
               agentName={meta.label}
-              codeName={item.date}
+              codeName={item.dateEnd ? `${item.date} – ${item.dateEnd}` : item.date}
               accent={item.type === "cert" ? "yellow" : item.type === "competition" ? "red" : "blue"}
               className="card-hover"
             >
-              <div className="mb-3 flex items-center gap-2">
-                <span className={`border-2 border-ink p-2 ${meta.color}`}>{meta.icon}</span>
-                <h2 className="text-lg font-black uppercase leading-tight">{item.title}</h2>
+              <div className="mb-3 flex items-start gap-2">
+                <span className={`shrink-0 border-2 border-ink p-2 ${meta.color}`}>{meta.icon}</span>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-black uppercase leading-tight">{item.title}</h2>
+                  {item.url && (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-[11px] font-bold text-blue hover:underline"
+                    >
+                      <ExternalLink size={11} /> View
+                    </a>
+                  )}
+                </div>
               </div>
               <p className="mb-3 text-sm font-medium text-ink/70">{item.description}</p>
-              {item.skillsUsed.length > 0 && (
+              {item.techStack.length > 0 && (
                 <div className="mb-3 flex flex-wrap gap-2">
-                  {item.skillsUsed.map((s) => (
-                    <span key={s} className="border-2 border-ink bg-canvas px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                  {item.techStack.map((s) => (
+                    <span
+                      key={s}
+                      className="border-2 border-ink bg-canvas px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider"
+                    >
                       {s}
                     </span>
                   ))}
                 </div>
+              )}
+              {item.certId && (
+                <p className="mb-3 text-[11px] font-bold text-ink/50">
+                  ID: <span className="font-black text-ink">{item.certId}</span>
+                </p>
               )}
               <p className="flex items-start gap-1.5 border-l-4 border-yellow pl-2 text-xs font-semibold text-ink/60">
                 <Sparkles size={12} className="mt-0.5 shrink-0" /> {item.aiSummary}
