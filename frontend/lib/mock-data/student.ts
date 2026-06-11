@@ -198,3 +198,71 @@ export const studentProfile = {
   cgpa: 3.2,
   graduation: "October 2026",
 };
+
+// Living Portfolio — items the student has added so far
+export interface PortfolioItem {
+  id: string;
+  type: "project" | "github" | "cert" | "competition";
+  title: string;
+  description: string;
+  skillsUsed: string[];
+  date: string;
+  aiSummary: string;
+}
+
+export const portfolioItems: PortfolioItem[] = [
+  {
+    id: "pf_1",
+    type: "project",
+    title: "Campus Food Ordering App",
+    description: "Group project — React Native app for campus cafeteria pre-orders",
+    skillsUsed: ["React Native", "Firebase", "Figma"],
+    date: "Mar 2026",
+    aiSummary:
+      "Demonstrates end-to-end product thinking: UI design through deployment. Strongest signal for frontend roles.",
+  },
+  {
+    id: "pf_2",
+    type: "github",
+    title: "github.com/ainasofea",
+    description: "12 repos · 47 contributions in the last 3 months",
+    skillsUsed: ["JavaScript", "Python", "Git"],
+    date: "Active",
+    aiSummary:
+      "Consistent commit cadence reads as discipline. Pin the food-ordering repo — it's your best work.",
+  },
+  {
+    id: "pf_3",
+    type: "cert",
+    title: "freeCodeCamp Responsive Web Design",
+    description: "300-hour certification completed",
+    skillsUsed: ["HTML", "CSS", "Accessibility"],
+    date: "Jan 2026",
+    aiSummary: "Entry-level signal — pair it with a deployed project to make it count.",
+  },
+];
+
+// SkorAlignAgent — full translation table for the Qualifications page
+export const skorAlignments = [
+  {
+    localCert: "MUET Band 4",
+    globalEquivalent: "CEFR B2 (Upper Intermediate)",
+    category: "Language",
+    employerDescription:
+      "Demonstrates solid working proficiency in English — able to handle professional communication, presentations, and written reports independently.",
+  },
+  {
+    localCert: "SKM Tahap 3 — IT Support",
+    globalEquivalent: "Vocational Diploma equivalent (EQF Level 4)",
+    category: "Technical (TVET)",
+    employerDescription:
+      "Hands-on certified competency in IT support workflows — equivalent to entry-level helpdesk certification recognised by MNC HR systems.",
+  },
+  {
+    localCert: "STPM CGPA 3.5",
+    globalEquivalent: "A-Levels equivalent (UCAS ~120 points)",
+    category: "Academic",
+    employerDescription:
+      "Pre-university qualification at distinction level — internationally comparable to strong A-Level results.",
+  },
+];

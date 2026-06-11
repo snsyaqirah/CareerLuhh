@@ -118,3 +118,143 @@ export const employerProfile = {
   industry: "Software & IT Services",
   size: "11-50 employees",
 };
+
+// Saved shortlist — candidates the employer is tracking
+export const shortlist = [
+  {
+    candidateId: "cand_001",
+    name: "Nurul Ain bt Rosli",
+    currentRole: "Junior Developer",
+    trajectoryScore: 89,
+    status: "contacted" as const,
+    notes: "Replied — open to a call after her current sprint ends. Follow up next Monday.",
+    addedAt: "3 days ago",
+  },
+  {
+    candidateId: "cand_002",
+    name: "Haziq bin Hamdan",
+    currentRole: "Self-taught Developer",
+    trajectoryScore: 84,
+    status: "watching" as const,
+    notes: "Wait for his 4th deployed project — strong junior hire signal if velocity holds.",
+    addedAt: "1 week ago",
+  },
+  {
+    candidateId: "cand_003",
+    name: "Tan Wei Jian",
+    currentRole: "QA Engineer",
+    trajectoryScore: 76,
+    status: "interviewing" as const,
+    notes: "Technical interview scheduled Thursday — prep automation take-home.",
+    addedAt: "2 weeks ago",
+  },
+];
+
+// Re-engagement warmlist — past candidates worth a second conversation
+export const warmlist = [
+  {
+    id: "warm_1",
+    name: "Daniel Wong",
+    lastRole: "Data Engineer @ fintech startup",
+    lastContact: "18 months ago",
+    rejectionReason: "Budget constraint, not fit",
+    matchedOpening: "Senior Data Engineer (opens next month)",
+    priority: "high" as const,
+  },
+  {
+    id: "warm_2",
+    name: "Aisyah Rahman",
+    lastRole: "UX Designer @ agency",
+    lastContact: "10 months ago",
+    rejectionReason: "Accepted competing offer",
+    matchedOpening: "Product Designer",
+    priority: "medium" as const,
+  },
+  {
+    id: "warm_3",
+    name: "Kavitha Pillai",
+    lastRole: "Backend Developer",
+    lastContact: "6 months ago",
+    rejectionReason: "Role was filled internally",
+    matchedOpening: "Backend Developer (Node.js)",
+    priority: "medium" as const,
+  },
+];
+
+// OnboardingAgent — all new hires being tracked
+export const newHires = [
+  {
+    id: "hire_004",
+    name: "Irfan Danial bin Azmi",
+    role: "Junior Developer",
+    day: 30,
+    riskScore: 42,
+    flags: ["Has not engaged in team Slack channels", "Submitted first PR 3 weeks late"],
+    managerAction: "Check in today — not performance review, just a genuine catch-up.",
+    conversationStarter:
+      "Hey Irfan, just wanted to see how you're settling in. What's been the most surprising thing about the role so far?",
+  },
+  {
+    id: "hire_005",
+    name: "Lim Jia Ying",
+    role: "Product Designer",
+    day: 14,
+    riskScore: 12,
+    flags: [],
+    managerAction: "On track — shipped first design review without escalation. No action needed.",
+    conversationStarter: "Nice work on the onboarding flow mockups — what do you want to tackle next?",
+  },
+  {
+    id: "hire_006",
+    name: "Arjun Mehta",
+    role: "QA Engineer",
+    day: 60,
+    riskScore: 67,
+    flags: ["Missed 2 standups this week", "Flagged workload concerns in 1:1 notes"],
+    managerAction: "Schedule a workload conversation this week — burnout signals at day 60 rarely self-correct.",
+    conversationStarter: "Arjun, your plate looks full. If you could hand off one thing tomorrow, what would it be?",
+  },
+];
+
+// Employer's posted internship listings
+export const internshipListings = [
+  {
+    id: "list_1",
+    title: "Frontend Developer Intern",
+    mode: "hybrid",
+    location: "Kuala Lumpur",
+    durationMonths: 6,
+    allowance: 900,
+    skillsNeeded: ["React", "TypeScript", "Git"],
+    applicants: 23,
+    topMatchScore: 91,
+    isActive: true,
+    postedAt: "2 weeks ago",
+  },
+  {
+    id: "list_2",
+    title: "UI/UX Design Intern",
+    mode: "onsite",
+    location: "Kuala Lumpur",
+    durationMonths: 4,
+    allowance: 800,
+    skillsNeeded: ["Figma", "Design Systems", "Prototyping"],
+    applicants: 41,
+    topMatchScore: 87,
+    isActive: true,
+    postedAt: "1 month ago",
+  },
+  {
+    id: "list_3",
+    title: "Data Analyst Intern",
+    mode: "remote",
+    location: "Remote (MY)",
+    durationMonths: 6,
+    allowance: 1000,
+    skillsNeeded: ["Python", "SQL", "Tableau"],
+    applicants: 17,
+    topMatchScore: 74,
+    isActive: false,
+    postedAt: "3 months ago",
+  },
+];
