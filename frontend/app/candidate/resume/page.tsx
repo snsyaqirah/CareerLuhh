@@ -558,18 +558,23 @@ export default function CandidateResumePage() {
           {/* Preview */}
           <div className="print:block">
             <div className="sticky top-6">
-              <div className="mb-3 flex items-center justify-between">
+              <div className="mb-3 flex items-center justify-between print:hidden">
                 <p className="text-label">Live Preview</p>
-                <button onClick={() => window.print()} className="flex items-center gap-1.5 border-2 border-ink px-3 py-1.5 text-xs font-bold uppercase hover:bg-yellow">
-                  <Printer size={12} /> Print
-                </button>
+                <div className="flex gap-2">
+                  <button onClick={() => downloadDoc(data)} className="flex items-center gap-1 border-2 border-ink px-3 py-1.5 text-xs font-bold uppercase hover:bg-yellow">
+                    <FileDown size={12} /> DOC
+                  </button>
+                  <button onClick={() => window.print()} className="flex items-center gap-1 border-2 border-ink bg-blue px-3 py-1.5 text-xs font-bold uppercase text-white hover:bg-blue/80">
+                    <Printer size={12} /> Print
+                  </button>
+                </div>
               </div>
-              <div className="overflow-auto border-4 border-ink shadow-hard-lg">
-                <div style={{ width: "520px" }}>
+              <div className="overflow-auto border-4 border-ink shadow-hard-lg print:border-0 print:overflow-visible print:shadow-none">
+                <div style={{ width: "520px" }} className="print:w-full">
                   <ResumePreview data={data} />
                 </div>
               </div>
-              <p className="mt-2 text-[10px] font-medium text-ink/40">Live preview — edits show instantly</p>
+              <p className="mt-2 text-[10px] font-medium text-ink/40 print:hidden">Live preview — edits show instantly</p>
             </div>
           </div>
         </div>
