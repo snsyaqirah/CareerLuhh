@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <!-- Canvas background -->
+  <rect width="48" height="48" fill="#f5f4f0"/>
+  <!-- Red square (bottom-left) -->
+  <rect x="2" y="18" width="28" height="28" fill="#D02020" stroke="#121212" stroke-width="2.5"/>
+  <!-- Blue circle (top-right) -->
+  <circle cx="32" cy="18" r="14" fill="#1040C0" stroke="#121212" stroke-width="2.5"/>
+  <!-- Yellow triangle (foreground) -->
+  <path d="M16 2 L30 26 L2 26 Z" fill="#F0C020" stroke="#121212" stroke-width="2.5" stroke-linejoin="miter"/>
+</svg>
