@@ -882,13 +882,52 @@ Output ONLY valid JSON.
 
 ### 6.1 Student Portal
 ```
-/student/dashboard          → Readiness score, coach alert, quick actions
-/student/onboarding         → 3-step onboarding wizard
+/student/dashboard          → Readiness score, coach alert, quick actions, "Got a Job?" CTA
 /student/roadmap            → Interactive career path tree (custom React SVG)
-/student/portfolio          → Living portfolio — add projects, GitHub, certs
 /student/internships        → The Recruiter — matched internships
+/student/portfolio          → Living portfolio — add projects, GitHub, certs
+/student/transcript         → Mini transcript — subjects + grades + GPA trend per semester
 /student/qualifications     → The Translator — MUET, SKM, STPM
 /student/lokal              → The Planner — city cost comparison tool
+/student/agents             → Agent Console — watch pipeline run live
+/student/onboarding         → 3-step onboarding wizard
+/student/graduate           → Profile Graduation wizard (student → candidate transfer)
+```
+
+#### Portfolio Item Fields (updated)
+```
+type        : project | github | cert | competition
+title       : string
+description : string
+techStack   : string[]          ← comma-separated on input, stored as array
+date        : string            ← display format "Mar 2026" or "Active"
+dateEnd     : string (optional) ← "Jun 2026" or "Ongoing"
+url         : string (optional) ← GitHub URL, project URL, cert verify link
+certId      : string (optional) ← only for cert type, e.g. "AWS-CLF-2026-123456"
+aiSummary   : string            ← The Auditor writes this in Stage 2
+```
+
+**GitHub API note (Stage 2):** When type = `github` and URL is provided, auto-fetch via:
+`GET https://api.github.com/users/{username}/repos` → returns repo count, languages, stars, last push.
+No auth needed for public repos (60 requests/hour unauthenticated, 5000 with token).
+
+#### Mini Transcript (`/student/transcript`)
+```
+Per semester:
+  - Semester number + academic year
+  - Subjects: code, name, credit hours, grade (A/A-/B+/B/B-/C+/C/C-/D/E), grade point
+  - Auto-calculated GPA per semester
+  - CGPA recalculated across all semesters
+  - GPA trend bar chart (visual)
+
+Malaysian grading scale used:
+  A = 4.0  |  A- = 3.7  |  B+ = 3.3  |  B = 3.0  |  B- = 2.7
+  C+ = 2.3 |  C = 2.0   |  C- = 1.7  |  D = 1.0   |  E = 0.0
+
+Feeds into:
+  - PathfinderAgent → academic direction analysis (strong in maths? → data paths)
+  - ReadinessAgent  → academic score component (30% of readiness)
+  - SkorAlignAgent  → CGPA ↔ global grading equivalence
 ```
 
 ### 6.2 Candidate Portal
