@@ -1542,5 +1542,13 @@ Deploy target: Vercel.
 
 ---
 
-*Document version: 2.0 | CareerLuhh | Talentbank First Cohort 2026*
+*Document version: 2.1 | CareerLuhh | Talentbank First Cohort 2026*
 *LLM: Gemini 2.0 Flash (free) | DB: Neon PostgreSQL (Stage 2) | Stage 1: Dummy data only*
+
+### v2.1 Changelog
+- Portfolio: added `techStack`, `dateEnd`, `url`, `certId` fields; GitHub API integration note (Stage 2)
+- Student Transcript: new `/student/transcript` page + `SemesterRecord` + `TranscriptSubject` schema
+- Profile Graduation: student → candidate transfer wizard at `/student/graduate` + migration logic
+- Nav reordered: Student (Roadmap → Internships → Portfolio → Transcript → ...), Candidate (Jobs → Next Move → Salary → ...), Employer (Search → Saved → Internships → ...)
+- `PathfinderAgent` + `ReadinessAgent` inputs updated to include transcript data
+- Career Profile panel in Agent Console: removed sticky scroll, made scrollable panel instead
