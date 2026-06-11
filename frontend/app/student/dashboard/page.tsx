@@ -120,6 +120,23 @@ export default function StudentDashboard() {
           <ArrowRight size={24} />
         </Link>
       </div>
+
+      {/* Graduate CTA */}
+      <Link
+        href="/student/graduate"
+        className="mt-5 flex items-center justify-between border-4 border-ink bg-blue p-5 text-white shadow-hard-md transition-transform hover:-translate-y-1"
+      >
+        <div className="flex items-center gap-4">
+          <GraduationCap size={28} />
+          <div>
+            <p className="text-sm font-black uppercase tracking-wider">Secured a job?</p>
+            <p className="mt-0.5 text-xs font-semibold text-white/70">
+              Transfer your student profile to Candidate — portfolio, transcript, and readiness score carry over
+            </p>
+          </div>
+        </div>
+        <ArrowRight size={22} className="shrink-0" />
+      </Link>
     </div>
   );
 }
