@@ -228,8 +228,10 @@ model StudentProfile {
   cgpa           Float?
   graduationDate DateTime?
   interests      String[]
+  graduatedAt    DateTime? // set when student transfers to candidate
 
   academicResults AcademicResult[]
+  semesterRecords SemesterRecord[]
 }
 
 model AcademicResult {
@@ -270,14 +272,36 @@ model PortfolioItem {
   id            String        @id @default(cuid())
   careerProfile CareerProfile @relation(fields: [profileId], references: [id])
   profileId     String
-  type          String
+  type          String        // project | github | cert | competition
   title         String
   description   String?
-  url           String?
-  skillsUsed    String[]
-  dateStart     DateTime?
-  dateEnd       DateTime?
+  url           String?       // project URL, GitHub URL, cert verify link
+  techStack     String[]      // replaces skillsUsed — clearer naming
+  dateDisplay   String?       // display string e.g. "Mar 2026"
+  dateEnd       String?       // e.g. "Jun 2026" or "Ongoing"
+  certId        String?       // optional cert ID, only for type=cert
   aiSummary     String?
+}
+
+model TranscriptSubject {
+  id             String   @id @default(cuid())
+  semesterRecord SemesterRecord @relation(fields: [semesterId], references: [id])
+  semesterId     String
+  code           String
+  name           String
+  creditHours    Int
+  grade          String   // A, A-, B+, B, B-, C+, C, C-, D, E
+  gradePoint     Float
+}
+
+model SemesterRecord {
+  id        String              @id @default(cuid())
+  studentId String
+  student   StudentProfile      @relation(fields: [studentId], references: [id])
+  semester  Int
+  year      String              // e.g. "2024/25"
+  gpa       Float
+  subjects  TranscriptSubject[]
 }
 
 model CareerPath {
@@ -403,7 +427,8 @@ export async function runAgent(
 
 #### `PathfinderAgent` — The Navigator
 **Trigger:** Student completes onboarding OR manually requests new path
-**Input:** Programme, field, CGPA, results, interests, location
+**Input:** Programme, field, CGPA, transcript (subject grades per semester), interests, location
+**Notes:** Transcript adds academic direction signals — e.g. consistently high maths grades suggest data/AI paths; strong HCI grades suggest UX paths.
 **Output:** Career path tree (nodes + edges for React SVG render)
 
 **System Prompt:**
@@ -488,13 +513,18 @@ Rules:
 ---
 
 #### `ReadinessAgent` — The Auditor
-**Trigger:** After PathfinderAgent runs OR student updates portfolio
+**Trigger:** After PathfinderAgent runs OR student updates portfolio OR adds transcript records
 **System Prompt:**
 ```
 You are The Auditor (ReadinessAgent) inside CareerLuhh.
 Your ONLY job is to assess how hireable a student is RIGHT NOW.
 
-Score breakdown: academic results (30%), skills (30%), portfolio (25%), soft indicators (15%)
+Score breakdown:
+  academic results (30%) ← uses CGPA + per-subject grades from transcript
+  skills (30%)           ← extracted from portfolio techStack fields
+  portfolio (25%)        ← project count, GitHub activity, cert IDs
+  soft indicators (15%)  ← MUET band, competition entries, location flexibility
+
 Be honest — do not inflate scores.
 Output ONLY valid JSON: { score, grade, gaps: [], strengths: [], nextActions: [] }
 ```
@@ -989,7 +1019,73 @@ POST /api/internships/:id/apply
 
 GET  /api/talent/search
 POST /api/talent/shortlist
+
+GET  /api/transcript
+POST /api/transcript/semester        ← add semester record
+DELETE /api/transcript/semester/:id
+
+POST /api/profile/graduate           ← student → candidate transfer
 ```
+
+---
+
+## 7a. Profile Graduation (Student → Candidate Transfer)
+
+**Trigger:** Student clicks "Secured a job?" CTA on dashboard → opens `/student/graduate` wizard
+
+### Wizard Flow (3 steps)
+```
+Step 1 — Job Details
+  Input: jobTitle, company, startDate, employmentStatus
+
+Step 2 — Preview Transfer
+  Shows what carries over:
+    ✓ Identity (name, email, location)
+    ✓ Portfolio items (all types)
+    ✓ Academic records (CGPA, transcript, semester records)
+    ✓ Skills extracted from portfolio techStack
+    ✓ ReadinessAgent score (recalculated for candidate context)
+
+Step 3 — Confirm → calls POST /api/profile/graduate
+```
+
+### Stage 2 Migration Logic (`POST /api/profile/graduate`)
+```typescript
+// lib/agents/profile-graduate.ts
+async function graduateProfile(studentId: string, jobDetails: JobDetails) {
+  // 1. Create CandidateProfile
+  const candidate = await prisma.candidateProfile.create({
+    data: {
+      userId: studentProfile.userId,
+      employmentStatus: jobDetails.status,
+      currentRole: jobDetails.jobTitle,
+      yearsExp: 0,
+      skills: extractSkillsFromPortfolio(portfolio),
+    }
+  })
+
+  // 2. Move portfolio items from student CareerProfile
+  // (CareerProfile is shared — items already there, no copy needed)
+
+  // 3. Copy academic CGPA to CandidateProfile as context
+  // (SemesterRecords stay linked to StudentProfile for reference)
+
+  // 4. Change user.role = candidate
+  await prisma.user.update({ where: { id: userId }, data: { role: "candidate" } })
+
+  // 5. Stamp graduatedAt on StudentProfile
+  await prisma.studentProfile.update({ data: { graduatedAt: new Date() } })
+
+  // 6. Re-run ReadinessAgent and PathfinderAgent in candidate mode
+  return { success: true, redirectTo: "/candidate/dashboard" }
+}
+```
+
+### Key Design Decision
+The **CareerProfile is shared** — it belongs to the User, not a role. Portfolio items, career paths, and job matches are already role-agnostic in the schema. The graduation migration only changes:
+1. `user.role` → `candidate`
+2. Creates a new `CandidateProfile` row pre-filled from student data
+3. Sets `studentProfile.graduatedAt` (student data preserved, not deleted)
 
 ---
 
