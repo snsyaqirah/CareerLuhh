@@ -47,7 +47,7 @@ export default function PrivacyPage() {
           </div>
           <h1 className="text-heading mb-3">Privacy Policy</h1>
           <p className="text-sm font-medium text-ink/60">
-            Last updated: 11 June 2026 · CareerLuhh is committed to protecting your personal data
+            Last updated: 12 June 2026 · CareerLuhh is committed to protecting your personal data
             in accordance with Malaysia&apos;s <strong>Personal Data Protection Act 2010 (PDPA)</strong>.
           </p>
           <p className="mt-3 text-sm font-medium text-ink/60">
@@ -91,6 +91,8 @@ export default function PrivacyPage() {
             <Row label="Portfolio" value="Project descriptions, GitHub profile URL, certifications, tech skills, certificate IDs" />
             <Row label="Location" value="City/state of residence, willingness to relocate — not GPS coordinates" />
             <Row label="Usage" value="Pages visited, features used, application history — no advertising profiling" />
+            <Row label="Platform activity (staff, with consent)" value="If you are a staff member invited by your employer and give explicit consent, your CareerLuhh activity (profile updates, job listing views, salary benchmark searches) is shared with your linked employer account. You can revoke this consent at any time in Settings." />
+            <Row label="In-platform messages" value="Messages sent or received through CareerLuhh's in-platform messaging system (e.g. employer re-engagement messages). These are stored on our servers and visible to both parties in the conversation." />
           </div>
           <p className="mt-3 flex items-start gap-2 border-l-4 border-yellow pl-3 text-xs">
             <AlertTriangle size={13} className="mt-0.5 shrink-0" />
@@ -108,6 +110,8 @@ export default function PrivacyPage() {
               ["Job matching", "To match your profile to relevant job listings based on your trajectory, skills, and preferences."],
               ["AI agent personalisation", "To provide trajectory-based recommendations (PathfinderAgent, JobMatchAgent, etc.) that are accurate to your situation."],
               ["Platform improvement", "To understand how users interact with the platform and improve features — aggregated and anonymised."],
+              ["Employer retention signals (staff, opt-in only)", "If you join CareerLuhh via an employer's invite code and explicitly consent, selected platform activity signals (profile updates, job browsing frequency, salary benchmark searches) are shared with that employer to support workforce retention conversations. This is never done silently — you must consent, and you can revoke at any time."],
+              ["In-platform messaging", "To deliver messages between employers and candidates through the CareerLuhh inbox. Message content is only accessible to the sender and recipient."],
               ["Communications (opt-in)", "If you consent, to send career updates, job alerts, or platform announcements. You can unsubscribe at any time."],
             ].map(([title, desc]) => (
               <li key={title as string} className="border-l-4 border-blue pl-3">
@@ -143,6 +147,12 @@ export default function PrivacyPage() {
             <Row label="Uploadthing (Stage 2)" value="Handles resume PDF uploads. Files stored in AWS S3. Privacy: uploadthing.com/privacy" />
             <Row label="Employers on platform" value="If you apply for a job, your name, email, and cover note are visible to that employer. Your full profile is only shared with explicit consent." />
           </div>
+          <p className="mt-4 flex items-start gap-2 border-l-4 border-red pl-3 text-xs">
+            <AlertTriangle size={13} className="mt-0.5 shrink-0 text-red" />
+            <span>
+              <strong>Employer–staff data sharing (The Watcher feature):</strong> If your employer uses CareerLuhh and invites you to join their company account, they may request access to your platform activity signals. This sharing only happens after your <strong>explicit, separate consent</strong> — it is not automatic. You can revoke this consent at any time in Settings without losing access to your personal CareerLuhh account. Your employer will not see the content of messages you send to other parties, salary details you have not shared, or any data outside the consented activity signals.
+            </span>
+          </p>
           <p className="mt-3">
             All third-party vendors are assessed for PDPA compliance. Data transfers outside Malaysia comply with PDPA Section 129 — transfers are only made to countries with adequate data protection laws or with your explicit consent.
           </p>
@@ -171,9 +181,8 @@ export default function PrivacyPage() {
             <div>
               <p className="font-black uppercase text-sm">Delete Your Account</p>
               <p className="mt-1 text-xs">
-                Stage 1: clear your browser localStorage to remove all local data.
-                Stage 2: Account Settings → Delete Account (removes all data within 30 days).
-                Or email <a href="mailto:privacy@careerluhh.my" className="font-bold text-blue underline underline-offset-2">privacy@careerluhh.my</a>.
+                Go to <strong>Settings → Delete Account</strong> in your portal. You must type &ldquo;DELETE&rdquo; to confirm — this removes all locally stored data immediately (Stage 1). Stage 2: deletion propagates to the database within 30 days. You can also email{" "}
+                <a href="mailto:privacy@careerluhh.my" className="font-bold text-blue underline underline-offset-2">privacy@careerluhh.my</a>.
               </p>
             </div>
           </div>
