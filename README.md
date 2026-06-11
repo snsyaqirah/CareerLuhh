@@ -281,18 +281,6 @@ CareerLuhh/
 
 ---
 
-## Hackathon Criteria Alignment
-
-| Criterion | Weight | How We Address It |
-|---|---|---|
-| **Product & UX Thinking** | 30% | 3 distinct user archetypes, clear problem statement, agents explain their reasoning in plain language, honest AI (not hype) |
-| **System Design & Integration** | 25% | 3 portals sharing one Career Profile, 16 agents with defined inputs/outputs, clean module boundaries, Stage 2 architecture pre-defined |
-| **Completeness** | 20% | 31 live routes, end-to-end user journey per portal, mobile-responsive, deployed to Vercel |
-| **AI Craft** | 15% | Gemini 2.0 Flash selected for structured outputs + low latency; prompt design documented in `/backend/agents/`; Stage 1 mock outputs mirror real agent schema |
-| **Code Quality** | 10% | TypeScript strict mode, zero `any`, PDPA security headers, no plaintext credentials in client bundle |
-
----
-
 ## Run Locally
 
 ```bash
@@ -331,5 +319,3 @@ MIT — built for the Talentbank First Cohort Tech Hackathon 2026.
 ## Team
 
 **Syaqirah** — Software Developer
-
-*CareerLuhh · Career First, Everything Else Later*
