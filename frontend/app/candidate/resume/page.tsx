@@ -589,7 +589,6 @@ export default function CandidateResumePage() {
             top: 0 !important;
             left: 0 !important;
             width: 100% !important;
-            padding: 0 !important;
             border: none !important;
           }
           @page { size: A4; margin: 0; }

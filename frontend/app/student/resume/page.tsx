@@ -499,7 +499,6 @@ export default function StudentResumePage() {
             top: 0 !important;
             left: 0 !important;
             width: 100% !important;
-            padding: 0 !important;
             border: none !important;
           }
           @page {

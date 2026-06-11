@@ -114,10 +114,17 @@ export const internships = [
     location: "Kuala Lumpur",
     allowance: 800,
     matchScore: 91,
-    matchReason:
-      "Your React interest + CGPA 3.2 aligns with their junior dev intern profile",
+    matchReason: "Your React interest + CGPA 3.2 aligns with their junior dev intern profile",
     absorptionRate: "High — 70% converted to full-time last year",
     duration: 6,
+    description: "Work alongside the digital banking product team to build and maintain frontend features for Maybank2u web. You'll ship real features into a product used by 9 million Malaysians.",
+    requirements: [
+      "Studying Computer Science, Software Engineering, or IT",
+      "Basic knowledge of React or any JS framework",
+      "CGPA 3.0 minimum",
+    ],
+    skills: ["React", "JavaScript", "Git", "REST APIs"],
+    url: "https://www.maybank.com/careers",
   },
   {
     id: "int_2",
@@ -127,10 +134,17 @@ export const internships = [
     location: "Kuala Lumpur",
     allowance: 1200,
     matchScore: 78,
-    matchReason:
-      "UI/UX interest shown in your profile matches product design track",
+    matchReason: "UI/UX interest shown in your profile matches product design track",
     absorptionRate: "Medium — active hiring from intern pool",
     duration: 4,
+    description: "Join the design team behind Shopee MY's mobile and web experience. You'll contribute to feature design sprints, conduct user research, and present designs to product managers.",
+    requirements: [
+      "Portfolio required — minimum 2 case studies",
+      "Proficient in Figma",
+      "Studying Design, Communications, or related field",
+    ],
+    skills: ["Figma", "User Research", "Prototyping", "Design Systems"],
+    url: "https://careers.shopee.com.my",
   },
   {
     id: "int_3",
@@ -140,10 +154,17 @@ export const internships = [
     location: "Kuala Lumpur",
     allowance: 1000,
     matchScore: 69,
-    matchReason:
-      "Your strong maths results signal data aptitude — worth exploring this track",
+    matchReason: "Your strong maths results signal data aptitude — worth exploring this track",
     absorptionRate: "Medium — graduate programme pipeline available",
     duration: 6,
+    description: "Support the data team in building dashboards and analytics pipelines for Petronas Digital's enterprise clients. Good exposure to real-world data engineering and BI tooling.",
+    requirements: [
+      "Studying Statistics, Mathematics, CS, or Data Science",
+      "SQL and Python fundamentals",
+      "Analytical mindset — you love solving ambiguous problems",
+    ],
+    skills: ["Python", "SQL", "Power BI", "Data Wrangling"],
+    url: "https://petronasdigital.com/careers",
   },
 ];
 

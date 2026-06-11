@@ -8,7 +8,12 @@ export type JobCategory =
   | "Product"
   | "Marketing"
   | "Finance"
-  | "Operations";
+  | "Operations"
+  | "Human Resources"
+  | "Healthcare"
+  | "Education"
+  | "Logistics"
+  | "Accounting";
 
 export type WorkMode = "remote" | "hybrid" | "onsite";
 export type JobType = "full-time" | "part-time" | "contract";
@@ -471,6 +476,105 @@ export const jobListings: JobListing[] = [
     skills: ["Python", "Django", "PostgreSQL", "Docker", "API Design"],
     source: "jobstreet",
     stretchFlag: false,
+  },
+
+  // ── Non-IT roles — CareerLuhh covers ALL industries ──────────────────────
+
+  {
+    id: "jl_17",
+    title: "Human Resources Business Partner",
+    company: "Sunway Group",
+    category: "Human Resources",
+    location: "Petaling Jaya, Selangor",
+    mode: "hybrid",
+    type: "full-time",
+    salaryMin: 5500,
+    salaryMax: 8500,
+    postedAt: "3 days ago",
+    description:
+      "Partner with business units to drive talent strategy, manage performance cycles, and lead change initiatives. You'll be the bridge between people and business outcomes in a conglomerate with 60,000+ employees across Southeast Asia.",
+    requirements: [
+      "3+ years HR generalist or HRBP experience",
+      "Degree in Human Resource Management or Psychology",
+      "Experience with HR systems (SAP SuccessFactors preferred)",
+    ],
+    skills: ["Talent Management", "HR Strategy", "Performance Management", "Change Management", "Employee Relations"],
+    source: "jobstreet",
+    stretchFlag: false,
+    successRate: 58,
+    interviewTip: "Two rounds: HR director + business unit head. Prepare a case study of a people problem you solved — with numbers.",
+  },
+  {
+    id: "jl_18",
+    title: "Registered Nurse (General Ward)",
+    company: "Pantai Hospital Kuala Lumpur",
+    category: "Healthcare",
+    location: "Kuala Lumpur",
+    mode: "onsite",
+    type: "full-time",
+    salaryMin: 3800,
+    salaryMax: 5500,
+    postedAt: "1 week ago",
+    description:
+      "Provide direct patient care in a busy general ward. Collaborate with doctors and allied health professionals to deliver safe, compassionate care. Mentorship for newly registered nurses is available.",
+    requirements: [
+      "Registered with Malaysian Nursing Board (MNB)",
+      "Post-basic certificate an advantage",
+      "Willing to work rotating shifts",
+    ],
+    skills: ["Patient Care", "Clinical Assessment", "IV Therapy", "BLS Certified", "Electronic Medical Records"],
+    source: "direct",
+    stretchFlag: false,
+    successRate: 72,
+    interviewTip: "Clinical panel interview — expect scenario questions on patient deterioration. SBAR communication framework is expected.",
+  },
+  {
+    id: "jl_19",
+    title: "Supply Chain Executive",
+    company: "Nestlé Malaysia",
+    category: "Logistics",
+    location: "Shah Alam, Selangor",
+    mode: "onsite",
+    type: "full-time",
+    salaryMin: 4500,
+    salaryMax: 7000,
+    postedAt: "5 days ago",
+    description:
+      "Coordinate end-to-end supply chain operations — from vendor management to distribution scheduling. You will optimise inventory levels and support the logistics team in achieving on-time delivery targets.",
+    requirements: [
+      "Degree in Supply Chain, Logistics, or Business",
+      "1–3 years in FMCG or manufacturing supply chain",
+      "Proficient in SAP or equivalent ERP system",
+    ],
+    skills: ["SAP", "Inventory Management", "Vendor Management", "Logistics Planning", "Excel / Power BI"],
+    source: "jobstreet",
+    stretchFlag: false,
+    successRate: 64,
+    interviewTip: "Case study round — be ready to walk through a supply disruption scenario and how you'd resolve it.",
+  },
+  {
+    id: "jl_20",
+    title: "Junior Accounts Executive",
+    company: "KPMG Malaysia",
+    category: "Accounting",
+    location: "Kuala Lumpur",
+    mode: "hybrid",
+    type: "full-time",
+    salaryMin: 3500,
+    salaryMax: 5500,
+    postedAt: "2 weeks ago",
+    description:
+      "Support audit and assurance engagements for mid-cap Malaysian companies. Gain exposure to financial reporting standards, regulatory requirements, and client management under senior oversight.",
+    requirements: [
+      "Pursuing or completed ACCA / ICPA / MICPA",
+      "Fresh graduate or up to 2 years audit experience",
+      "Strong Excel and report-writing skills",
+    ],
+    skills: ["Financial Reporting", "Audit", "Excel", "MFRS", "Client Communication"],
+    source: "direct",
+    stretchFlag: false,
+    successRate: 66,
+    interviewTip: "Competency-based interview. Expect 'give me an example of a time you dealt with ambiguity' — have two stories ready.",
   },
 ];
 
