@@ -259,7 +259,7 @@ export default function LandingPage() {
                 </span>
               </div>
               <div className="mb-3 flex flex-wrap gap-1.5">
-                {job.tags.slice(0, 3).map((t) => (
+                {job.skills.slice(0, 3).map((t: string) => (
                   <span key={t} className="border border-ink/20 px-1.5 py-0.5 text-[10px] font-bold uppercase">
                     {t}
                   </span>
@@ -269,7 +269,7 @@ export default function LandingPage() {
                 <div className="flex items-center gap-1 text-xs font-medium text-ink/50">
                   <MapPinned size={11} /> {job.location}
                 </div>
-                <span className="text-xs font-black text-ink">{job.salaryRange}</span>
+                <span className="text-xs font-black text-ink">RM {job.salaryMin / 1000}k–{job.salaryMax / 1000}k</span>
               </div>
             </div>
           ))}
