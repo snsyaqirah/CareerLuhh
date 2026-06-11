@@ -10,12 +10,14 @@ import {
   MapPin,
   FileText,
   Bot,
+  ClipboardList,
 } from "lucide-react";
 import { PortalShell, type NavItem } from "@/components/shared/PortalShell";
 
 const NAV: NavItem[] = [
   { label: "Dashboard", href: "/candidate/dashboard", icon: <LayoutDashboard size={16} /> },
-  { label: "Job Matches", href: "/candidate/jobs", icon: <Briefcase size={16} /> },
+  { label: "Job Board", href: "/candidate/jobs", icon: <Briefcase size={16} /> },
+  { label: "My Applications", href: "/candidate/applications", icon: <ClipboardList size={16} /> },
   { label: "Next Move", href: "/candidate/next-move", icon: <Compass size={16} /> },
   { label: "Salary", href: "/candidate/salary", icon: <Banknote size={16} /> },
   { label: "Portfolio", href: "/candidate/portfolio", icon: <FolderGit2 size={16} /> },
