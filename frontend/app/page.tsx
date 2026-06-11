@@ -92,11 +92,9 @@ const HOW_IT_WORKS = [
 const PREVIEW_JOBS = jobListings.slice(0, 3);
 
 const MODE_COLOR: Record<string, string> = {
-  "Full-time": "bg-blue text-white",
-  "Part-time": "bg-red text-white",
-  Remote: "bg-yellow text-ink",
-  Hybrid: "bg-canvas text-ink",
-  Internship: "bg-blue text-white",
+  remote: "bg-yellow text-ink",
+  hybrid: "bg-canvas text-ink",
+  onsite: "bg-blue text-white",
 };
 
 export default function LandingPage() {
