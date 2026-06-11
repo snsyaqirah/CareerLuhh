@@ -54,10 +54,11 @@ export default function RegisterPage() {
   const [role, setRole] = useState<Role | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [pdpaConsent, setPdpaConsent] = useState(false);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!role) return;
+    if (!role || !pdpaConsent) return;
     register(name, email, role);
     router.push(ROLE_HOME[role]);
   }
