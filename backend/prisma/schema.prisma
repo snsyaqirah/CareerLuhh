@@ -1,0 +1,185 @@
+// CareerLuhh — Stage 2 database schema (Neon PostgreSQL)
+// Stage 1 uses mock data only; this schema is the blueprint for the build phase.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Neon connection string
+}
+
+enum Role {
+  student
+  candidate
+  employer
+}
+
+enum EmploymentStatus {
+  employed
+  unemployed
+  freelance
+  gig
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      Role
+  createdAt DateTime @default(now())
+
+  studentProfile   StudentProfile?
+  candidateProfile CandidateProfile?
+  employerProfile  EmployerProfile?
+  careerProfile    CareerProfile?
+  agentLogs        AgentLog[]
+}
+
+model CareerProfile {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id])
+  displayName    String?
+  headline       String?
+  location       String?
+  readinessScore Int      @default(0)
+  updatedAt      DateTime @updatedAt
+
+  portfolioItems PortfolioItem[]
+  careerPaths    CareerPath[]
+  jobMatches     JobMatch[]
+}
+
+model StudentProfile {
+  id             String    @id @default(cuid())
+  userId         String    @unique
+  user           User      @relation(fields: [userId], references: [id])
+  university     String?
+  programme      String?
+  field          String?
+  semester       Int?
+  cgpa           Float?
+  graduationDate DateTime?
+  interests      String[]
+
+  academicResults AcademicResult[]
+}
+
+model AcademicResult {
+  id        String         @id @default(cuid())
+  studentId String
+  student   StudentProfile @relation(fields: [studentId], references: [id])
+  semester  Int
+  year      Int
+  gpa       Float
+  subjects  Json
+}
+
+model CandidateProfile {
+  id               String           @id @default(cuid())
+  userId           String           @unique
+  user             User             @relation(fields: [userId], references: [id])
+  employmentStatus EmploymentStatus @default(unemployed)
+  currentRole      String?
+  yearsExp         Int?
+  skills           String[]
+  resumeUrl        String?
+  parsedResume     Json?
+}
+
+model EmployerProfile {
+  id          String  @id @default(cuid())
+  userId      String  @unique
+  user        User    @relation(fields: [userId], references: [id])
+  companyName String
+  industry    String?
+  size        String?
+
+  internshipListings InternshipListing[]
+  talentShortlist    TalentShortlist[]
+}
+
+model PortfolioItem {
+  id            String        @id @default(cuid())
+  careerProfile CareerProfile @relation(fields: [profileId], references: [id])
+  profileId     String
+  type          String
+  title         String
+  description   String?
+  url           String?
+  skillsUsed    String[]
+  dateStart     DateTime?
+  dateEnd       DateTime?
+  aiSummary     String?
+}
+
+model CareerPath {
+  id            String        @id @default(cuid())
+  careerProfile CareerProfile @relation(fields: [profileId], references: [id])
+  profileId     String
+  generatedAt   DateTime      @default(now())
+  paths         Json
+}
+
+model AgentLog {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  agentCode   String
+  input       Json
+  output      Json
+  triggeredAt DateTime @default(now())
+}
+
+model JobMatch {
+  id            String        @id @default(cuid())
+  careerProfile CareerProfile @relation(fields: [profileId], references: [id])
+  profileId     String
+  jobTitle      String
+  company       String
+  source        String
+  url           String?
+  matchScore    Int
+  matchReason   String?
+  status        String        @default("new")
+  fetchedAt     DateTime      @default(now())
+}
+
+model InternshipListing {
+  id             String          @id @default(cuid())
+  employerId     String
+  employer       EmployerProfile @relation(fields: [employerId], references: [id])
+  title          String
+  description    String?
+  skillsNeeded   String[]
+  location       String?
+  mode           String
+  durationMonths Int?
+  allowance      Float?
+  postedAt       DateTime        @default(now())
+  isActive       Boolean         @default(true)
+
+  applications InternshipApplication[]
+}
+
+model InternshipApplication {
+  id         String            @id @default(cuid())
+  studentId  String
+  listingId  String
+  listing    InternshipListing @relation(fields: [listingId], references: [id])
+  status     String            @default("applied")
+  matchScore Int?
+  appliedAt  DateTime          @default(now())
+}
+
+model TalentShortlist {
+  id         String          @id @default(cuid())
+  employerId String
+  employer   EmployerProfile @relation(fields: [employerId], references: [id])
+  profileId  String
+  status     String          @default("watching")
+  notes      String?
+  addedAt    DateTime        @default(now())
+}
