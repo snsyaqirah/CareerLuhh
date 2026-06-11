@@ -20,6 +20,47 @@
 
 ---
 
+## 0. Mandatory Criteria Checklist (Talentbank Career OS)
+
+### Step 1 — Core Job Platform Requirements
+| Requirement | Status | Implementation |
+|---|---|---|
+| Sign up & register | ✅ | `/register` — 3 roles (student, candidate, employer), mock auth |
+| Profile & resume builder | ✅ | Onboarding wizard + Portfolio + ResumeOCRAgent parses PDF |
+| Job listings | ✅ | `/candidate/jobs` — 16 listings, search, filters |
+| Job applications | ✅ | Apply modal → localStorage → `/candidate/applications` tracking |
+| Job matching | ✅ | JobMatchAgent — trajectory-based AI matching with explanations |
+| Keyword & job search | ✅ | Search bar + category + work mode filters on job board |
+| Candidate dashboard | ✅ | `/candidate/dashboard` — readiness, coach, salary alert, job digest |
+| Employer dashboard | ✅ | `/employer/dashboard` — talent radar, retention alerts, onboarding |
+
+### Step 2 — Modules Covered
+| Module | Audience | Implementation |
+|---|---|---|
+| Career Path Navigator | Candidate | PathfinderAgent → `/student/roadmap` + `/candidate/next-move` |
+| Living Portfolio | Candidate | `/student/portfolio` + `/candidate/portfolio` — tech stack, cert ID, GitHub URL |
+| AI Career Coach | Candidate | CoachAgent — urgency-aware advice on dashboard |
+| Fair Pay Engine | Candidate | PayBenchmarkAgent → `/candidate/salary` — benchmark + negotiation script |
+| Smart Talent Matching | Employer | TrajectoryMatchAgent → `/employer/search` + AI Matched tab on job board |
+| Talent Retention Signals | Employer | RetentionSignalAgent → `/employer/dashboard` alerts |
+| Talent Re-Engagement | Employer | ReEngagementAgent → `/employer/re-engage` warmlist |
+| Onboarding Success Predictor | Employer | OnboardingAgent → `/employer/onboarding` new hire tracker |
+| Workforce Resilience Planner | Employer | WorkforceAgent → `/employer/workforce` 30-year plan |
+| Adaptive Readiness Profile | University/Student | ReadinessAgent → student dashboard score |
+| Live Internship Marketplace | University/Student | InternMatchAgent → `/student/internships` matched listings |
+| Lifelong Outcome Loop | University/Student | Student → Candidate transfer at `/student/graduate` tracks full arc |
+
+### Scoring Alignment
+| Criterion | Weight | How We Address It |
+|---|---|---|
+| Product & UX Thinking | 30% | 3 portals × full user journey, Bauhaus design system, real user tasks completed |
+| System Design & Integration | 25% | Shared Career Profile, 16 agents pipeline, multi-role auth, modular architecture |
+| Completeness | 20% | All 8 basics implemented, clickable prototype, deployable to Vercel |
+| AI Craft | 15% | 16 specialised agents, trajectory-based (not keyword) matching, RAG knowledge base in Agent Console |
+| Code Quality | 10% | TypeScript strict, Tailwind design tokens, no magic numbers, zero TS errors |
+
+---
+
 ## 1. Project Overview
 
 **CareerLuhh** is Asia's Career Co-Pilot — a multi-agent AI system that guides users from student life through active employment. Unlike traditional job portals that match by keyword, CareerLuhh matches by **trajectory** — where you're heading, not just where you've been.
@@ -963,24 +1004,62 @@ Feeds into:
 ### 6.2 Candidate Portal
 ```
 /candidate/dashboard        → Coach alerts, job digest, readiness
-/candidate/onboarding       → Upload resume → The Clerk parses it
+/candidate/jobs             → Job Board — browse all 16+ listings + AI matched tab + search/filter + Apply
+/candidate/applications     → My Applications — status tracking (applied → interview → offer)
 /candidate/next-move        → The Navigator — 3 path options
-/candidate/jobs             → The Broker — job matches
 /candidate/salary           → The Analyst — benchmark + negotiation
-/candidate/gig              → The Converter — gig → professional credentials
 /candidate/portfolio        → Living portfolio
+/candidate/gig              → The Converter — gig → professional credentials
 /candidate/lokal            → The Planner
+/candidate/agents           → Agent Console
+/candidate/onboarding       → Upload resume → The Clerk parses it
+```
+
+#### Job Board Features
+```
+Browse All Jobs tab:
+  - 16 curated job listings across Technology, Design, Data, Product, Finance, Marketing
+  - Keyword search (title, company, skill)
+  - Filter by category + work mode (remote/hybrid/onsite)
+  - Expandable job cards with requirements + skills
+  - Apply button → modal (name, email, cover note)
+  - Applied state persisted in localStorage
+
+AI Matched tab:
+  - Jobs pre-scored by JobMatchAgent
+  - Explains WHY each job fits (trajectory-based reasoning)
+  - Stretch flags for growth opportunities
+
+Application Status tracking:
+  applied → reviewing → shortlisted → interview → offer / rejected
+  Visual timeline per application card
 ```
 
 ### 6.3 Employer Portal
 ```
 /employer/dashboard         → Talent radar digest, retention alerts
+/employer/jobs              → Post Jobs — post full-time listings + manage applicants
 /employer/search            → The Headhunter — search by trajectory
 /employer/saved             → Shortlisted candidates
+/employer/internships       → Post + manage internship listings
 /employer/re-engage         → The Diplomat — warmlist
 /employer/onboarding        → The Buddy — new hire tracker
-/employer/internships       → Post + manage internship listings
 /employer/workforce         → The Strategist — workforce plan
+/employer/agents            → Agent Console
+```
+
+#### Employer Job Posting Features
+```
+Post a Job form:
+  title, category, location, mode, type, salary range, description,
+  requirements (dynamic rows), skills needed
+
+Manage listings:
+  - Active / Closed status toggle
+  - Applicant count per listing
+  - Expand to see all applicants with name, role, match score
+  - Status update per applicant (new → reviewing → shortlisted → rejected)
+  - Stage 2: applicants linked to full Candidate + CareerProfile
 ```
 
 ---
@@ -1012,6 +1091,16 @@ POST /api/agents/retention-signal
 POST /api/agents/re-engagement
 POST /api/agents/onboarding
 POST /api/agents/workforce
+
+GET  /api/jobs                        ← browse all job listings
+POST /api/jobs                        ← employer posts a job
+GET  /api/jobs/:id
+PUT  /api/jobs/:id
+DELETE /api/jobs/:id
+
+POST /api/jobs/:id/apply              ← candidate applies
+GET  /api/applications                ← candidate's application history
+PUT  /api/applications/:id/status     ← employer updates applicant status
 
 GET  /api/internships
 POST /api/internships
@@ -1544,6 +1633,14 @@ Deploy target: Vercel.
 
 *Document version: 2.1 | CareerLuhh | Talentbank First Cohort 2026*
 *LLM: Gemini 2.0 Flash (free) | DB: Neon PostgreSQL (Stage 2) | Stage 1: Dummy data only*
+
+### v2.2 Changelog
+- Added Section 0: Mandatory Criteria Checklist mapping all 8 basics + 12 modules to implementation
+- Job Board: 16 job listings, keyword search, category + mode filters, Apply modal, localStorage persistence
+- Application Tracker: `/candidate/applications` — status timeline (applied → interview → offer)
+- Employer Job Management: `/employer/jobs` — post jobs form, manage listings, update applicant status
+- API routes updated to include jobs CRUD + applications endpoints
+- Navs updated: Candidate adds "Job Board" + "My Applications"; Employer adds "Post Jobs"
 
 ### v2.1 Changelog
 - Portfolio: added `techStack`, `dateEnd`, `url`, `certId` fields; GitHub API integration note (Stage 2)
