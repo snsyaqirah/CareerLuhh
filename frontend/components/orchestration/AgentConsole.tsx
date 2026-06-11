@@ -232,14 +232,11 @@ export function AgentConsole({ role }: { role: Role }) {
           <Bot size={13} />
           {running ? "Pipeline running" : done ? "Pipeline complete" : "Idle"}
         </span>
-        <div className="flex-1">
-          <ProgressBar durationMs={400} active={false} />
-          <div className="h-1.5 w-full border border-ink bg-white">
-            <div
-              className="h-full bg-blue transition-all duration-300"
-              style={{ width: `${(completed / pipeline.steps.length) * 100}%` }}
-            />
-          </div>
+        <div className="h-1.5 flex-1 border border-ink bg-white">
+          <div
+            className="h-full bg-blue transition-all duration-300"
+            style={{ width: `${(completed / pipeline.steps.length) * 100}%` }}
+          />
         </div>
         <span className="text-xs font-black uppercase tracking-wider">
           {completed}/{pipeline.steps.length} agents
