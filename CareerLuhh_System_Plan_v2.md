@@ -27,7 +27,7 @@
 |---|---|---|
 | Sign up & register | ✅ | `/register` — 3 roles (student, candidate, employer), mock auth |
 | Profile & resume builder | ✅ | Onboarding wizard + Portfolio + ResumeOCRAgent parses PDF |
-| Job listings | ✅ | `/candidate/jobs` — 16 listings, search, filters |
+| Job listings | ✅ | `/candidate/jobs` — 20 listings across 8 industries (IT, Finance, Healthcare, HR, Logistics, Accounting, Design, Data), search, filters |
 | Job applications | ✅ | Apply modal → localStorage → `/candidate/applications` tracking |
 | Job matching | ✅ | JobMatchAgent — trajectory-based AI matching with explanations |
 | Keyword & job search | ✅ | Search bar + category + work mode filters on job board |
@@ -74,7 +74,8 @@
 - **16 Specialised AI Agents** — each does one job, minimal hallucination
 - **Living Career Profile** — evolves from student to senior, never starts from scratch
 - **Malaysia-First** — MUET, TVET, gig economy, rural-to-urban, local job boards integrated
-- **SDG-Aligned** — SDG 4, 8, 10, 17
+- **SDG-Aligned** — SDG 4, 5, 8, 10
+- **Industry-Agnostic** — covers IT, Finance, Healthcare, HR, Logistics, Education, and all other fields
 
 ---
 
