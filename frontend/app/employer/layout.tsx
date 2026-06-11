@@ -9,11 +9,13 @@ import {
   UserPlus,
   Building2,
   Bot,
+  Briefcase,
 } from "lucide-react";
 import { PortalShell, type NavItem } from "@/components/shared/PortalShell";
 
 const NAV: NavItem[] = [
   { label: "Dashboard", href: "/employer/dashboard", icon: <LayoutDashboard size={16} /> },
+  { label: "Post Jobs", href: "/employer/jobs", icon: <Briefcase size={16} /> },
   { label: "Talent Search", href: "/employer/search", icon: <Search size={16} /> },
   { label: "Saved", href: "/employer/saved", icon: <Bookmark size={16} /> },
   { label: "Internships", href: "/employer/internships", icon: <Building2 size={16} /> },

@@ -552,7 +552,7 @@ export const employerJobPostings: EmployerJobPosting[] = [
     requirements: ["3+ years full-stack", "Node.js", "PostgreSQL"],
     skills: ["Next.js", "Node.js", "PostgreSQL", "Docker"],
     applicants: [
-      { id: "b1", name: "Ahmad Faris bin Azman", currentRole: "Junior Software Engineer", yearsExp: 2, matchScore: 81, status: "interview", appliedAt: "1 week ago" },
+      { id: "b1", name: "Ahmad Faris bin Azman", currentRole: "Junior Software Engineer", yearsExp: 2, matchScore: 81, status: "shortlisted", appliedAt: "1 week ago" },
       { id: "b2", name: "Siti Hajar bt Kamaruddin", currentRole: "Mid-level Developer", yearsExp: 3, matchScore: 88, status: "shortlisted", appliedAt: "5 days ago" },
     ],
   },
