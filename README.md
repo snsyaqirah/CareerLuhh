@@ -56,16 +56,15 @@ a throwaway local session for whichever role you pick.
 
 No environment variables needed for Stage 1.
 
-## Built pages (Stage 1)
+## Built pages (Stage 1) — all 26 routes live
 
-- `/` — Bauhaus landing page
-- `/login` + `/register` — mock auth with role selection
-- `/student/dashboard` · `/student/roadmap` (custom SVG career tree) · `/student/internships`
-- `/candidate/dashboard` · `/candidate/jobs` · `/candidate/salary`
-- `/employer/dashboard` · `/employer/search` · `/employer/workforce`
-
-Locked sidebar items (Portfolio, Gig Bridge, Re-Engage, …) are Stage 2 scope —
-shown on purpose so judges see the full vision.
+- `/` — Bauhaus landing page · `/login` + `/register` — mock auth with role selection
+- **Student:** dashboard · roadmap (custom SVG career tree) · internships ·
+  portfolio · qualifications (SkorAlign) · lokal route · onboarding wizard
+- **Candidate:** dashboard · jobs · salary · next-move · gig bridge ·
+  portfolio · lokal route · resume upload (The Clerk demo)
+- **Employer:** dashboard · talent search · workforce · saved shortlist ·
+  re-engage warmlist · onboarding tracker · internship listings
 
 ## Design system
 
