@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { ArrowRight, GraduationCap, Briefcase, Building2, Check } from "lucide-react";
 import { useAuth, ROLE_HOME, type Role } from "@/lib/auth-context";
 import { LogoWordmark } from "@/components/bauhaus/GeometricLogo";
+import { DemoGuide } from "@/components/shared/DemoGuide";
 
 const ROLES: { role: Role; title: string; desc: string; icon: React.ReactNode; color: string }[] = [
   {
@@ -65,6 +66,7 @@ export default function RegisterPage() {
 
   return (
     <main className="min-h-screen bg-canvas">
+      <DemoGuide pathname="/register" />
       <header className="flex items-center justify-between border-b-4 border-ink bg-white px-6 py-4">
         <Link href="/">
           <LogoWordmark />

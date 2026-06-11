@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { ArrowRight, GraduationCap, Briefcase, Building2 } from "lucide-react";
 import { useAuth, DEMO_ACCOUNTS, ROLE_HOME, type Role } from "@/lib/auth-context";
 import { LogoWordmark } from "@/components/bauhaus/GeometricLogo";
+import { DemoGuide } from "@/components/shared/DemoGuide";
 
 const ROLE_ICONS: Record<Role, React.ReactNode> = {
   student: <GraduationCap size={18} />,
@@ -35,6 +36,7 @@ export default function LoginPage() {
 
   return (
     <main className="flex min-h-screen">
+      <DemoGuide pathname="/login" />
       {/* Left color block */}
       <div className="relative hidden w-2/5 flex-col justify-between border-r-4 border-ink bg-blue p-10 lg:flex">
         <Link href="/">

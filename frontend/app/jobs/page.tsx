@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MapPin, Banknote, Search, ArrowRight } from "lucide-react";
 import { LogoWordmark } from "@/components/bauhaus/GeometricLogo";
 import { jobListings } from "@/lib/mock-data/jobs";
+import { DemoGuide } from "@/components/shared/DemoGuide";
 
 function fmtSalary(min: number, max: number) {
   return `RM${(min / 1000).toFixed(0)}k – RM${(max / 1000).toFixed(0)}k`;
@@ -16,6 +17,7 @@ const MODE_COLOR: Record<string, string> = {
 export default function PublicJobsPage() {
   return (
     <main className="min-h-screen bg-canvas">
+      <DemoGuide pathname="/jobs" />
       {/* Header */}
       <header className="sticky top-0 z-50 flex items-center justify-between border-b-4 border-ink bg-white px-5 py-4 md:px-10">
         <Link href="/"><LogoWordmark /></Link>

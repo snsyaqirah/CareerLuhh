@@ -179,7 +179,7 @@ export default function LandingPage() {
         ].map(([num, label]) => (
           <div
             key={label}
-            className="border-ink px-6 py-8 text-center [&:not(:last-child)]:md:border-r-4 odd:border-r-4 md:odd:border-r-4"
+            className="border-ink px-6 py-8 text-center odd:border-r-4 [&:nth-child(-n+2)]:border-b-4 [&:nth-child(-n+2)]:md:border-b-0 md:[&:not(:last-child)]:border-r-4"
           >
             <p className="text-4xl font-black md:text-5xl">{num}</p>
             <p className="text-label mt-1">{label}</p>

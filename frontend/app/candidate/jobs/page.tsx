@@ -399,25 +399,25 @@ export default function JobsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="mb-6 flex border-b-4 border-ink">
+      <div className="mb-6 flex flex-wrap border-b-4 border-ink">
         <button
           onClick={() => setTab("browse")}
-          className={`px-5 py-2.5 text-sm font-black uppercase tracking-wide transition-colors ${tab === "browse" ? "bg-ink text-white" : "hover:bg-canvas"}`}
+          className={`px-3 py-2 text-xs font-black uppercase tracking-wide transition-colors sm:px-5 sm:py-2.5 sm:text-sm ${tab === "browse" ? "bg-ink text-white" : "hover:bg-canvas"}`}
         >
           Browse All ({jobListings.length})
         </button>
         <button
           onClick={() => setTab("matched")}
-          className={`flex items-center gap-2 px-5 py-2.5 text-sm font-black uppercase tracking-wide transition-colors ${tab === "matched" ? "bg-ink text-white" : "hover:bg-canvas"}`}
+          className={`flex items-center gap-1.5 px-3 py-2 text-xs font-black uppercase tracking-wide transition-colors sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm ${tab === "matched" ? "bg-ink text-white" : "hover:bg-canvas"}`}
         >
-          <Bot size={14} /> AI Matched ({matchedJobs.length})
+          <Bot size={13} /> AI Matched ({matchedJobs.length})
         </button>
         {savedIds.size > 0 && (
           <a
             href="/candidate/saved"
-            className="ml-auto flex items-center gap-2 px-5 py-2.5 text-sm font-black uppercase tracking-wide text-blue hover:bg-canvas"
+            className="ml-auto flex items-center gap-1.5 px-3 py-2 text-xs font-black uppercase tracking-wide text-blue hover:bg-canvas sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm"
           >
-            <Bookmark size={14} /> Saved ({savedIds.size})
+            <Bookmark size={13} /> Saved ({savedIds.size})
           </a>
         )}
       </div>

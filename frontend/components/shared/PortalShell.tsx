@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { LogOut, Lock, Menu, Settings } from "lucide-react";
 import { useAuth, type Role } from "@/lib/auth-context";
 import { GeometricLogo } from "@/components/bauhaus/GeometricLogo";
+import { DemoGuide } from "@/components/shared/DemoGuide";
 
 export interface NavItem {
   label: string;
@@ -16,9 +17,9 @@ export interface NavItem {
 }
 
 const ROLE_LABEL: Record<Role, string> = {
-  student: "🎓 Student",
-  candidate: "💼 Candidate",
-  employer: "🏢 Employer",
+  student: "Student",
+  candidate: "Candidate",
+  employer: "Employer",
 };
 
 const ROLE_COLOR: Record<Role, string> = {
@@ -120,7 +121,7 @@ export function PortalShell({
   );
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen overflow-x-hidden">
       {/* Desktop sidebar */}
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-60 lg:block">{sidebar}</aside>
 
@@ -134,25 +135,33 @@ export function PortalShell({
 
       <div className="flex min-h-screen flex-1 flex-col lg:pl-60">
         {/* Top bar */}
-        <header className="sticky top-0 z-30 flex items-center justify-between border-b-4 border-ink bg-white px-5 py-3">
-          <button
-            className="border-2 border-ink p-2 lg:hidden"
-            onClick={() => setMobileOpen(true)}
-            aria-label="Open menu"
-          >
-            <Menu size={18} />
-          </button>
-          <span className={`agent-badge ${ROLE_COLOR[role]} hidden sm:inline-flex`}>
-            {ROLE_LABEL[role]} Portal
-          </span>
-          <span className="agent-badge-idle">
+        <header className="sticky top-0 z-30 flex items-center justify-between border-b-4 border-ink bg-white px-4 py-3 gap-2">
+          <div className="flex items-center gap-3">
+            <button
+              className="shrink-0 border-2 border-ink p-2 lg:hidden"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Open menu"
+            >
+              <Menu size={18} />
+            </button>
+            <span className={`agent-badge shrink-0 ${ROLE_COLOR[role]}`}>
+              {ROLE_LABEL[role]}
+            </span>
+          </div>
+          <span className="agent-badge-idle shrink-0">
             <span className="h-2 w-2 rounded-full bg-red" />
-            Stage 1 · Mock Data
+            <span className="hidden sm:inline">Stage 1 · </span>Mock Data
           </span>
         </header>
 
         <main className="flex-1 p-5 md:p-8">{children}</main>
       </div>
+
+      {/* Demo guide — auto-detects current page from pathname */}
+      <DemoGuide
+        pathname={pathname}
+        portalColor={role === "student" ? "blue" : role === "candidate" ? "red" : "yellow"}
+      />
     </div>
   );
 }

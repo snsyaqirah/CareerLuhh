@@ -469,22 +469,23 @@ export default function WorkforcePage() {
       </div>
 
       {/* Tab nav */}
-      <div className="mb-6 flex border-2 border-ink">
+      <div className="mb-6 flex flex-wrap border-2 border-ink">
         {(
           [
-            { id: "watcher", label: "The Watcher · Retention Signals" },
-            { id: "planner", label: "Resilience Planner" },
-            { id: "strategy", label: "Workforce Strategy" },
+            { id: "watcher", label: "The Watcher", labelFull: "The Watcher · Retention Signals" },
+            { id: "planner", label: "Planner", labelFull: "Resilience Planner" },
+            { id: "strategy", label: "Strategy", labelFull: "Workforce Strategy" },
           ] as const
         ).map((t) => (
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
-            className={`flex-1 border-r-2 border-ink px-3 py-2.5 text-xs font-black uppercase last:border-r-0 ${
+            className={`flex-1 border-b-2 border-r-2 border-ink px-3 py-2.5 text-xs font-black uppercase last:border-r-0 sm:border-b-0 ${
               tab === t.id ? "bg-ink text-white" : "hover:bg-canvas"
             }`}
           >
-            {t.label}
+            <span className="sm:hidden">{t.label}</span>
+            <span className="hidden sm:inline">{t.labelFull}</span>
           </button>
         ))}
       </div>
