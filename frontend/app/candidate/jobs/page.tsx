@@ -383,10 +383,14 @@ export default function JobsPage() {
       <h1 className="text-heading mb-2">
         Find Your Next Role<span className="text-red">.</span>
       </h1>
-      <p className="mb-6 max-w-2xl text-sm font-medium text-ink/60">
+      <p className="mb-3 max-w-2xl text-sm font-medium text-ink/60">
         Browse {jobListings.length} live listings or let the AI surface your top matches.
         Each job shows your skills gap, success rate, and interview tips — not just the description.
       </p>
+      <div className="mb-6 flex items-center gap-2 border-2 border-ink/20 bg-canvas px-4 py-2 text-xs font-bold">
+        <span className="h-2 w-2 rounded-full bg-blue shrink-0" />
+        CareerLuhh covers <span className="text-blue">all industries</span> — IT, Finance, Healthcare, HR, Logistics, Education, and more.
+      </div>
 
       {/* Agent card */}
       <div className="mb-6">
