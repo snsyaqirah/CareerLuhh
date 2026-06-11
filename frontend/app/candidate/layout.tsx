@@ -9,11 +9,13 @@ import {
   FolderGit2,
   MapPin,
   FileText,
+  Bot,
 } from "lucide-react";
 import { PortalShell, type NavItem } from "@/components/shared/PortalShell";
 
 const NAV: NavItem[] = [
   { label: "Dashboard", href: "/candidate/dashboard", icon: <LayoutDashboard size={16} /> },
+  { label: "Agent Console", href: "/candidate/agents", icon: <Bot size={16} /> },
   { label: "Job Matches", href: "/candidate/jobs", icon: <Briefcase size={16} /> },
   { label: "Salary", href: "/candidate/salary", icon: <Banknote size={16} /> },
   { label: "Next Move", href: "/candidate/next-move", icon: <Compass size={16} /> },

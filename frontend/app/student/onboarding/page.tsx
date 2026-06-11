@@ -27,9 +27,9 @@ export default function StudentOnboarding() {
     setInterests((s) => (s.includes(i) ? s.filter((x) => x !== i) : [...s, i]));
 
   function finish() {
-    // Stage 1: fake the agent pipeline, then land on the dashboard
+    // Stage 1: hand off to the Agent Console to watch the real pipeline run
     setRunning(true);
-    setTimeout(() => router.push("/student/dashboard"), 1800);
+    setTimeout(() => router.push("/student/agents"), 1800);
   }
 
   if (running) {
