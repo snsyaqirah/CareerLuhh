@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { FolderGit2, Github, Award, Trophy, Plus, Sparkles, X } from "lucide-react";
+import { FolderGit2, GitBranch, Award, Trophy, Plus, Sparkles, X } from "lucide-react";
 import { AgentCard } from "@/components/agent-card/AgentCard";
 import { portfolioItems, type PortfolioItem } from "@/lib/mock-data/student";
 
 const TYPE_META: Record<PortfolioItem["type"], { icon: React.ReactNode; label: string; color: string }> = {
   project: { icon: <FolderGit2 size={16} />, label: "Project", color: "bg-blue text-white" },
-  github: { icon: <Github size={16} />, label: "GitHub", color: "bg-ink text-white" },
+  github: { icon: <GitBranch size={16} />, label: "GitHub", color: "bg-ink text-white" },
   cert: { icon: <Award size={16} />, label: "Certificate", color: "bg-yellow text-ink" },
   competition: { icon: <Trophy size={16} />, label: "Competition", color: "bg-red text-white" },
 };
