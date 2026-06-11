@@ -59,17 +59,52 @@ export const talentRadar = {
 };
 
 // RetentionSignalAgent — The Watcher
+// Signals are CareerLuhh-internal (platform activity) — not LinkedIn scraping.
+// Stage 2: employer invites staff to CareerLuhh; staff consent to sharing activity data.
 export const retentionAlerts = [
   {
     employeeId: "emp_003",
     name: "Siti Hajar bt Kamaruddin",
+    role: "Mid-level Developer",
     riskLevel: "medium" as const,
+    riskScore: 61,
     signals: [
-      "Updated LinkedIn profile 3 days ago",
-      "Added new skills (Docker, Kubernetes) not relevant to current role",
+      "Updated CareerLuhh skills profile 3 days ago — added Docker, Kubernetes (2 levels above her current role scope)",
+      "Browsed 8 job listings this week (5× her usual activity)",
+      "Ran a salary benchmark for Senior Engineer roles — 32% above her current package",
     ],
     recommendedAction:
       "Have a career conversation this week. Ask where she sees herself in 12 months. She may be looking for a path to senior level — do you have that for her?",
+    suggestedScript: "Siti, I've been thinking about your growth here. You've clearly been building beyond your current scope — Docker, Kubernetes — that's senior-level thinking. I want to make sure we have a path that matches where you're heading. What does your ideal next role look like?",
+  },
+  {
+    employeeId: "emp_007",
+    name: "Farid bin Nordin",
+    role: "Data Analyst",
+    riskLevel: "low" as const,
+    riskScore: 28,
+    signals: [
+      "Completed 2 new certifications (Power BI, dbt) in the past 30 days",
+      "Salary benchmark search for Data Engineer roles (one level up)",
+    ],
+    recommendedAction:
+      "Low risk right now, but monitor. He's upskilling intentionally — consider a title conversation before he starts actively searching.",
+    suggestedScript: "Farid, I noticed you've been investing in your skills lately — Power BI, dbt. That's exactly the direction our data team needs to go. I'd love to talk about what a Data Engineer path looks like for you here.",
+  },
+  {
+    employeeId: "emp_011",
+    name: "Priya Nair",
+    role: "UX Designer",
+    riskLevel: "high" as const,
+    riskScore: 79,
+    signals: [
+      "Viewed 14 job listings in the past 5 days — all Product Manager roles (career pivot signal)",
+      "Updated CareerLuhh career goal from 'Senior Designer' to 'Product Manager'",
+      "Opened salary benchmark for PM roles at 3 different companies",
+    ],
+    recommendedAction:
+      "High flight risk — and she's signalling a career pivot, not just a company change. Explore whether you can create a hybrid design-PM role or offer internal mobility before she leaves.",
+    suggestedScript: "Priya, you've always had strong product instincts. I've been wondering if the pure design track is the right fit for where you're heading. Have you ever thought about a product management path? There might be something worth exploring here.",
   },
 ];
 
