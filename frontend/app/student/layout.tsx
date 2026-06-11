@@ -11,6 +11,7 @@ import {
   Bot,
   BookOpen,
   GraduationCap,
+  FileText,
 } from "lucide-react";
 import { PortalShell, type NavItem } from "@/components/shared/PortalShell";
 
@@ -20,6 +21,7 @@ const NAV: NavItem[] = [
   { label: "Internships", href: "/student/internships", icon: <Building2 size={16} /> },
   { label: "Portfolio", href: "/student/portfolio", icon: <FolderGit2 size={16} /> },
   { label: "Transcript", href: "/student/transcript", icon: <BookOpen size={16} /> },
+  { label: "Resume Builder", href: "/student/resume", icon: <FileText size={16} /> },
   { label: "Qualifications", href: "/student/qualifications", icon: <Languages size={16} /> },
   { label: "Lokal Route", href: "/student/lokal", icon: <MapPin size={16} /> },
   { label: "Agent Console", href: "/student/agents", icon: <Bot size={16} /> },
