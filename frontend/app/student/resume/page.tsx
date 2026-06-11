@@ -50,7 +50,7 @@ const autoProjects: Project[] = projectItems.map((p) => ({
 const autoCerts = certItems.map((c) => `${c.title} (${c.date})`).join(" · ");
 
 const latestSemester = transcriptRecords.length > 0 ? transcriptRecords[transcriptRecords.length - 1] : null;
-const cgpaDisplay = latestSemester ? latestSemester.cgpa.toFixed(2) : studentProfile.cgpa.toFixed(2);
+const cgpaDisplay = latestSemester ? latestSemester.gpa.toFixed(2) : studentProfile.cgpa.toFixed(2);
 
 // Collect all unique skills from portfolio tech stacks
 const allSkills = [...new Set(portfolioItems.flatMap((p) => p.techStack))].join(", ");
