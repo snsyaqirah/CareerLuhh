@@ -4,6 +4,35 @@
 
 ---
 
+## Changelog — Stage 1 Build (June 2026)
+
+| Date | Change |
+|---|---|
+| Jun 12 | **Industry breadth** — added 4 non-IT jobs (HR, Healthcare, Logistics, Accounting); CareerLuhh now covers 8 job categories |
+| Jun 12 | **Candidate detail** in employer talent search — expandable full profile with education, experience, skills, portfolio highlight |
+| Jun 12 | **Internship detail** — click-to-expand on each internship card with description, requirements, skills, apply button |
+| Jun 12 | **Saved jobs detail** — expandable view with description, requirements, skills gap, interview tip, apply CTA |
+| Jun 12 | **Re-engage rewrite** — editable draft textarea, mock send (CareerLuhh + email notification), in-platform chatbox with threaded replies |
+| Jun 12 | **Resume print margin fix** — removed `padding: 0 !important` from print CSS so `2cm` inline padding is preserved |
+| Jun 12 | **README.md rewrite** — full proposal with What Is CareerLuhh, Problem, 16 Agents table, 3 Mermaid diagrams, feature breakdown, SDG alignment, tech stack, project structure |
+| Jun 11 | **Workforce Intelligence** — rewrote `/employer/workforce` with Invite Staff section, The Watcher (platform-internal signals), Workforce Resilience Planner (interactive 5-year calculator) |
+| Jun 11 | **Manager check-in scheduler** — rewrote `/employer/onboarding` with Day 30/60/90 milestone scheduler, conversation scripts, done/skip buttons |
+| Jun 11 | **Employer.ts signals** — replaced LinkedIn-based signals with CareerLuhh-internal platform activity (profile updates, job browsing, salary benchmarks) |
+| Jun 11 | **Demo Guide system** — `lib/demo-guide.ts` + `DemoGuide.tsx` floating popup on all pages; single config file, disabled for Stage 2 with one flag |
+| Jun 11 | **Mobile responsive** — tab bar padding, overflow-x-hidden, responsive topbar, stat bar borders |
+| Jun 10 | **PDPA compliance** — privacy policy, consent checkbox, robots.txt, terms |
+| Jun 10 | **SDG fix** — replaced SDG 17 (Partnerships) with SDG 5 (Gender Equality); updated stats bar and SDG section |
+| Jun 10 | **Hero quote** — replaced "The Advisor says / Graduation is 4 months away" with JobMatchAgent card showing 94% match + company badges |
+| Jun 10 | **Resume builder** — auto-populate from portfolio + transcript, A4 preview, PDF print (no timestamp), DOCX download |
+| Jun 10 | **Candidate resume** — OCR upload + analyzer (score + severity issues) + builder tab |
+| Jun 10 | **Saved jobs** — localStorage bookmark + `/candidate/saved` page |
+| Jun 10 | **Skills gap + social proof** — per-job on candidate job board |
+| Jun 10 | **Settings** — edit name, export data, delete account (all 3 portals) |
+| Jun 10 | **Public job board** — `/jobs` accessible without login |
+| Jun 10 | **Student resume builder** — new nav item + dedicated page |
+
+---
+
 ## 📋 Table of Contents
 1. [Project Overview](#1-project-overview)
 2. [Tech Stack](#2-tech-stack)
@@ -1455,7 +1484,7 @@ graph TD
 | **SDG 4** Quality Education | SkorAlignAgent, InternMatchAgent, PathfinderAgent | Validates local credentials globally; connects students to growth internships; maps realistic education-to-career paths |
 | **SDG 8** Decent Work & Economic Growth | GigBridgeAgent, PayBenchmarkAgent, JobMatchAgent | Formalises gig credentials; ensures fair pay; improves job matching quality |
 | **SDG 10** Reduced Inequalities | LokalRouteAgent, SkorAlignAgent, GigBridgeAgent | Levels playing field for rural youth, TVET grads, and gig workers |
-| **SDG 17** Partnerships | External integrations, Talentbank ecosystem | Connects to Maukerja, LinkedIn, universities, and employers |
+| **SDG 5** Gender Equality | Blind recruitment mode | Removes name, gender, photo, and university from screening — candidates evaluated on competency alone |
 
 ---
 
