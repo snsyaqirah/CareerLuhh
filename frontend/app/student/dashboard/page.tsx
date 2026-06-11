@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, AlertTriangle, ListTodo } from "lucide-react";
+import { ArrowRight, CheckCircle2, AlertTriangle, ListTodo, GraduationCap } from "lucide-react";
 import { ReadinessRing } from "@/components/readiness-ring/ReadinessRing";
 import { CoachAlert } from "@/components/shared/CoachAlert";
 import { AgentCard } from "@/components/agent-card/AgentCard";
