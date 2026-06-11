@@ -108,8 +108,8 @@ export default function CandidateOnboarding() {
               actually in the document. Missing fields stay empty.
             </p>
           </AgentCard>
-          <Link href="/candidate/dashboard" className="btn-red mt-6">
-            Continue to Dashboard <ArrowRight size={16} />
+          <Link href="/candidate/agents" className="btn-red mt-6">
+            Watch My Agents Run <ArrowRight size={16} />
           </Link>
         </div>
       )}
