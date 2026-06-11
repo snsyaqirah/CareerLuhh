@@ -1,0 +1,17 @@
+# CareerLuhh — Stage 1 prototype / demo app
+# Discouraging indexing: this is a hackathon demo with dummy data only.
+
+User-agent: *
+Disallow: /student/
+Disallow: /candidate/
+Disallow: /employer/
+Disallow: /login
+Disallow: /register
+Disallow: /api/
+
+# Allow public pages to be indexed
+Allow: /
+Allow: /privacy
+Allow: /terms
+
+Sitemap: https://careerluhh.vercel.app/sitemap.xml

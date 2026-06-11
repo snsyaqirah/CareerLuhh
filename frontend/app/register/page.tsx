@@ -166,7 +166,32 @@ export default function RegisterPage() {
                   <input className="input-bauhaus" placeholder={f.placeholder} />
                 </div>
               ))}
-              <button type="submit" className="btn-red w-full">
+
+              {/* PDPA consent */}
+              <div className="border-2 border-ink p-4">
+                <label className="flex cursor-pointer items-start gap-3">
+                  <input
+                    type="checkbox"
+                    checked={pdpaConsent}
+                    onChange={(e) => setPdpaConsent(e.target.checked)}
+                    className="mt-0.5 h-4 w-4 shrink-0 accent-blue"
+                    required
+                  />
+                  <span className="text-xs font-medium leading-relaxed">
+                    I have read and agree to CareerLuhh&apos;s{" "}
+                    <Link href="/privacy" target="_blank" className="font-bold text-blue underline underline-offset-2">
+                      Privacy Policy
+                    </Link>{" "}
+                    and{" "}
+                    <Link href="/terms" target="_blank" className="font-bold text-blue underline underline-offset-2">
+                      Terms &amp; Conditions
+                    </Link>
+                    . I consent to the collection and use of my personal data as described, in accordance with Malaysia&apos;s Personal Data Protection Act 2010 (PDPA).
+                  </span>
+                </label>
+              </div>
+
+              <button type="submit" disabled={!pdpaConsent} className="btn-red w-full disabled:opacity-40 disabled:cursor-not-allowed">
                 Create Account <ArrowRight size={16} />
               </button>
             </form>
