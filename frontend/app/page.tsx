@@ -59,9 +59,9 @@ const AGENTS = [
 
 const SDGS = [
   { num: "4", label: "Quality Education" },
+  { num: "5", label: "Gender Equality" },
   { num: "8", label: "Decent Work & Growth" },
   { num: "10", label: "Reduced Inequalities" },
-  { num: "17", label: "Partnerships" },
 ];
 
 const HOW_IT_WORKS = [
@@ -152,11 +152,19 @@ export default function LandingPage() {
           <div className="absolute bottom-16 right-12 h-32 w-32 border-4 border-ink bg-red" />
           <div className="absolute right-24 top-24 h-0 w-0 border-l-[50px] border-r-[50px] border-b-[86px] border-l-transparent border-r-transparent border-b-white" />
           <div className="rotate-[-4deg] border-4 border-ink bg-white p-6 shadow-hard-lg">
-            <p className="text-label mb-2 text-red">The Advisor says</p>
-            <p className="max-w-[240px] text-sm font-bold leading-snug">
-              &ldquo;Graduation is 4 months away. You need one deployed project
-              before you apply. Start this weekend.&rdquo;
+            <p className="text-label mb-2 text-blue">JobMatchAgent</p>
+            <p className="text-[11px] font-black uppercase tracking-wide text-ink/50 mb-2">
+              4 roles match your trajectory right now
             </p>
+            <p className="max-w-[240px] text-sm font-bold leading-snug">
+              &ldquo;Your React + Node.js skills match open roles at Grab, FPX, and Setel.
+              One deployed project closes the gap on all four.&rdquo;
+            </p>
+            <div className="mt-3 flex gap-1.5">
+              <span className="border border-blue bg-blue/10 px-1.5 py-0.5 text-[9px] font-black uppercase text-blue">94% match</span>
+              <span className="border border-ink/20 px-1.5 py-0.5 text-[9px] font-black uppercase text-ink/50">Grab</span>
+              <span className="border border-ink/20 px-1.5 py-0.5 text-[9px] font-black uppercase text-ink/50">FPX</span>
+            </div>
           </div>
         </div>
       </section>
