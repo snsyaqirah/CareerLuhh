@@ -1,7 +1,8 @@
 "use client";
 
-// Stage 1 mock auth — hardcoded demo accounts, session in localStorage.
-// Stage 2 replaces this with NextAuth.js v5.
+// Stage 1 mock auth — demo accounts only, session in localStorage.
+// Stage 2 replaces this with NextAuth.js v5 + bcrypt-hashed passwords in Neon DB.
+// NEVER put real credentials here — this file ships in the client bundle.
 
 import {
   createContext,
@@ -19,11 +20,16 @@ export interface SessionUser {
   name: string;
 }
 
-export const MOCK_USERS: (SessionUser & { password: string })[] = [
-  { email: "student@demo.com", password: "demo123", role: "student", name: "Aina Sofea" },
-  { email: "candidate@demo.com", password: "demo123", role: "candidate", name: "Ahmad Faris" },
-  { email: "employer@demo.com", password: "demo123", role: "employer", name: "TechNova Sdn Bhd" },
+// Public-facing demo account hints (email + role only — no passwords)
+export const DEMO_ACCOUNTS: { email: string; role: Role; name: string }[] = [
+  { email: "student@demo.com", role: "student", name: "Aina Sofea" },
+  { email: "candidate@demo.com", role: "candidate", name: "Ahmad Faris" },
+  { email: "employer@demo.com", role: "employer", name: "TechNova Sdn Bhd" },
 ];
+
+// Auth credentials — NOT exported. Stays internal to this module.
+// Stage 2: replace with POST /api/auth/login → server-side bcrypt verify.
+const AUTH_USERS = DEMO_ACCOUNTS.map((u) => ({ ...u, password: "demo123" }));
 
 export const ROLE_HOME: Record<Role, string> = {
   student: "/student/dashboard",
@@ -41,7 +47,7 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-const STORAGE_KEY = "careerluhh_session";
+const STORAGE_KEY = "careerluhh_session_v1";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<SessionUser | null>(null);
@@ -50,9 +56,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setUser(JSON.parse(raw));
+      if (raw) {
+        const parsed = JSON.parse(raw) as SessionUser;
+        // Basic sanity-check: ensure the stored object has the right shape
+        if (parsed.email && parsed.role && parsed.name) setUser(parsed);
+      }
     } catch {
-      // corrupted session — start fresh
+      localStorage.removeItem(STORAGE_KEY); // corrupted — start fresh
     }
     setLoading(false);
   }, []);
@@ -64,7 +74,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const login = useCallback((email: string, password: string) => {
-    const found = MOCK_USERS.find(
+    const found = AUTH_USERS.find(
       (u) => u.email.toLowerCase() === email.trim().toLowerCase()
     );
     if (!found || found.password !== password) {

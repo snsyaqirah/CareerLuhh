@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight, GraduationCap, Briefcase, Building2 } from "lucide-react";
-import { useAuth, MOCK_USERS, ROLE_HOME, type Role } from "@/lib/auth-context";
+import { useAuth, DEMO_ACCOUNTS, ROLE_HOME, type Role } from "@/lib/auth-context";
 import { LogoWordmark } from "@/components/bauhaus/GeometricLogo";
 
 const ROLE_ICONS: Record<Role, React.ReactNode> = {
@@ -28,8 +28,8 @@ export default function LoginPage() {
   }
 
   function quickLogin(role: Role) {
-    const acc = MOCK_USERS.find((u) => u.role === role)!;
-    login(acc.email, acc.password);
+    const acc = DEMO_ACCOUNTS.find((u) => u.role === role)!;
+    login(acc.email, "demo123"); // demo password shown on-screen
     router.push(ROLE_HOME[role]);
   }
 
