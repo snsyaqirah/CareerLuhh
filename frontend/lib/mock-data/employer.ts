@@ -224,7 +224,7 @@ export const newHires = [
     role: "Junior Developer",
     day: 30,
     riskScore: 42,
-    flags: ["Has not engaged in team Slack channels", "Submitted first PR 3 weeks late"],
+    flags: ["No CareerLuhh check-in completed at Day 14", "Submitted first PR 3 weeks late — onboarding milestone missed"],
     managerAction: "Check in today — not performance review, just a genuine catch-up.",
     conversationStarter:
       "Hey Irfan, just wanted to see how you're settling in. What's been the most surprising thing about the role so far?",
