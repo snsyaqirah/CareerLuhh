@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CareerLuhh 🧭
 
-## Getting Started
+> **"Career First, Everything Else Later"** — Asia's Career Co-Pilot
+> Talentbank First Cohort Tech Hackathon 2026 · Stage 1 Prototype
 
-First, run the development server:
+A multi-agent AI career platform that guides users from student life through
+active employment. Unlike job portals that match by keyword, CareerLuhh matches
+by **trajectory** — where you're heading, not just where you've been.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+🎓 **Student Portal** · 💼 **Candidate Portal** · 🏢 **Employer Portal** — three
+portals, one living Career Profile, 16 specialised AI agents.
+
+Full spec: [`CareerLuhh_System_Plan_v2.md`](CareerLuhh_System_Plan_v2.md)
+
+---
+
+## ⚠️ Stage 1 = Clickable prototype, dummy data only
+
+No real database, no real LLM calls, mock login. All agent responses are
+hardcoded JSON in `frontend/lib/mock-data/`. Real Neon DB + Gemini agents land
+in Stage 2 (build phase).
+
+## Repo structure
+
+```
+CareerLuhh/
+├── frontend/   ← Next.js 14 app (the entire Stage 1 prototype)
+└── backend/    ← Stage 2 blueprint: Prisma schema, Gemini client, agent specs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Run locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd frontend
+npm install
+npm run dev      # → http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Demo accounts (password: `demo123`)
 
-## Learn More
+| Role | Email | Lands on |
+|---|---|---|
+| 🎓 Student | `student@demo.com` | `/student/dashboard` |
+| 💼 Candidate | `candidate@demo.com` | `/candidate/dashboard` |
+| 🏢 Employer | `employer@demo.com` | `/employer/dashboard` |
 
-To learn more about Next.js, take a look at the following resources:
+Or use the one-click demo buttons on `/login`. Register also works — it creates
+a throwaway local session for whichever role you pick.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy to Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push this repo to GitHub
+2. Vercel → **Add New Project** → import the repo
+3. **Set "Root Directory" to `frontend`** ← the only setting that matters
+4. Framework preset auto-detects Next.js → Deploy
 
-## Deploy on Vercel
+No environment variables needed for Stage 1.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Built pages (Stage 1)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/` — Bauhaus landing page
+- `/login` + `/register` — mock auth with role selection
+- `/student/dashboard` · `/student/roadmap` (custom SVG career tree) · `/student/internships`
+- `/candidate/dashboard` · `/candidate/jobs` · `/candidate/salary`
+- `/employer/dashboard` · `/employer/search` · `/employer/workforce`
+
+Locked sidebar items (Portfolio, Gig Bridge, Re-Engage, …) are Stage 2 scope —
+shown on purpose so judges see the full vision.
+
+## Design system
+
+Bauhaus × Career: Outfit font, hard offset shadows (no blur), 2–4px ink
+borders, square corners, and a strict palette — `#1040C0` blue, `#D02020` red,
+`#F0C020` yellow on `#F5F4F0` canvas.
+
+## SDG alignment
+
+SDG 4 (Quality Education) · SDG 8 (Decent Work) · SDG 10 (Reduced
+Inequalities) · SDG 17 (Partnerships)
