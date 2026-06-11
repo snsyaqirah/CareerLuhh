@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f5f4f0;
+  --foreground: #121212;
+  --blue: #1040c0;
+  --red: #d02020;
+  --yellow: #f0c020;
+  --muted: #e0e0e0;
+}
+
+@layer base {
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+  }
+  ::selection {
+    background: #f0c020;
+    color: #121212;
+  }
+}
+
+@layer components {
+  /* ---------- Typography ---------- */
+  .text-display {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+  .text-heading {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .text-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-ink px-6 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-150 ease-out select-none;
+    box-shadow: 4px 4px 0px 0px #121212;
+  }
+  .btn:hover {
+    opacity: 0.92;
+  }
+  .btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
+  .btn-blue {
+    @apply btn bg-blue text-white;
+  }
+  .btn-red {
+    @apply btn bg-red text-white;
+  }
+  .btn-yellow {
+    @apply btn bg-yellow text-ink;
+  }
+  .btn-white {
+    @apply btn bg-white text-ink;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-ink bg-transparent px-6 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-150;
+  }
+  .btn-ghost:hover {
+    @apply bg-ink text-white;
+  }
+
+  /* ---------- Cards ---------- */
+  .card {
+    @apply relative border-4 border-ink bg-white p-6 transition-transform duration-200 ease-out;
+    box-shadow: 8px 8px 0px 0px #121212;
+  }
+  .card-sm {
+    @apply relative border-2 border-ink bg-white p-4;
+    box-shadow: 4px 4px 0px 0px #121212;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+  }
+
+  /* ---------- Agent badge ---------- */
+  .agent-badge {
+    @apply inline-flex items-center gap-2 border-2 border-ink px-3 py-1 text-xs font-bold uppercase;
+    letter-spacing: 0.08em;
+  }
+  .agent-badge-idle {
+    @apply agent-badge bg-soft;
+  }
+  .agent-badge-running {
+    @apply agent-badge bg-yellow;
+  }
+  .agent-badge-complete {
+    @apply agent-badge bg-blue text-white;
+  }
+  .agent-badge-alert {
+    @apply agent-badge bg-red text-white;
+  }
+
+  /* ---------- Inputs ---------- */
+  .input-bauhaus {
+    @apply w-full border-2 border-ink bg-white px-4 py-3 text-sm font-medium outline-none transition-shadow;
+  }
+  .input-bauhaus:focus {
+    box-shadow: 4px 4px 0px 0px #121212;
+  }
+  .label-bauhaus {
+    @apply mb-2 block text-xs font-bold uppercase tracking-widest;
+  }
+}
+
+@layer utilities {
+  .shadow-hard-sm {
+    box-shadow: 3px 3px 0px 0px #121212;
+  }
+  .shadow-hard {
+    box-shadow: 6px 6px 0px 0px #121212;
+  }
+  .shadow-hard-lg {
+    box-shadow: 8px 8px 0px 0px #121212;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
