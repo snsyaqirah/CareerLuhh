@@ -219,8 +219,10 @@ export const portfolioItems: PortfolioItem[] = [
     type: "project",
     title: "Campus Food Ordering App",
     description: "Group project — React Native app for campus cafeteria pre-orders",
-    skillsUsed: ["React Native", "Firebase", "Figma"],
-    date: "Mar 2026",
+    techStack: ["React Native", "Firebase", "Figma"],
+    date: "Jan 2026",
+    dateEnd: "Mar 2026",
+    url: "https://github.com/ainasofea/campus-food",
     aiSummary:
       "Demonstrates end-to-end product thinking: UI design through deployment. Strongest signal for frontend roles.",
   },
@@ -229,8 +231,9 @@ export const portfolioItems: PortfolioItem[] = [
     type: "github",
     title: "github.com/ainasofea",
     description: "12 repos · 47 contributions in the last 3 months",
-    skillsUsed: ["JavaScript", "Python", "Git"],
+    techStack: ["JavaScript", "Python", "Git"],
     date: "Active",
+    url: "https://github.com/ainasofea",
     aiSummary:
       "Consistent commit cadence reads as discipline. Pin the food-ordering repo — it's your best work.",
   },
@@ -239,9 +242,112 @@ export const portfolioItems: PortfolioItem[] = [
     type: "cert",
     title: "freeCodeCamp Responsive Web Design",
     description: "300-hour certification completed",
-    skillsUsed: ["HTML", "CSS", "Accessibility"],
+    techStack: ["HTML", "CSS", "Accessibility"],
     date: "Jan 2026",
+    certId: "fCC-RWD-2026-001",
+    url: "https://freecodecamp.org/certification/ainasofea/responsive-web-design",
     aiSummary: "Entry-level signal — pair it with a deployed project to make it count.",
+  },
+];
+
+// Transcript — AcademicResult records per semester
+export interface TranscriptSubject {
+  code: string;
+  name: string;
+  creditHours: number;
+  grade: string;
+  gradePoint: number;
+}
+
+export interface SemesterRecord {
+  id: string;
+  semester: number;
+  year: string;
+  gpa: number;
+  subjects: TranscriptSubject[];
+}
+
+const GRADE_POINTS: Record<string, number> = {
+  A: 4.0, "A-": 3.7, "B+": 3.3, B: 3.0, "B-": 2.7,
+  "C+": 2.3, C: 2.0, "C-": 1.7, D: 1.0, E: 0.0,
+};
+
+export function calcGpa(subjects: TranscriptSubject[]): number {
+  const total = subjects.reduce((s, x) => s + x.gradePoint * x.creditHours, 0);
+  const credits = subjects.reduce((s, x) => s + x.creditHours, 0);
+  return credits === 0 ? 0 : Math.round((total / credits) * 100) / 100;
+}
+
+export function calcCgpa(semesters: SemesterRecord[]): number {
+  const allSubjects = semesters.flatMap((s) => s.subjects);
+  return calcGpa(allSubjects);
+}
+
+export const transcriptRecords: SemesterRecord[] = [
+  {
+    id: "sem_1",
+    semester: 1,
+    year: "2023/24",
+    gpa: 3.45,
+    subjects: [
+      { code: "CSC101", name: "Introduction to Programming", creditHours: 3, grade: "A", gradePoint: 4.0 },
+      { code: "MAT101", name: "Calculus I", creditHours: 3, grade: "B+", gradePoint: 3.3 },
+      { code: "CSC102", name: "Computer Organisation", creditHours: 3, grade: "A-", gradePoint: 3.7 },
+      { code: "ENG101", name: "English for Communication", creditHours: 2, grade: "A", gradePoint: 4.0 },
+      { code: "MPW101", name: "Malaysian Studies", creditHours: 2, grade: "A-", gradePoint: 3.7 },
+    ],
+  },
+  {
+    id: "sem_2",
+    semester: 2,
+    year: "2023/24",
+    gpa: 3.30,
+    subjects: [
+      { code: "CSC201", name: "Data Structures & Algorithms", creditHours: 3, grade: "B+", gradePoint: 3.3 },
+      { code: "MAT201", name: "Discrete Mathematics", creditHours: 3, grade: "B+", gradePoint: 3.3 },
+      { code: "CSC202", name: "Object-Oriented Programming", creditHours: 3, grade: "A-", gradePoint: 3.7 },
+      { code: "ENG201", name: "Technical Writing", creditHours: 2, grade: "A", gradePoint: 4.0 },
+      { code: "CSC203", name: "Web Technology", creditHours: 3, grade: "B", gradePoint: 3.0 },
+    ],
+  },
+  {
+    id: "sem_3",
+    semester: 3,
+    year: "2024/25",
+    gpa: 3.15,
+    subjects: [
+      { code: "CSC301", name: "Database Systems", creditHours: 3, grade: "B+", gradePoint: 3.3 },
+      { code: "CSC302", name: "Operating Systems", creditHours: 3, grade: "B", gradePoint: 3.0 },
+      { code: "CSC303", name: "Software Engineering", creditHours: 3, grade: "B+", gradePoint: 3.3 },
+      { code: "MAT301", name: "Statistics for CS", creditHours: 3, grade: "B", gradePoint: 3.0 },
+      { code: "CSC304", name: "Computer Networks", creditHours: 3, grade: "B-", gradePoint: 2.7 },
+    ],
+  },
+  {
+    id: "sem_4",
+    semester: 4,
+    year: "2024/25",
+    gpa: 3.20,
+    subjects: [
+      { code: "CSC401", name: "Artificial Intelligence", creditHours: 3, grade: "B+", gradePoint: 3.3 },
+      { code: "CSC402", name: "Mobile Application Development", creditHours: 3, grade: "A-", gradePoint: 3.7 },
+      { code: "CSC403", name: "Human-Computer Interaction", creditHours: 3, grade: "A-", gradePoint: 3.7 },
+      { code: "CSC404", name: "Information Security", creditHours: 3, grade: "B", gradePoint: 3.0 },
+      { code: "MPW401", name: "Co-curriculum", creditHours: 1, grade: "A", gradePoint: 4.0 },
+    ],
+  },
+  {
+    id: "sem_5",
+    semester: 5,
+    year: "2025/26",
+    gpa: 3.10,
+    subjects: [
+      { code: "CSC501", name: "Cloud Computing", creditHours: 3, grade: "B", gradePoint: 3.0 },
+      { code: "CSC502", name: "Final Year Project I", creditHours: 4, grade: "A-", gradePoint: 3.7 },
+      { code: "CSC503", name: "Advanced Web Development", creditHours: 3, grade: "B+", gradePoint: 3.3 },
+      { code: "CSC504", name: "Internship Preparation", creditHours: 1, grade: "A", gradePoint: 4.0 },
+      { code: "CSC505", name: "Big Data Analytics", creditHours: 3, grade: "B-", gradePoint: 2.7 },
+    ],
   },
 ];
 
