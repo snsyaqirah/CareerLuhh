@@ -205,8 +205,11 @@ export interface PortfolioItem {
   type: "project" | "github" | "cert" | "competition";
   title: string;
   description: string;
-  skillsUsed: string[];
-  date: string;
+  techStack: string[];
+  date: string;        // display string e.g. "Mar 2026" or "Active"
+  dateEnd?: string;    // e.g. "Jun 2026" or "Ongoing"
+  url?: string;        // project URL, GitHub profile, cert link
+  certId?: string;     // optional cert ID for "cert" type
   aiSummary: string;
 }
 

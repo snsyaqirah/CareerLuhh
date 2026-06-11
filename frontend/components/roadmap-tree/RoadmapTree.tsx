@@ -44,7 +44,7 @@ function PathRow({ path }: { path: CareerPath }) {
     <div className="card mb-8 overflow-hidden p-0">
       {/* Path header */}
       <div
-        className="flex flex-wrap items-center justify-between gap-3 border-b-4 border-ink px-5 py-4"
+        className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b-4 border-ink px-5 py-4"
         style={{ background: path.color }}
       >
         <div className="flex items-center gap-3">
@@ -68,7 +68,7 @@ function PathRow({ path }: { path: CareerPath }) {
       </div>
 
       {/* Tree */}
-      <div className="overflow-x-auto bg-white px-2 py-4 hover:bg-yellow/10 transition-colors">
+      <div className="overflow-x-auto bg-white px-5 py-6 hover:bg-yellow/10 transition-colors">
         <svg width={width} height={height} className="block" style={{ minWidth: width }}>
           <defs>
             <marker

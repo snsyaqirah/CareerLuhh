@@ -161,15 +161,15 @@ function MemoryPanel({
 }) {
   const entries = Object.entries(profile);
   return (
-    <div className="card sticky top-24">
+    <div className="card">
       <div className="mb-3 flex items-center gap-2">
         <Database size={16} />
         <p className="font-black uppercase leading-tight">Career Profile</p>
       </div>
       <p className="mb-4 text-[11px] font-bold uppercase tracking-wider text-ink/50">
-        Shared memory · every agent reads & writes here
+        Shared memory · every agent reads &amp; writes here
       </p>
-      <div className="space-y-1.5">
+      <div className="max-h-96 space-y-1.5 overflow-y-auto">
         {entries.map(([k, v]) => {
           const isNew = !prevKeys.current.has(k);
           return (
