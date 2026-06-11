@@ -38,6 +38,9 @@ export interface JobListing {
   matchScore?: number;
   matchReason?: string;
   stretchFlag?: boolean;
+  socialProof?: string;
+  successRate?: number;
+  interviewTip?: string;
 }
 
 export interface ApplicationRecord {
@@ -111,6 +114,9 @@ export const jobListings: JobListing[] = [
     matchReason:
       "Your React + Node.js background directly fits their consumer web team. They value trajectory — your side projects signal growth mindset.",
     stretchFlag: false,
+    socialProof: "11 CS grads from UiTM & UM joined Grab Malaysia in 2025",
+    successRate: 72,
+    interviewTip: "Two rounds: technical (live coding in React) + culture fit. They love asking about your most complex state management problem. Prepare a specific story.",
   },
   {
     id: "jl_02",
@@ -137,6 +143,9 @@ export const jobListings: JobListing[] = [
     matchReason:
       "Slightly above current level — worth applying. Your AWS cert fills their infra gap.",
     stretchFlag: true,
+    socialProof: "6 graduates from your trajectory level got hired at Shopee in the last 12 months",
+    successRate: 54,
+    interviewTip: "3 rounds: take-home assignment + system design + HR. Focus on scalability — they care about how you handle 100x traffic spikes.",
   },
   {
     id: "jl_03",
@@ -162,6 +171,9 @@ export const jobListings: JobListing[] = [
     matchReason:
       "Fully remote — pairs well with The Planner's recommendation to maximise net disposable income.",
     stretchFlag: false,
+    socialProof: "Setel hires from non-FAANG backgrounds — 4 graduates with your profile joined in 2025",
+    successRate: 68,
+    interviewTip: "Async-friendly process. Portfolio review first, then a short Loom video interview. Show off a live deployed project.",
   },
   {
     id: "jl_04",
@@ -184,6 +196,9 @@ export const jobListings: JobListing[] = [
     skills: ["Node.js", "PostgreSQL", "Redis", "Kafka", "Docker"],
     source: "linkedin",
     stretchFlag: false,
+    socialProof: "AirAsia actively recruits from Malaysian universities — 8 hires in backend engineering in 2025",
+    successRate: 61,
+    interviewTip: "System design is core here. Expect a question like: 'Design a payment queue that handles 1M transactions/day'. Know Kafka basics.",
   },
   {
     id: "jl_05",
@@ -365,6 +380,9 @@ export const jobListings: JobListing[] = [
     skills: ["Next.js", "Node.js", "PostgreSQL", "Prisma", "TypeScript"],
     source: "maukerja",
     stretchFlag: false,
+    socialProof: "FPX is fintech — strong brand on your CV. 5 engineers with similar profiles joined in 2025",
+    successRate: 79,
+    interviewTip: "They care about clean code and testing habits. Walk them through a refactor you did. Mention Prisma experience if you have it — that's their ORM.",
   },
   {
     id: "jl_13",
