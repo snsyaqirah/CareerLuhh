@@ -198,6 +198,45 @@ function ResumePreview({ data }: { data: ResumeData }) {
   );
 }
 
+// ─── DOCX download ────────────────────────────────────────────────────────
+function downloadDoc(data: ResumeData) {
+  const expHtml = data.experience.map((exp) => `
+    <p style="margin:0"><b>${exp.title}</b> <span style="float:right">${exp.period}</span></p>
+    <p style="margin:0;color:#333;font-style:italic">${exp.company}</p>
+    <ul style="margin:4px 0 8px 18px;padding:0">
+      ${exp.bullets.filter(Boolean).map((b) => `<li style="font-size:10.5pt;line-height:1.4">${b}</li>`).join("")}
+    </ul>
+  `).join("");
+
+  const html = `
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
+<head><meta charset='utf-8'>
+<style>
+  body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; margin: 2cm; color: #111; }
+  h1 { font-size: 18pt; text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+  .contact { text-align: center; font-size: 9pt; color: #555; margin-bottom: 4px; }
+  .section-head { font-size: 10pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #111; padding-bottom: 2px; margin-top: 14px; margin-bottom: 6px; }
+  p { margin: 2px 0; font-size: 10.5pt; line-height: 1.4; }
+</style></head>
+<body>
+  <h1>${data.name}</h1>
+  <div class="contact">${[data.email, data.phone, data.location].filter(Boolean).join(" &nbsp;·&nbsp; ")}</div>
+  ${data.linkedin || data.github ? `<div class="contact">${[data.linkedin, data.github].filter(Boolean).join(" &nbsp;·&nbsp; ")}</div>` : ""}
+  ${data.summary ? `<div class="section-head">Professional Summary</div><p>${data.summary}</p>` : ""}
+  ${data.experience.length ? `<div class="section-head">Work Experience</div>${expHtml}` : ""}
+  ${data.skills ? `<div class="section-head">Skills</div><p>${data.skills}</p>` : ""}
+  ${data.certifications ? `<div class="section-head">Certifications</div><p>${data.certifications}</p>` : ""}
+</body></html>`;
+
+  const blob = new Blob([html], { type: "application/msword" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${(data.name || "resume").replace(/\s+/g, "_")}_resume.doc`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 // ─── Main Page ──────────────────────────────────────────────────────────────
 export default function CandidateResumePage() {
   const [tab, setTab] = useState<"analyze" | "build">("analyze");
@@ -505,13 +544,14 @@ export default function CandidateResumePage() {
               />
             </section>
 
-            <div className="border-t-4 border-ink pt-6">
-              <button onClick={() => window.print()} className="btn-blue">
-                <Printer size={16} /> Print / Save as PDF
+            <div className="border-t-4 border-ink pt-6 flex flex-wrap gap-3 items-center">
+              <button onClick={() => window.print()} className="btn-blue flex items-center gap-2">
+                <Printer size={14} /> Print / PDF
               </button>
-              <p className="mt-2 text-xs font-medium text-ink/50">
-                Print → Save as PDF. Layout is A4 optimised.
-              </p>
+              <button onClick={() => downloadDoc(data)} className="flex items-center gap-2 border-2 border-ink bg-canvas px-4 py-2 text-xs font-black uppercase hover:bg-yellow">
+                <FileDown size={14} /> Download DOC
+              </button>
+              <span className="text-xs font-medium text-ink/40">DOC = editable in Microsoft Word</span>
             </div>
           </div>
 
