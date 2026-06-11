@@ -9,18 +9,22 @@ import {
   MapPin,
   Sparkles,
   Bot,
+  BookOpen,
+  GraduationCap,
 } from "lucide-react";
 import { PortalShell, type NavItem } from "@/components/shared/PortalShell";
 
 const NAV: NavItem[] = [
   { label: "Dashboard", href: "/student/dashboard", icon: <LayoutDashboard size={16} /> },
-  { label: "Agent Console", href: "/student/agents", icon: <Bot size={16} /> },
   { label: "Roadmap", href: "/student/roadmap", icon: <GitBranch size={16} /> },
   { label: "Internships", href: "/student/internships", icon: <Building2 size={16} /> },
   { label: "Portfolio", href: "/student/portfolio", icon: <FolderGit2 size={16} /> },
+  { label: "Transcript", href: "/student/transcript", icon: <BookOpen size={16} /> },
   { label: "Qualifications", href: "/student/qualifications", icon: <Languages size={16} /> },
   { label: "Lokal Route", href: "/student/lokal", icon: <MapPin size={16} /> },
+  { label: "Agent Console", href: "/student/agents", icon: <Bot size={16} /> },
   { label: "Onboarding", href: "/student/onboarding", icon: <Sparkles size={16} /> },
+  { label: "Got a Job →", href: "/student/graduate", icon: <GraduationCap size={16} /> },
 ];
 
 export default function StudentLayout({ children }: { children: React.ReactNode }) {
