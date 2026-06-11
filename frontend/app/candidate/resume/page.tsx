@@ -10,11 +10,11 @@ import {
   TrendingUp,
   FileText,
   Printer,
+  FileDown,
   Plus,
   Trash2,
   ChevronDown,
   ChevronUp,
-  Lightbulb,
   Zap,
 } from "lucide-react";
 import { AgentCard } from "@/components/agent-card/AgentCard";
