@@ -42,6 +42,8 @@ interface AuthContextValue {
   loading: boolean;
   login: (email: string, password: string) => { ok: boolean; error?: string; user?: SessionUser };
   register: (name: string, email: string, role: Role) => SessionUser;
+  updateProfile: (updates: { name?: string }) => void;
+  deleteAccount: () => void;
   logout: () => void;
 }
 
@@ -93,8 +95,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = useCallback(() => persist(null), []);
 
+  const updateProfile = useCallback((updates: { name?: string }) => {
+    setUser((current) => {
+      if (!current) return current;
+      const updated = { ...current, ...updates };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      return updated;
+    });
+  }, []);
+
+  const deleteAccount = useCallback(() => {
+    // Remove all CareerLuhh data from localStorage
+    ["applied_jobs", "saved_jobs", STORAGE_KEY].forEach((k) => localStorage.removeItem(k));
+    // Also remove any keys with careerluhh prefix
+    Object.keys(localStorage)
+      .filter((k) => k.startsWith("careerluhh"))
+      .forEach((k) => localStorage.removeItem(k));
+    persist(null);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, updateProfile, deleteAccount, logout }}>
       {children}
     </AuthContext.Provider>
   );

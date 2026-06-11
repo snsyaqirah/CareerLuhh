@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LogOut, Lock, Menu } from "lucide-react";
+import { LogOut, Lock, Menu, Settings } from "lucide-react";
 import { useAuth, type Role } from "@/lib/auth-context";
 import { GeometricLogo } from "@/components/bauhaus/GeometricLogo";
 
@@ -96,17 +96,25 @@ export function PortalShell({
       </nav>
 
       <div className="border-t-2 border-white/10 p-4">
-        <p className="mb-1 truncate text-sm font-bold">{user.name}</p>
+        <p className="mb-0.5 truncate text-sm font-bold">{user.name}</p>
         <p className="mb-3 truncate text-xs text-white/50">{user.email}</p>
-        <button
-          onClick={() => {
-            logout();
-            router.push("/");
-          }}
-          className="flex w-full items-center justify-center gap-2 border-2 border-white/30 px-3 py-2 text-xs font-bold uppercase tracking-wider hover:bg-red hover:border-red"
-        >
-          <LogOut size={14} /> Log Out
-        </button>
+        <div className="flex gap-2">
+          <Link
+            href={`/${role}/settings`}
+            className="flex flex-1 items-center justify-center gap-1.5 border-2 border-white/30 px-2 py-1.5 text-xs font-bold uppercase tracking-wider hover:bg-white/10"
+          >
+            <Settings size={12} /> Settings
+          </Link>
+          <button
+            onClick={() => {
+              logout();
+              router.push("/");
+            }}
+            className="flex flex-1 items-center justify-center gap-1.5 border-2 border-white/30 px-2 py-1.5 text-xs font-bold uppercase tracking-wider hover:bg-red hover:border-red"
+          >
+            <LogOut size={12} /> Log Out
+          </button>
+        </div>
       </div>
     </div>
   );
