@@ -273,13 +273,13 @@ export default function LandingPage() {
           ))}
         </div>
 
-        <div className="mt-8">
-          <Link href="/login" className="btn-blue">
-            See All Jobs <ArrowRight size={16} />
+        <div className="mt-8 flex flex-wrap items-center gap-4">
+          <Link href="/jobs" className="btn-blue">
+            Browse All {jobListings.length} Jobs <ArrowRight size={16} />
           </Link>
-          <p className="mt-3 text-xs font-medium text-ink/50">
-            Log in as a candidate to browse all listings, apply, and track applications.
-          </p>
+          <Link href="/login" className="btn-ghost text-sm">
+            Log in for AI match scores →
+          </Link>
         </div>
       </section>
 
