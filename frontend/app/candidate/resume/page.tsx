@@ -537,9 +537,17 @@ export default function CandidateResumePage() {
 
       <style jsx global>{`
         @media print {
-          body * { visibility: hidden; }
-          #resume-preview, #resume-preview * { visibility: visible; }
-          #resume-preview { position: fixed; top: 0; left: 0; width: 100%; }
+          * { visibility: hidden !important; }
+          #resume-preview, #resume-preview * { visibility: visible !important; }
+          #resume-preview {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            padding: 0 !important;
+            border: none !important;
+          }
+          @page { size: A4; margin: 0; }
         }
       `}</style>
     </div>
