@@ -175,7 +175,7 @@ export default function LandingPage() {
           ["16", "AI Agents"],
           ["3", "Portals, 1 Profile"],
           ["MY", "Malaysia-First"],
-          ["4", "SDGs Aligned"],
+          ["SDG", "4, 5, 8 & 10"],
         ].map(([num, label]) => (
           <div
             key={label}
@@ -379,16 +379,24 @@ export default function LandingPage() {
         <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
           {SDGS.map((s) => (
             <div key={s.num} className="border-4 border-ink bg-white p-5 text-ink shadow-hard">
-              <p className="text-4xl font-black">SDG {s.num}</p>
+              <p className="text-3xl font-black md:text-4xl">SDG {s.num}</p>
               <p className="text-label mt-2">{s.label}</p>
             </div>
           ))}
         </div>
-        <p className="mt-10 max-w-2xl font-medium text-white/85">
-          MUET to CEFR translation, gig-work credentialing, and rural-vs-city
-          salary planning — levelling the field for TVET grads, gig workers, and
-          rural youth across Malaysia.
-        </p>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 max-w-3xl">
+          {[
+            ["SDG 4", "Career path guidance + skills gap analysis helps every Malaysian make better education and career decisions — not just those with access to good counsellors."],
+            ["SDG 5", "Blind recruitment mode removes name, gender, photo, and university from screening — candidates are evaluated on competency alone."],
+            ["SDG 8", "Salary benchmarking, gig-work credentialing, and a job board accessible without a degree from a top-5 university. Decent work for everyone."],
+            ["SDG 10", "Lokal Route compares net take-home in KL vs hometown — so rural youth aren't fooled by big city salary numbers. TVET grads are first-class users, not afterthoughts."],
+          ].map(([sdg, desc]) => (
+            <div key={sdg as string} className="border-2 border-white/20 p-4">
+              <p className="font-black uppercase text-yellow mb-1">{sdg}</p>
+              <p className="text-xs font-medium text-white/70 leading-relaxed">{desc}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* ---------- CTA banner (yellow) ---------- */}
