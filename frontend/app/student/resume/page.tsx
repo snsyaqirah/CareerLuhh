@@ -296,11 +296,12 @@ export default function StudentResumePage() {
 
       {aiComplete && (
         <div className="mb-6">
-          <AgentCard
-            agentName="ResumeCoachAgent"
-            status="complete"
-            summary="Your objective has been drafted based on your profile. Sections with blue checkmarks are looking good. Don't forget to tailor the objective for each role you apply to."
-          />
+          <AgentCard agentName="ResumeCoachAgent" codeName="— resume coach" status="complete">
+            <p className="text-sm font-medium text-ink/70">
+              Your objective has been drafted based on your profile. Sections with blue checkmarks are looking good.
+              Don&apos;t forget to tailor the objective for each role you apply to.
+            </p>
+          </AgentCard>
         </div>
       )}
 

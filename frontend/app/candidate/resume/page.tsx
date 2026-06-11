@@ -291,11 +291,14 @@ export default function CandidateResumePage() {
 
           {uploadState === "done" && (
             <>
-              <AgentCard
-                agentName="ResumeOCRAgent"
-                status="complete"
-                summary={`Resume parsed. Found ${MOCK_ANALYSIS.extracted.roles.length} roles, ${MOCK_ANALYSIS.extracted.yearsExp} YoE, ${MOCK_ANALYSIS.extracted.skills.length} skills detected. Overall score: ${MOCK_ANALYSIS.score}/100.`}
-              />
+              <AgentCard agentName="ResumeOCRAgent" codeName="— OCR & analysis" status="complete">
+                <p className="text-sm font-medium text-ink/70">
+                  Resume parsed. Found {MOCK_ANALYSIS.extracted.roles.length} roles,{" "}
+                  {MOCK_ANALYSIS.extracted.yearsExp} YoE,{" "}
+                  {MOCK_ANALYSIS.extracted.skills.length} skills detected. Overall score:{" "}
+                  {MOCK_ANALYSIS.score}/100.
+                </p>
+              </AgentCard>
 
               {/* Score */}
               <div className="grid gap-4 sm:grid-cols-3">
@@ -323,10 +326,10 @@ export default function CandidateResumePage() {
                 <p className="text-label mb-3">Issues Found</p>
                 <div className="space-y-2">
                   {MOCK_ANALYSIS.issues.map((issue, i) => (
-                    <div key={i} className={`flex items-start gap-3 border-2 p-3 ${SEV_COLOR[issue.severity]}`}>
+                    <div key={i} className={`flex items-start gap-3 border-2 p-3 ${SEV_COLOR[issue.severity as Severity]}`}>
                       <AlertCircle size={13} className="mt-0.5 shrink-0" />
                       <div className="flex-1 text-xs">
-                        <span className="font-black uppercase text-[10px] mr-2 border border-current px-1">{SEV_LABEL[issue.severity]}</span>
+                        <span className="font-black uppercase text-[10px] mr-2 border border-current px-1">{SEV_LABEL[issue.severity as Severity]}</span>
                         {issue.text}
                       </div>
                     </div>

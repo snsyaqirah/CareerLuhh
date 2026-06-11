@@ -390,11 +390,12 @@ export default function JobsPage() {
 
       {/* Agent card */}
       <div className="mb-6">
-        <AgentCard
-          agentName="JobMatchAgent"
-          status="complete"
-          summary={`Analysed ${jobListings.length} roles against your profile. ${matchedJobs.length} matches found — average fit: ${avgMatch}%. ${savedIds.size > 0 ? `You have ${savedIds.size} saved job${savedIds.size > 1 ? "s" : ""}.` : "Save jobs you like with the bookmark button."}`}
-        />
+        <AgentCard agentName="JobMatchAgent" codeName="— trajectory matcher" status="complete">
+          <p className="text-sm font-medium text-ink/70">
+            Analysed {jobListings.length} roles against your profile. {matchedJobs.length} matches found — average fit: {avgMatch}%.{" "}
+            {savedIds.size > 0 ? `You have ${savedIds.size} saved job${savedIds.size > 1 ? "s" : ""}.` : "Save jobs you like with the bookmark button."}
+          </p>
+        </AgentCard>
       </div>
 
       {/* Tabs */}
