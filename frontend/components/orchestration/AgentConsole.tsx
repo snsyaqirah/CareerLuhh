@@ -48,7 +48,29 @@ function chip(text: string) {
   );
 }
 
-function StepCard({ step, status }: { step: AgentStep; status: StepStatus }) {
+// Returns a map of { readKey → agentName } for keys that a previous step wrote.
+function findProducers(allSteps: AgentStep[], stepIndex: number): Record<string, string> {
+  const result: Record<string, string> = {};
+  for (const key of allSteps[stepIndex].reads) {
+    for (let j = stepIndex - 1; j >= 0; j--) {
+      if (key in allSteps[j].writes) {
+        result[key] = allSteps[j].agentName;
+        break;
+      }
+    }
+  }
+  return result;
+}
+
+function StepCard({
+  step,
+  status,
+  producers,
+}: {
+  step: AgentStep;
+  status: StepStatus;
+  producers: Record<string, string>;
+}) {
   const open = status !== "idle";
   return (
     <div
