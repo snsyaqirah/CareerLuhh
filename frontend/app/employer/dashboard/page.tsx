@@ -56,6 +56,12 @@ export default function EmployerDashboard() {
                 <li key={s} className="border-l-4 border-red pl-2">{s}</li>
               ))}
             </ul>
+            <div className="mt-3 flex items-start gap-2 border-2 border-blue/40 bg-blue/5 p-2.5">
+              <Shield size={12} className="mt-0.5 shrink-0 text-blue" />
+              <p className="text-[11px] font-semibold text-ink/60">
+                In-platform signals only · no LinkedIn scraping · staff consent required under PDPA 2010
+              </p>
+            </div>
             <p className="mt-3 border-2 border-ink bg-yellow/40 p-3 text-sm font-semibold">
               {alert.recommendedAction}
             </p>
