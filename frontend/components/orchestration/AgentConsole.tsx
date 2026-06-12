@@ -111,14 +111,27 @@ function StepCard({
 
       {open && (
         <div className="mt-3 space-y-3 border-t-2 border-dashed border-ink/20 pt-3">
-          {/* reads */}
+          {/* reads — shows which previous agent produced each key */}
           {step.reads.length > 0 && (
-            <div className="flex flex-wrap items-center gap-1.5">
-              <ArrowDown size={12} className="text-blue" />
-              <span className="text-[10px] font-bold uppercase tracking-wider text-ink/50">
+            <div className="flex flex-wrap items-start gap-1.5">
+              <ArrowDown size={12} className="mt-0.5 text-blue" />
+              <span className="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-ink/50">
                 reads
               </span>
-              {step.reads.map(chip)}
+              {step.reads.map((key) => (
+                <div key={key} className="flex flex-col items-start gap-0.5">
+                  {chip(key)}
+                  {producers[key] ? (
+                    <span className="pl-1 text-[9px] font-black uppercase tracking-wider text-yellow">
+                      ← {producers[key]}
+                    </span>
+                  ) : (
+                    <span className="pl-1 text-[9px] font-bold uppercase tracking-wider text-ink/30">
+                      seed
+                    </span>
+                  )}
+                </div>
+              ))}
             </div>
           )}
 
@@ -218,7 +231,7 @@ function MemoryPanel({
 
 export function AgentConsole({ role }: { role: Role }) {
   const pipeline = PIPELINES[role];
-  const { status, profile, running, done, run } = useOrchestration(pipeline);
+  const { status, profile, running, done, run } = useOrchestration(pipeline, true);
 
   // track which profile keys existed last render so new ones can flash
   const prevKeys = useRef<Set<string>>(new Set(Object.keys(pipeline.seed)));
@@ -268,8 +281,13 @@ export function AgentConsole({ role }: { role: Role }) {
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
         {/* pipeline */}
         <div className="space-y-3">
-          {pipeline.steps.map((step) => (
-            <StepCard key={step.id} step={step} status={status[step.id] ?? "idle"} />
+          {pipeline.steps.map((step, idx) => (
+            <StepCard
+              key={step.id}
+              step={step}
+              status={status[step.id] ?? "idle"}
+              producers={findProducers(pipeline.steps, idx)}
+            />
           ))}
         </div>
 
