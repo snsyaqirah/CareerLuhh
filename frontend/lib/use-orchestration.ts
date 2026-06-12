@@ -18,7 +18,7 @@ export interface OrchestrationState {
   run: () => void;
 }
 
-export function useOrchestration(pipeline: Pipeline): OrchestrationState {
+export function useOrchestration(pipeline: Pipeline, autoRun = false): OrchestrationState {
   const idle = () =>
     Object.fromEntries(pipeline.steps.map((s) => [s.id, "idle" as StepStatus]));
 
@@ -71,14 +71,15 @@ export function useOrchestration(pipeline: Pipeline): OrchestrationState {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pipeline]);
 
-  // auto-run once on mount so judges see motion immediately
+  // autoRun=true: fires on mount (Agent Console demo). Default false = on-demand only.
   useEffect(() => {
+    if (!autoRun) return;
     const t = setTimeout(run, 500);
     return () => {
       clearTimeout(t);
       clearTimers();
     };
-  }, [run]);
+  }, [run, autoRun]);
 
   return { status, profile, activeId, running, done, run };
 }

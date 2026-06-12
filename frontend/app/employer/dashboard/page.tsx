@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Radar, Eye, MailOpen, UserPlus } from "lucide-react";
+import { ArrowRight, Radar, Eye, MailOpen, UserPlus, Shield } from "lucide-react";
 import { AgentCard } from "@/components/agent-card/AgentCard";
 import {
   employerProfile,
