@@ -13,6 +13,8 @@ import {
   Code,
   Award,
   MessageSquare,
+  EyeOff,
+  Zap,
 } from "lucide-react";
 import { AgentCard } from "@/components/agent-card/AgentCard";
 import { trajectoryMatches } from "@/lib/mock-data/employer";
@@ -78,9 +80,22 @@ export default function TalentSearchPage() {
         Keyword filters miss where people are <span className="font-bold text-ink">heading</span>.
         The Headhunter ranks candidates by growth curve, not just CV history.
       </p>
-      <p className="mb-8 text-xs font-bold text-ink/40 uppercase tracking-wide">
+      <p className="mb-4 text-xs font-bold text-ink/40 uppercase tracking-wide">
         Open to all industries — IT, Finance, Healthcare, Operations, Education, and more.
       </p>
+
+      {/* Differentiator callout */}
+      <div className="mb-8 flex items-start gap-3 border-2 border-ink bg-ink p-4 text-white">
+        <EyeOff size={16} className="mt-0.5 shrink-0 text-yellow" />
+        <div>
+          <p className="text-xs font-black uppercase tracking-wide text-yellow">What Jobstreet &amp; LinkedIn miss</p>
+          <p className="mt-1 text-sm font-medium text-white/80">
+            Keyword filters exclude candidates who don&apos;t write &ldquo;React Developer, 3 years&rdquo; on their CV.
+            CareerLuhh ranks by <strong className="text-white">growth curve</strong> — surfacing TVET graduates, career switchers,
+            and self-taught builders whose trajectory predicts your next great hire.
+          </p>
+        </div>
+      </div>
 
       {/* Search bar */}
       <div className="mb-8 flex gap-3">
@@ -110,6 +125,18 @@ export default function TalentSearchPage() {
             >
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="max-w-xl">
+                  <div className="mb-2 flex flex-wrap gap-2">
+                    {c.university.toLowerCase().includes("tvet") && (
+                      <span className="flex items-center gap-1 border-2 border-yellow bg-yellow px-2 py-0.5 text-[10px] font-black uppercase text-ink">
+                        <EyeOff size={9} /> Keyword-invisible · CareerLuhh only
+                      </span>
+                    )}
+                    {c.currentRole.toLowerCase().includes("self-taught") && (
+                      <span className="flex items-center gap-1 border-2 border-red bg-red px-2 py-0.5 text-[10px] font-black uppercase text-white">
+                        <Zap size={9} /> Non-traditional · high velocity
+                      </span>
+                    )}
+                  </div>
                   <h2 className="text-xl font-black uppercase">{c.name}</h2>
                   <p className="mb-3 font-bold text-blue">
                     {c.currentRole} · {c.university}

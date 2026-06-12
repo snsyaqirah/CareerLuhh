@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, AlertTriangle, ListTodo, GraduationCap } from "lucide-react";
+import { ArrowRight, CheckCircle2, AlertTriangle, ListTodo, GraduationCap, Users } from "lucide-react";
 import { ReadinessRing } from "@/components/readiness-ring/ReadinessRing";
 import { CoachAlert } from "@/components/shared/CoachAlert";
 import { AgentCard } from "@/components/agent-card/AgentCard";
@@ -35,14 +35,50 @@ export default function StudentDashboard() {
             <ReadinessRing score={readiness.score} />
             <div className="min-w-[180px] flex-1">
               <p className="text-label text-ink/50">Readiness grade</p>
-              <p className="mb-3 text-5xl font-black">{readiness.grade}</p>
+              <p className="mb-1 text-5xl font-black">{readiness.grade}</p>
+              <p className="mb-3 flex items-center gap-1.5 text-xs font-bold text-ink/50">
+                <Users size={11} />
+                {readiness.cohortNote}
+              </p>
               <p className="text-sm font-medium text-ink/70">
                 You&apos;re hireable-ish — close the gaps below before graduation
                 and this jumps past 80.
               </p>
             </div>
           </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+
+          {/* Score breakdown */}
+          <div className="mt-5 border-t-2 border-dashed border-ink/20 pt-4">
+            <p className="text-label mb-3 text-ink/50">Score breakdown · {readiness.score}/100</p>
+            <div className="space-y-2.5">
+              {readiness.breakdown.map((item) => (
+                <div key={item.label}>
+                  <div className="mb-1 flex items-center justify-between gap-2">
+                    <span className="text-[11px] font-bold uppercase tracking-wide">{item.label}</span>
+                    <span className="text-[11px] font-black">
+                      {item.score}
+                      <span className="font-medium text-ink/40">/{item.max}</span>
+                    </span>
+                  </div>
+                  <div className="h-2 w-full border border-ink/20 bg-canvas">
+                    <div
+                      className={`h-full transition-all ${
+                        item.score / item.max >= 0.7
+                          ? "bg-blue"
+                          : item.score / item.max >= 0.4
+                            ? "bg-yellow"
+                            : "bg-red"
+                      }`}
+                      style={{ width: `${(item.score / item.max) * 100}%` }}
+                    />
+                  </div>
+                  <p className="mt-0.5 text-[10px] font-medium text-ink/40">{item.note}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-5 grid gap-4 sm:grid-cols-2 border-t-2 border-dashed border-ink/20 pt-4">
             <div>
               <p className="text-label mb-2 flex items-center gap-1.5 text-red">
                 <AlertTriangle size={13} /> Gaps

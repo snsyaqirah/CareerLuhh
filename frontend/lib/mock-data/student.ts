@@ -87,6 +87,40 @@ export const careerPaths: CareerPath[] = [
 export const readiness = {
   score: 62,
   grade: "B",
+  cohortPercentile: 31,
+  cohortNote: "Top 31% of Computer Science students graduating in Malaysia this year",
+  breakdown: [
+    {
+      label: "Academic (CGPA)",
+      score: 21,
+      max: 25,
+      note: "CGPA 3.2 — above the 3.0 employer threshold",
+    },
+    {
+      label: "Portfolio & Projects",
+      score: 12,
+      max: 25,
+      note: "GitHub active but no deployed project yet — biggest unlock",
+    },
+    {
+      label: "Work Experience",
+      score: 5,
+      max: 20,
+      note: "No internship yet — this is normal for Semester 6",
+    },
+    {
+      label: "Professional Profile",
+      score: 14,
+      max: 20,
+      note: "GitHub strong · LinkedIn profile 60% complete",
+    },
+    {
+      label: "Certifications",
+      score: 10,
+      max: 10,
+      note: "MUET Band 4 registered — meets English threshold",
+    },
+  ],
   gaps: [
     "No portfolio projects yet",
     "Missing internship experience",
