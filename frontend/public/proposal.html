@@ -11,19 +11,19 @@
       startOnLoad: true,
       theme: 'base',
       themeVariables: {
-        primaryColor: '#1040C0',
-        primaryTextColor: '#ffffff',
+        primaryColor: '#F5F4F0',
+        primaryTextColor: '#121212',
         primaryBorderColor: '#121212',
         secondaryColor: '#F0C020',
         secondaryTextColor: '#121212',
-        tertiaryColor: '#F5F4F0',
+        tertiaryColor: '#e8e7e3',
         tertiaryTextColor: '#121212',
         lineColor: '#121212',
         textColor: '#121212',
         background: '#ffffff',
         mainBkg: '#F5F4F0',
         nodeBorder: '#121212',
-        clusterBkg: '#F5F4F0',
+        clusterBkg: '#ffffff',
         clusterBorder: '#121212',
         titleColor: '#121212',
         edgeLabelBackground: '#F5F4F0',
@@ -681,6 +681,16 @@ graph TD
     end
 
     C2 -.->|job listings| E1
+
+    classDef blue fill:#1040C0,color:#fff,stroke:#121212,stroke-width:2px
+    classDef red fill:#D02020,color:#fff,stroke:#121212,stroke-width:2px
+    classDef ink fill:#121212,color:#fff,stroke:#121212,stroke-width:2px
+    classDef canvas fill:#F5F4F0,color:#121212,stroke:#121212,stroke-width:2px
+
+    class S1,S2,S3,S4,S6 blue
+    class S5 canvas
+    class C1,C2,C3,C4,C5,C6,C7 red
+    class E1,E2,E3,E4,E5 ink
   </pre>
 
   <div class="sec-hd mt24">
@@ -694,24 +704,24 @@ graph TD
   <pre class="mermaid" style="background:white; border:2px solid #121212; padding:16px;">
 graph LR
     subgraph Client["Browser"]
-        LP[Landing Page /]
-        JP[Public Jobs /jobs]
-        SP[Student Portal /student/*]
-        CP[Candidate Portal /candidate/*]
-        EP[Employer Portal /employer/*]
+        LP[Landing Page]
+        JP[Public Job Board]
+        SP[Student Portal]
+        CP[Candidate Portal]
+        EP[Employer Portal]
     end
 
-    subgraph NextJS["Next.js 15 App Router"]
-        Auth[Auth Context — localStorage]
-        MockData[Mock Data Layer — lib/mock-data/]
-        Shell[PortalShell — Shared Layout]
-        Guide[DemoGuide — Stage 1 Page Guide]
+    subgraph NextJS["Next.js 15 App Router — Stage 1"]
+        Auth[Auth Context]
+        MockData[Mock Data Layer]
+        Shell[PortalShell]
+        Guide[DemoGuide]
     end
 
     subgraph Stage2["Stage 2 — Backend Blueprint"]
-        API[Next.js API Routes]
-        Gemini[Gemini 2.0 Flash — Agent Engine]
-        Neon[Neon PostgreSQL — Prisma ORM]
+        API[API Routes]
+        Gemini[Gemini 2.0 Flash]
+        Neon[Neon PostgreSQL]
         NextAuth[NextAuth.js v5]
     end
 
@@ -720,6 +730,14 @@ graph LR
     Auth -.->|replaces with| NextAuth
     API --> Gemini
     API --> Neon
+
+    classDef canvas fill:#F5F4F0,color:#121212,stroke:#121212,stroke-width:2px
+    classDef yellow fill:#F0C020,color:#121212,stroke:#121212,stroke-width:2px
+    classDef blue fill:#1040C0,color:#fff,stroke:#121212,stroke-width:2px
+
+    class LP,JP,SP,CP,EP canvas
+    class Auth,MockData,Shell,Guide yellow
+    class API,Gemini,Neon,NextAuth blue
   </pre>
 
   <div style="margin-top:20px; background:var(--ink); color:white; padding:14px 18px; display:flex; justify-content:space-between; align-items:center;">
