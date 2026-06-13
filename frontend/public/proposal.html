@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerLuhh — System Proposal · Talentbank Hackathon 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Outfit', sans-serif; background: #CCCBC4; color: #121212; }
+    :root { --blue:#1040C0; --red:#D02020; --yellow:#F0C020; --ink:#121212; --canvas:#F5F4F0; }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--canvas);
+      margin: 24px auto;
+      padding: 44px 48px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media screen { .page { box-shadow: 8px 8px 0 rgba(0,0,0,0.25); } }
+
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body { background: white; }
+      .page { margin: 0; padding: 28px 36px 56px; box-shadow: none; min-height: 0; page-break-after: always; }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    /* Type */
+    .t-display { font-size: 80px; font-weight: 900; text-transform: uppercase; line-height: 0.88; letter-spacing: -3px; }
+    .t-h1 { font-size: 34px; font-weight: 900; text-transform: uppercase; line-height: 1; }
+    .t-h2 { font-size: 20px; font-weight: 900; text-transform: uppercase; line-height: 1.1; }
+    .t-h3 { font-size: 14px; font-weight: 800; text-transform: uppercase; }
+    .t-label { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.45; }
+    .t-body { font-size: 12.5px; font-weight: 500; line-height: 1.65; }
+    .t-small { font-size: 11px; font-weight: 600; line-height: 1.55; }
+    .t-tiny { font-size: 10px; font-weight: 600; line-height: 1.5; }
+
+    /* Colors */
+    .c-blue { color: var(--blue); }
+    .c-red { color: var(--red); }
+    .bg-blue { background: var(--blue); color: white; }
+    .bg-red { background: var(--red); color: white; }
+    .bg-yellow { background: var(--yellow); color: var(--ink); }
+    .bg-ink { background: var(--ink); color: white; }
+
+    /* Layout */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .mt8 { margin-top: 8px; }
+    .mt16 { margin-top: 16px; }
+    .mt24 { margin-top: 24px; }
+    .mt32 { margin-top: 32px; }
+    .mb8 { margin-bottom: 8px; }
+    .mb16 { margin-bottom: 16px; }
+    .mb24 { margin-bottom: 24px; }
+
+    /* Elements */
+    .divider { height: 4px; background: var(--ink); margin: 20px 0; }
+    .divider-sm { height: 2px; background: var(--ink); margin: 12px 0; }
+    .divider-dash { border-top: 2px dashed rgba(18,18,18,0.18); margin: 14px 0; }
+
+    .card { border: 2px solid var(--ink); padding: 14px; background: white; }
+    .card-blue { border-color: var(--blue); background: rgba(16,64,192,0.04); }
+    .card-red { border-color: var(--red); background: rgba(208,32,32,0.04); }
+    .card-yellow { border-color: var(--yellow); background: rgba(240,192,32,0.07); }
+
+    .badge { display: inline-block; padding: 2px 7px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; border: 1.5px solid currentColor; }
+    .badge-blue { color: var(--blue); }
+    .badge-red { color: var(--red); }
+    .badge-fill-blue { background: var(--blue); color: white; border-color: var(--blue); }
+    .badge-fill-ink { background: var(--ink); color: white; border-color: var(--ink); }
+
+    .sec-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+    .sec-num { width: 34px; height: 34px; background: var(--ink); color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0; }
+
+    table { width: 100%; border-collapse: collapse; }
+    th { background: var(--ink); color: white; padding: 7px 10px; text-align: left; font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+    td { padding: 6px 10px; font-size: 11px; font-weight: 500; border-bottom: 1px solid rgba(18,18,18,0.09); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: rgba(18,18,18,0.025); }
+
+    .pg-footer { position: absolute; bottom: 20px; left: 48px; right: 48px; display: flex; justify-content: space-between; font-size: 9px; font-weight: 600; color: rgba(18,18,18,0.3); border-top: 1px solid rgba(18,18,18,0.1); padding-top: 8px; }
+
+    /* Portal list */
+    .portal-list { list-style: none; padding: 0; }
+    .portal-list li { padding: 4px 0; font-size: 11px; font-weight: 600; border-bottom: 1px dashed rgba(18,18,18,0.1); }
+    .portal-list li:last-child { border-bottom: none; }
+
+    /* Pipeline diagram */
+    .pipeline { display: flex; align-items: stretch; border: 2px solid var(--ink); }
+    .pipe-col { flex: 1; }
+    .pipe-hd { padding: 7px 10px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; }
+    .pipe-body { padding: 10px; }
+    .pipe-agent { border: 1.5px solid; padding: 4px 8px; font-size: 9.5px; font-weight: 700; margin-bottom: 5px; }
+    .pipe-arrow { text-align: center; font-size: 11px; color: rgba(18,18,18,0.3); margin: 2px 0; }
+    .pipe-sep { width: 28px; background: rgba(18,18,18,0.04); border-left: 2px solid var(--ink); border-right: 2px solid var(--ink); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
+    .pipe-arr-txt { font-size: 16px; color: rgba(18,18,18,0.3); }
+    .pipe-arr-lbl { font-size: 7px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(18,18,18,0.3); writing-mode: vertical-lr; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAGE 1 · COVER
+     ══════════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <!-- Geometric accents -->
+  <div style="position:absolute; top:0; right:0; width:140px; height:140px; background:var(--red);"></div>
+  <div style="position:absolute; top:56px; right:56px; width:60px; height:60px; background:var(--yellow);"></div>
+  <div style="position:absolute; bottom:60px; right:0; width:8px; height:180px; background:var(--blue);"></div>
+
+  <!-- Blue top bar -->
+  <div style="height:10px; background:var(--blue); margin: -44px -48px 44px;"></div>
+
+  <p class="t-label" style="margin-bottom:14px;">Talentbank First Cohort Tech Hackathon 2026 · Stage 1 Proposal</p>
+
+  <div class="t-display mb16">
+    Career<span class="c-blue">Luhh</span>
+  </div>
+  <p style="font-size:18px; font-weight:800; text-transform:uppercase; color:var(--red); margin-bottom:36px; letter-spacing:-0.5px;">Career First, Everything Else Later.</p>
+
+  <p class="t-body" style="max-width:400px; margin-bottom:36px; opacity:0.75;">
+    Asia's Career Co-Pilot — a multi-agent AI platform with one continuous career profile that travels from student to first job to senior pivot. Three portals. Sixteen specialised agents. Every industry.
+  </p>
+
+  <div class="divider"></div>
+
+  <!-- 3 stats -->
+  <div class="grid3 mt24 mb24">
+    <div style="border-left:4px solid var(--blue); padding:12px 14px; background:white;">
+      <div style="font-size:44px; font-weight:900; color:var(--blue); line-height:1;">3</div>
+      <p class="t-tiny" style="opacity:0.6; margin-top:4px;">Portals · Student · Candidate · Employer</p>
+    </div>
+    <div style="border-left:4px solid var(--red); padding:12px 14px; background:white;">
+      <div style="font-size:44px; font-weight:900; color:var(--red); line-height:1;">16</div>
+      <p class="t-tiny" style="opacity:0.6; margin-top:4px;">Specialised AI agents — one job each</p>
+    </div>
+    <div style="border-left:4px solid var(--ink); padding:12px 14px; background:white;">
+      <div style="font-size:44px; font-weight:900; line-height:1;">12+</div>
+      <p class="t-tiny" style="opacity:0.6; margin-top:4px;">Challenge modules covered</p>
+    </div>
+  </div>
+
+  <!-- Team + Demo -->
+  <div class="grid2">
+    <div class="card">
+      <p class="t-label mb8">Live Demo</p>
+      <p class="t-h2 c-blue" style="margin-bottom:4px;">careerluhh.vercel.app</p>
+      <p class="t-tiny" style="opacity:0.55; margin-bottom:10px;">3 portals · 20 jobs · clickable prototype · Page Guide on every page</p>
+      <div class="divider-dash"></div>
+      <p class="t-label mb8">Demo Accounts · password: demo123</p>
+      <p class="t-tiny" style="opacity:0.6;">Student → <span style="font-family:monospace;">student@demo.com</span></p>
+      <p class="t-tiny" style="opacity:0.6;">Candidate → <span style="font-family:monospace;">candidate@demo.com</span></p>
+      <p class="t-tiny" style="opacity:0.6;">Employer → <span style="font-family:monospace;">employer@demo.com</span></p>
+    </div>
+    <div class="card">
+      <p class="t-label mb8">Team</p>
+      <p class="t-h2" style="margin-bottom:3px;">Syaqirah</p>
+      <p class="t-small c-blue" style="margin-bottom:6px;">Siti Nursyaqirah binti Osman</p>
+      <p class="t-tiny" style="opacity:0.55; margin-bottom:3px;">Full-Stack Developer · Solo</p>
+      <p class="t-tiny" style="opacity:0.55; margin-bottom:10px;">Smart Reader® Worldwide</p>
+      <div class="divider-dash"></div>
+      <p class="t-label mb8">GitHub</p>
+      <p class="t-tiny c-blue">github.com/snsyaqirah/CareerLuhh</p>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span>CareerLuhh · System Proposal · Stage 1 · June 2026</span>
+    <span>Talentbank Tech Hackathon 2026</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAGE 2 · PROBLEM + SOLUTION
+     ══════════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-num bg-red">01</div>
+    <div>
+      <p class="t-label">Why This Exists</p>
+      <h2 class="t-h1">The Problem</h2>
+    </div>
+  </div>
+
+  <div style="background:white; border:2px solid var(--ink); padding:16px; margin-bottom:18px;">
+    <p class="t-body">
+      Malaysia produces <strong>250,000 graduates per year</strong>. More than half will spend their first 6–12 months underemployed or unemployed — not because they lack ability, but because the systems between them and the right employer were never designed to see the whole picture. Candidates apply to 50 jobs and hear back from three. Employers post a role, get 400 applications, and hire the one whose CV happened to match a filter. Both sides end up cynical. Neither got what they actually needed.
+    </p>
+  </div>
+
+  <div class="grid3 mb24">
+    <div class="card card-red">
+      <p class="t-h3 c-red mb8">No Map</p>
+      <p class="t-small" style="opacity:0.75;">Career counselling is scarce, expensive, or generic. Students graduate without knowing what roles match their trajectory — only what keywords to paste into a CV.</p>
+    </div>
+    <div class="card card-red">
+      <p class="t-h3 c-red mb8">No Signal</p>
+      <p class="t-small" style="opacity:0.75;">Job boards rank by recency or sponsored placement. Candidates can't see their fit, their gap, or what to do about it. TVET graduates and self-taught talent are invisible to keyword filters.</p>
+    </div>
+    <div class="card card-red">
+      <p class="t-h3 c-red mb8">No Co-Pilot</p>
+      <p class="t-small" style="opacity:0.75;">Employers hire reactively. By the time a resignation lands, the signal was visible weeks earlier — if anyone was watching.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec-hd mt24">
+    <div class="sec-num bg-blue">02</div>
+    <div>
+      <p class="t-label">Our Answer</p>
+      <h2 class="t-h1">What CareerLuhh Does</h2>
+    </div>
+  </div>
+
+  <div style="background:var(--blue); color:white; padding:18px; border:2px solid var(--ink); margin-bottom:18px;">
+    <p style="font-size:14px; font-weight:700; line-height:1.55;">
+      A three-portal career operating system built around <em>one continuous career profile</em> that travels with the user — from student, to first job, to senior pivot, across every phase of working life.
+    </p>
+    <p style="font-size:11.5px; font-weight:500; margin-top:10px; opacity:0.8; line-height:1.6;">
+      It does not predict the future. It shows the realistic range of paths available to someone with a specific shape: their skills, their qualifications, their location, their goals. Every recommendation is explainable in one plain sentence. No black-box scores. No false precision.
+    </p>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <div style="background:var(--blue); color:white; padding:6px 10px; margin:-14px -14px 10px; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.07em;">🎓 Student Portal</div>
+      <ul class="portal-list">
+        <li>Readiness score 0–100 with gap breakdown</li>
+        <li>3-path career roadmap year by year</li>
+        <li>Internship matcher by absorption rate</li>
+        <li>SkorAlign — credential translator</li>
+        <li>Lokal Route — KL vs hometown net pay</li>
+        <li>Graduate → transfer to Candidate</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div style="background:var(--red); color:white; padding:6px 10px; margin:-14px -14px 10px; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.07em;">💼 Candidate Portal</div>
+      <ul class="portal-list">
+        <li>AI job matching by trajectory</li>
+        <li>Skills gap per role listing</li>
+        <li>AI Career Coach (NudgeAgent + CoachChat)</li>
+        <li>Salary benchmark + negotiation script</li>
+        <li>Resume OCR analyzer — severity scoring</li>
+        <li>6-month next-move planner</li>
+        <li>Gig work credentialing</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div style="background:var(--ink); color:white; padding:6px 10px; margin:-14px -14px 10px; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.07em;">🏢 Employer Portal</div>
+      <ul class="portal-list">
+        <li>Trajectory-based talent search</li>
+        <li>TVET + self-taught candidate surfacing</li>
+        <li>Retention signals — PDPA compliant</li>
+        <li>Re-engagement warmlist</li>
+        <li>Day 30/60/90 check-in scheduler</li>
+        <li>5-year workforce resilience planner</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span>CareerLuhh · System Proposal · Stage 1</span>
+    <span>Page 2</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAGE 3 · 16 AI AGENTS
+     ══════════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-num bg-red">03</div>
+    <div>
+      <p class="t-label">The Engine</p>
+      <h2 class="t-h1">16 Specialised AI Agents</h2>
+    </div>
+  </div>
+
+  <div style="background:white; border:2px solid var(--yellow); padding:10px 14px; margin-bottom:16px; display:flex; gap:10px; align-items:flex-start;">
+    <span style="font-size:16px; flex-shrink:0;">⚡</span>
+    <p class="t-small" style="opacity:0.75;">Each agent does one clearly scoped job. They trigger on <strong>explicit user intent only</strong> — not on page load, not simultaneously. Each passes a shared <span style="font-family:monospace; background:rgba(18,18,18,0.06); padding:1px 5px; font-size:10px; border:1px solid rgba(18,18,18,0.15);">SessionContext</span> forward so every recommendation knows what the previous one established. No agent calls another directly — the orchestrator connects them.</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:24px;">#</th>
+        <th style="width:130px;">Agent</th>
+        <th style="width:145px;">Code Name</th>
+        <th style="width:100px;">Portal</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="font-weight:900;">1</td><td><strong>The Auditor</strong></td><td style="font-family:monospace; font-size:9.5px; color:var(--blue);">ReadinessAgent</td><td><span class="badge badge-blue">Student</span></td><td>Scores career readiness 0–100 from portfolio, transcript, and skills</td></tr>
+      <tr><td style="font-weight:900;">2</td><td><strong>The Navigator</strong></td><td style="font-family:monospace; font-size:9.5px; color:var(--blue);">NavigatorAgent</td><td><span class="badge badge-blue">Student</span></td><td>Maps 3 realistic career paths with year-by-year milestones</td></tr>
+      <tr><td style="font-weight:900;">3</td><td><strong>The Recruiter</strong></td><td style="font-family:monospace; font-size:9.5px; color:var(--blue);">InternMatchAgent</td><td><span class="badge badge-blue">Student</span></td><td>Ranks internships by profile fit and absorption rate — not just allowance</td></tr>
+      <tr><td style="font-weight:900;">4</td><td><strong>The Translator</strong></td><td style="font-family:monospace; font-size:9.5px; color:var(--blue);">SkorAlignAgent</td><td><span class="badge badge-blue">Student</span> <span class="badge badge-red">Candidate</span></td><td>Translates Malaysian qualifications to global equivalents employers understand</td></tr>
+      <tr><td style="font-weight:900;">5</td><td><strong>The Coach</strong></td><td style="font-family:monospace; font-size:9.5px; color:var(--blue);">NudgeAgent</td><td><span class="badge badge-blue">Student</span> <span class="badge badge-red">Candidate</span></td><td>Urgency-aware AI career coach; CoachChat conversational layer reads full profile</td></tr>
+      <tr><td style="font-weight:900;">6</td><td><strong>The Writer</strong></td><td style="font-family:monospace; font-size:9.5px; color:var(--blue);">ResumeAgent</td><td><span class="badge badge-blue">Student</span> <span class="badge badge-red">Candidate</span></td><td>Drafts and reviews resume sections; auto-populates from portfolio and transcript</td></tr>
+      <tr><td style="font-weight:900;">7</td><td><strong>The Analyst</strong></td><td style="font-family:monospace; font-size:9.5px; color:var(--red);">ResumeOCRAgent</td><td><span class="badge badge-red">Candidate</span></td><td>Parses uploaded resume, scores 0–100, flags issues by severity (critical / moderate / minor)</td></tr>
+      <tr><td style="font-weight:900;">8</td><td><strong>JobMatchAgent</strong></td><td style="font-family:monospace; font-size:9.5px; color:var(--red);">JobMatchAgent</td><td><span class="badge badge-red">Candidate</span></td><td>Ranks jobs by trajectory + skills gap; explains every decision in plain language</td></tr>
+      <tr><td style="font-weight:900;">9</td><td><strong>The Advisor</strong></td><td style="font-family:monospace; font-size:9.5px; color:var(--red);">AdvisorAgent</td><td><span class="badge badge-red">Candidate</span></td><td>Builds personalised 6-month next-move plan from current profile and target role</td></tr>
+      <tr><td style="font-weight:900;">10</td><td><strong>PayBenchmarkAgent</strong></td><td style="font-family:monospace; font-size:9.5px; color:var(--red);">SalaryAgent</td><td><span class="badge badge-red">Candidate</span></td><td>Benchmarks salary by role, level, and city; generates negotiation script</td></tr>
+      <tr><td style="font-weight:900;">11</td><td><strong>The Interrogator</strong></td><td style="font-family:monospace; font-size:9.5px; color:var(--red);">InterviewPrepAgent</td><td><span class="badge badge-red">Candidate</span></td><td>Company-specific interview tips based on role and known hiring pattern</td></tr>
+      <tr><td style="font-weight:900;">12</td><td><strong>The Headhunter</strong></td><td style="font-family:monospace; font-size:9.5px;">TrajectoryMatchAgent</td><td><span class="badge badge-fill-ink">Employer</span></td><td>Finds candidates by growth curve — surfaces TVET and self-taught talent keyword filters miss</td></tr>
+      <tr><td style="font-weight:900;">13</td><td><strong>The Scout</strong></td><td style="font-family:monospace; font-size:9.5px;">TalentRadarAgent</td><td><span class="badge badge-fill-ink">Employer</span></td><td>Flags hidden-gem candidates weekly — non-traditional backgrounds, unusual learning velocity</td></tr>
+      <tr><td style="font-weight:900;">14</td><td><strong>The Watcher</strong></td><td style="font-family:monospace; font-size:9.5px;">RetentionSignalAgent</td><td><span class="badge badge-fill-ink">Employer</span></td><td>Surfaces flight risk from in-platform signals only — PDPA 2010 compliant, consent-gated</td></tr>
+      <tr><td style="font-weight:900;">15</td><td><strong>The Buddy</strong></td><td style="font-family:monospace; font-size:9.5px;">OnboardingAgent</td><td><span class="badge badge-fill-ink">Employer</span></td><td>Schedules Day 30/60/90 manager check-ins with ready-made conversation scripts</td></tr>
+      <tr><td style="font-weight:900;">16</td><td><strong>The Strategist</strong></td><td style="font-family:monospace; font-size:9.5px;">WorkforceAgent</td><td><span class="badge badge-fill-ink">Employer</span></td><td>5-year workforce projection + interactive Resilience Planner calculator</td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:14px; background:white; border:2px solid var(--ink); padding:10px 14px; display:flex; justify-content:space-between; align-items:center; gap:20px;">
+    <p class="t-tiny" style="opacity:0.6;"><strong>Stage 1:</strong> All outputs are hardcoded mock data in <span style="font-family:monospace; font-size:10px;">lib/mock-data/*.ts</span> — every agent, every pipeline, fully simulated.</p>
+    <p class="t-tiny" style="opacity:0.6; flex-shrink:0;"><strong>Stage 2:</strong> Live Gemini 2.0 Flash calls. On-demand only.</p>
+  </div>
+
+  <div class="pg-footer">
+    <span>CareerLuhh · System Proposal · Stage 1</span>
+    <span>Page 3</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAGE 4 · AGENT PIPELINE + ARCHITECTURE
+     ══════════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-num bg-yellow" style="color:var(--ink);">04</div>
+    <div>
+      <p class="t-label">How Agents Connect</p>
+      <h2 class="t-h1">Agent Pipeline</h2>
+    </div>
+  </div>
+
+  <!-- Pipeline diagram -->
+  <div class="pipeline mb24">
+    <!-- Student -->
+    <div class="pipe-col" style="border-right:2px solid var(--ink);">
+      <div class="pipe-hd bg-blue">🎓 Student Portal</div>
+      <div class="pipe-body">
+        <div class="pipe-agent" style="color:var(--blue); border-color:var(--blue);">Portfolio + Transcript</div>
+        <div class="pipe-arrow">↓</div>
+        <div class="pipe-agent" style="color:var(--blue); border-color:var(--blue);">ReadinessAgent</div>
+        <div class="pipe-arrow">↓ score + gaps</div>
+        <div class="pipe-agent" style="color:var(--blue); border-color:var(--blue);">NavigatorAgent</div>
+        <div class="pipe-arrow">↓ 3 paths</div>
+        <div class="pipe-agent" style="color:var(--blue); border-color:var(--blue);">InternMatchAgent</div>
+        <div class="pipe-agent" style="color:var(--blue); border-color:var(--blue);">NudgeAgent (Coach)</div>
+        <div class="pipe-agent" style="color:var(--blue); border-color:var(--blue);">ResumeAgent</div>
+        <div class="pipe-agent" style="color:var(--blue); border-color:var(--blue);">SkorAlignAgent</div>
+      </div>
+    </div>
+    <!-- Sep 1 -->
+    <div class="pipe-sep">
+      <span class="pipe-arr-txt">→</span>
+      <span class="pipe-arr-lbl">graduate</span>
+    </div>
+    <!-- Candidate -->
+    <div class="pipe-col" style="border-right:2px solid var(--ink);">
+      <div class="pipe-hd bg-red">💼 Candidate Portal</div>
+      <div class="pipe-body">
+        <div class="pipe-agent" style="color:var(--red); border-color:var(--red);">Career Profile</div>
+        <div class="pipe-arrow">↓</div>
+        <div class="pipe-agent" style="color:var(--red); border-color:var(--red);">JobMatchAgent</div>
+        <div class="pipe-arrow">↓ matched roles</div>
+        <div class="pipe-agent" style="color:var(--red); border-color:var(--red);">InterviewPrepAgent</div>
+        <div class="pipe-agent" style="color:var(--red); border-color:var(--red);">NudgeAgent (Coach)</div>
+        <div class="pipe-agent" style="color:var(--red); border-color:var(--red);">AdvisorAgent</div>
+        <div class="pipe-agent" style="color:var(--red); border-color:var(--red);">SalaryAgent</div>
+        <div class="pipe-agent" style="color:var(--red); border-color:var(--red);">ResumeOCRAgent</div>
+      </div>
+    </div>
+    <!-- Sep 2 -->
+    <div class="pipe-sep">
+      <span class="pipe-arr-txt">→</span>
+      <span class="pipe-arr-lbl">signals</span>
+    </div>
+    <!-- Employer -->
+    <div class="pipe-col">
+      <div class="pipe-hd bg-ink">🏢 Employer Portal</div>
+      <div class="pipe-body">
+        <div class="pipe-agent" style="border-color:var(--ink);">TrajectoryMatchAgent</div>
+        <div class="pipe-arrow">↓ candidates</div>
+        <div class="pipe-agent" style="border-color:var(--ink);">TalentRadarAgent</div>
+        <div class="pipe-agent" style="border-color:var(--ink);">RetentionSignalAgent</div>
+        <div class="pipe-arrow">↓ alerts</div>
+        <div class="pipe-agent" style="border-color:var(--ink);">OnboardingAgent</div>
+        <div class="pipe-agent" style="border-color:var(--ink);">WorkforceAgent</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-hd">
+    <div class="sec-num">05</div>
+    <div>
+      <p class="t-label">System Architecture</p>
+      <h2 class="t-h2">Stage 1 → Stage 2</h2>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div style="background:var(--yellow); padding:5px 10px; margin:-14px -14px 12px; font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em;">Stage 1 · Live Now · careerluhh.vercel.app</div>
+      <p class="t-tiny" style="opacity:0.6; margin-bottom:10px;">Next.js 15 + Tailwind CSS v4 + TypeScript · Vercel</p>
+      <div style="border:1.5px solid rgba(18,18,18,0.18); padding:5px 10px; font-size:10px; font-weight:600; margin-bottom:5px; background:rgba(18,18,18,0.02);">Browser → PortalShell (3 portals)</div>
+      <div style="border:1.5px solid rgba(18,18,18,0.18); padding:5px 10px; font-size:10px; font-weight:600; margin-bottom:5px; background:rgba(18,18,18,0.02);">Mock Data Layer · lib/mock-data/*.ts</div>
+      <div style="border:1.5px solid rgba(18,18,18,0.18); padding:5px 10px; font-size:10px; font-weight:600; margin-bottom:5px; background:rgba(18,18,18,0.02);">Auth: localStorage session · 3 demo accounts</div>
+      <div style="border:1.5px solid rgba(18,18,18,0.18); padding:5px 10px; font-size:10px; font-weight:600; background:rgba(18,18,18,0.02);">Security: HSTS · CSP · X-Frame-Options · PDPA 2010</div>
+    </div>
+    <div class="card card-blue">
+      <div style="background:var(--blue); color:white; padding:5px 10px; margin:-14px -14px 12px; font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em;">Stage 2 · 28-Day Build</div>
+      <p class="t-tiny" style="opacity:0.6; margin-bottom:10px;">Same Next.js shell — backend wired in via API Routes</p>
+      <div style="border:1.5px solid var(--blue); padding:5px 10px; font-size:10px; font-weight:600; margin-bottom:5px; background:rgba(16,64,192,0.04); color:var(--blue);">Google Gemini 2.0 Flash · 16 live agent calls · free tier</div>
+      <div style="border:1.5px solid var(--blue); padding:5px 10px; font-size:10px; font-weight:600; margin-bottom:5px; background:rgba(16,64,192,0.04); color:var(--blue);">Neon PostgreSQL + Prisma ORM · persistent career profiles</div>
+      <div style="border:1.5px solid var(--blue); padding:5px 10px; font-size:10px; font-weight:600; margin-bottom:5px; background:rgba(16,64,192,0.04); color:var(--blue);">NextAuth.js v5 · Uploadthing (resume PDF)</div>
+      <div style="border:1.5px solid var(--blue); padding:5px 10px; font-size:10px; font-weight:600; background:rgba(16,64,192,0.04); color:var(--blue);">~RM0.001/session · 3–5 agent calls max per user</div>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span>CareerLuhh · System Proposal · Stage 1</span>
+    <span>Page 4</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAGE 5 · MODULES COVERED + SDG
+     ══════════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-num bg-blue">06</div>
+    <div>
+      <p class="t-label">Coverage</p>
+      <h2 class="t-h1">Challenge Modules</h2>
+    </div>
+  </div>
+
+  <table style="margin-bottom:20px;">
+    <thead>
+      <tr>
+        <th>Module</th>
+        <th style="width:90px;">Audience</th>
+        <th>CareerLuhh Implementation</th>
+        <th style="width:64px;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Career Path Navigator</strong></td><td>Candidate</td><td>NavigatorAgent → /student/roadmap · /candidate/next-move</td><td><span class="badge badge-fill-blue">Primary</span></td></tr>
+      <tr><td><strong>Living Portfolio</strong></td><td>Candidate</td><td>/student/portfolio + /candidate/portfolio — tech stack, cert ID, GitHub URL</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>AI Career Coach</strong></td><td>Candidate</td><td>NudgeAgent + CoachChat — urgency-aware coach, conversational layer on dashboard</td><td><span class="badge badge-fill-blue">Primary</span></td></tr>
+      <tr><td><strong>Fair Pay Engine</strong></td><td>Candidate</td><td>SalaryAgent → /candidate/salary — market rate benchmark + negotiation script</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Smart Talent Matching</strong></td><td>Employer</td><td>TrajectoryMatchAgent → /employer/search — growth-curve matching, not keyword</td><td><span class="badge badge-fill-blue">Primary</span></td></tr>
+      <tr><td><strong>Talent Retention Signals</strong></td><td>Employer</td><td>RetentionSignalAgent → /employer/dashboard — PDPA-compliant in-platform alerts</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Talent Re-Engagement</strong></td><td>Employer</td><td>/employer/re-engage — warmlist + editable draft + in-platform chatbox</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Onboarding Success Predictor</strong></td><td>Employer</td><td>OnboardingAgent → /employer/onboarding — Day 30/60/90 check-ins with scripts</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Workforce Resilience Planner</strong></td><td>Employer</td><td>WorkforceAgent → /employer/workforce — interactive 5-year headcount projection</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Adaptive Readiness Profile</strong></td><td>University</td><td>ReadinessAgent → /student/dashboard — score + gap breakdown + next actions</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Live Internship Marketplace</strong></td><td>University</td><td>InternMatchAgent → /student/internships — ranked by fit and absorption rate</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Lifelong Outcome Loop</strong></td><td>University</td><td>Student → Candidate transfer at /student/graduate — full arc profile tracking</td><td><span class="badge badge-fill-blue">Primary</span></td></tr>
+      <tr style="background:rgba(208,32,32,0.03);"><td><strong>Credential Bridge ✦</strong></td><td>Wildcard</td><td>SkorAlignAgent — translates Malaysian qualifications to global equivalents</td><td><span class="badge badge-red">Wildcard</span></td></tr>
+      <tr style="background:rgba(208,32,32,0.03);"><td><strong>Lokal Route ✦</strong></td><td>Wildcard</td><td>LokalRouteAgent — gross salary minus real COL: KL vs hometown net take-home</td><td><span class="badge badge-red">Wildcard</span></td></tr>
+      <tr style="background:rgba(208,32,32,0.03);"><td><strong>Gig Ledger ✦</strong></td><td>Wildcard</td><td>GigBridgeAgent → /candidate/gig — rewrites gig history into CV-ready credentials</td><td><span class="badge badge-red">Wildcard</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <div class="sec-hd mt24">
+    <div class="sec-num bg-ink">07</div>
+    <div>
+      <p class="t-label">Impact</p>
+      <h2 class="t-h2">SDG Alignment</h2>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <p style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:5px;">SDG 4 · Quality Education</p>
+      <p class="t-small" style="opacity:0.75;">Career path guidance + skills gap analysis helps every Malaysian make better education decisions — not just those with access to good counsellors.</p>
+    </div>
+    <div class="card">
+      <p style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:5px;">SDG 5 · Gender Equality</p>
+      <p class="t-small" style="opacity:0.75;">Blind recruitment mode removes name, gender, photo, and university from screening — candidates evaluated on competency alone.</p>
+    </div>
+    <div class="card">
+      <p style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:5px;">SDG 8 · Decent Work</p>
+      <p class="t-small" style="opacity:0.75;">Salary benchmarking, gig-work credentialing, job board without a top-5 degree. TVET graduates are first-class users — not edge cases.</p>
+    </div>
+    <div class="card">
+      <p style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:5px;">SDG 10 · Reduced Inequalities</p>
+      <p class="t-small" style="opacity:0.75;">Lokal Route shows real net take-home KL vs hometown. Rural youth are not fooled by big-city salary numbers that disappear into rent.</p>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span>CareerLuhh · System Proposal · Stage 1</span>
+    <span>Page 5</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAGE 6 · TECH STACK + DEMO
+     ══════════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-num bg-yellow" style="color:var(--ink);">08</div>
+    <div>
+      <p class="t-label">Under the Hood</p>
+      <h2 class="t-h1">Tech Stack</h2>
+    </div>
+  </div>
+
+  <div class="grid2 mb24">
+    <div>
+      <p class="t-h3" style="margin-bottom:10px; border-bottom:2px solid var(--ink); padding-bottom:6px;">Stage 1 · Live</p>
+      <table>
+        <thead><tr><th>Layer</th><th>Technology</th></tr></thead>
+        <tbody>
+          <tr><td>Framework</td><td><strong>Next.js 15</strong> · App Router · TypeScript strict</td></tr>
+          <tr><td>Styling</td><td><strong>Tailwind CSS v4</strong> · Bauhaus design system</td></tr>
+          <tr><td>Components</td><td><strong>shadcn/ui</strong> · Lucide React · Framer Motion</td></tr>
+          <tr><td>Auth</td><td>Custom useAuth · localStorage · 3 demo accounts</td></tr>
+          <tr><td>Data</td><td>1,610 lines mock data · <span style="font-family:monospace; font-size:9px;">lib/mock-data/</span></td></tr>
+          <tr><td>Deployment</td><td><strong>Vercel</strong> · CI on push · zero config</td></tr>
+          <tr><td>Security</td><td>HSTS · CSP · X-Frame-Options · PDPA 2010</td></tr>
+          <tr><td>Font</td><td><strong>Outfit</strong> — geometric sans-serif (Google Fonts)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <p class="t-h3 c-blue" style="margin-bottom:10px; border-bottom:2px solid var(--blue); padding-bottom:6px;">Stage 2 · 28-Day Build</p>
+      <table>
+        <thead><tr><th>Layer</th><th>Technology</th></tr></thead>
+        <tbody>
+          <tr><td>AI Engine</td><td><strong>Gemini 2.0 Flash</strong> · free tier · structured output</td></tr>
+          <tr><td>Database</td><td><strong>Neon PostgreSQL</strong> · Prisma ORM · serverless</td></tr>
+          <tr><td>Auth</td><td><strong>NextAuth.js v5</strong> · email + Google OAuth</td></tr>
+          <tr><td>File Storage</td><td><strong>Uploadthing</strong> · resume PDF upload + parse</td></tr>
+          <tr><td>Job Data</td><td>Maukerja + Jobstreet API feeds</td></tr>
+          <tr><td>Agent model</td><td>On-demand only · shared SessionContext · ~RM0.001/session</td></tr>
+          <tr><td>Code quality</td><td>TypeScript strict · zero TS errors · no magic numbers</td></tr>
+          <tr><td>Compliance</td><td>PDPA 2010 · consent on register · data export + delete</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="grid2 mt24">
+    <div class="card card-blue">
+      <p class="t-label mb8" style="color:var(--blue); opacity:1;">Try It Now</p>
+      <p class="t-h2 c-blue" style="margin-bottom:6px;">careerluhh.vercel.app</p>
+      <div class="divider-dash"></div>
+      <p class="t-label mb8">Demo accounts · password: demo123</p>
+      <div style="display:flex; flex-direction:column; gap:4px; margin-bottom:10px;">
+        <div style="border:1.5px solid rgba(18,18,18,0.18); padding:5px 10px; display:flex; justify-content:space-between; background:white;">
+          <span class="t-tiny" style="opacity:0.55;">🎓 Student</span>
+          <span style="font-family:monospace; font-size:10px;">student@demo.com</span>
+        </div>
+        <div style="border:1.5px solid rgba(18,18,18,0.18); padding:5px 10px; display:flex; justify-content:space-between; background:white;">
+          <span class="t-tiny" style="opacity:0.55;">💼 Candidate</span>
+          <span style="font-family:monospace; font-size:10px;">candidate@demo.com</span>
+        </div>
+        <div style="border:1.5px solid rgba(18,18,18,0.18); padding:5px 10px; display:flex; justify-content:space-between; background:white;">
+          <span class="t-tiny" style="opacity:0.55;">🏢 Employer</span>
+          <span style="font-family:monospace; font-size:10px;">employer@demo.com</span>
+        </div>
+      </div>
+      <p class="t-tiny" style="opacity:0.5;">Page Guide button (bottom right) on every page — explains what's built and what's planned for Stage 2.</p>
+    </div>
+
+    <div class="card">
+      <p class="t-label mb8">Judging Criteria Alignment</p>
+      <table>
+        <thead><tr><th>Criterion</th><th style="width:48px; text-align:center;">Weight</th></tr></thead>
+        <tbody>
+          <tr><td>Product &amp; UX Thinking</td><td style="font-weight:900; color:var(--blue); text-align:center;">30%</td></tr>
+          <tr><td>System Design &amp; Integration</td><td style="font-weight:900; color:var(--blue); text-align:center;">25%</td></tr>
+          <tr><td>Completeness</td><td style="font-weight:900; color:var(--blue); text-align:center;">20%</td></tr>
+          <tr><td>AI Craft</td><td style="font-weight:900; color:var(--blue); text-align:center;">15%</td></tr>
+          <tr><td>Code Quality</td><td style="font-weight:900; color:var(--blue); text-align:center;">10%</td></tr>
+        </tbody>
+      </table>
+      <div class="divider-dash"></div>
+      <p class="t-tiny" style="opacity:0.6; line-height:1.6;">TypeScript strict mode · zero type errors · Bauhaus design system throughout · PDPA 2010 compliant · HSTS + CSP + security headers · 41 pages across 3 portals · mobile-first · 1,610 lines mock data</p>
+    </div>
+  </div>
+
+  <div style="margin-top:16px; background:var(--ink); color:white; padding:14px 18px; display:flex; justify-content:space-between; align-items:center;">
+    <div>
+      <p style="font-size:16px; font-weight:900; text-transform:uppercase; letter-spacing:-0.5px;">CareerLuhh</p>
+      <p class="t-tiny" style="opacity:0.55; margin-top:2px;">One profile. Three portals. The full arc of a career — visible for the first time.</p>
+    </div>
+    <div style="text-align:right;">
+      <p class="t-tiny c-blue" style="opacity:1;">careerluhh.vercel.app</p>
+      <p class="t-tiny" style="opacity:0.4; margin-top:2px;">github.com/snsyaqirah/CareerLuhh</p>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span>CareerLuhh · careerluhh.vercel.app</span>
+    <span>github.com/snsyaqirah/CareerLuhh · Page 6</span>
+  </div>
+</div>
+
+</body>
+</html>

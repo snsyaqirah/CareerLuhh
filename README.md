@@ -158,12 +158,18 @@ journey
 - **Got a Job → Graduate** — one-click transfer of student profile to Candidate portal
 
 ### For Candidates
+Serves both fresh graduates entering the workforce for the first time and working professionals ready to switch companies or level up.
+
 - **AI Job Matching** — jobs ranked by trajectory fit, not recency; every decision explained
 - **Skills Gap per Role** — exact skills you're missing for each listing, not a vague score
+- **AI Career Coach** — NudgeAgent + CoachChat: urgency-aware mentor tied to your job search timeline; ask it anything about your profile
 - **Salary Benchmark** — market rate by role + city + level, with negotiation script
-- **Resume OCR + Analyzer** — upload existing resume → score 0–100 → ranked issues
+- **Resume OCR + Analyzer** — upload existing resume → score 0–100 → ranked issues by severity
+- **Next-Move Planner** — personalised 6-month plan built from your current skills and target roles
 - **Application Tracker** — full pipeline view with AI feedback on rejections
 - **Saved Jobs** — bookmark + full detail view with skills gap and interview tips
+- **Lokal Route** — net take-home calculator: KL vs your hometown, so you compare what you actually keep
+- **Gig Work Credentialing** — GigBridgeAgent rewrites gig history (Grab, Foodpanda, freelance) into credentials HR systems understand
 
 ### For Employers
 - **Trajectory Search** — finds candidates by growth curve; surfaces TVET and self-taught talent keyword filters miss
