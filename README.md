@@ -150,12 +150,16 @@ journey
 ## Key Features
 
 ### For Students
-- **Readiness Score** — 0-100 career readiness with gap analysis (ReadinessAgent)
-- **Career Roadmap** — 3 tailored paths with year-by-year milestones and honest Malaysian salary ranges
-- **Internship Matcher** — ranked by fit AND absorption rate (not just allowance)
-- **Resume Builder** — auto-populates from Portfolio + Transcript, A4 preview, PDF print, DOCX download
-- **SkorAlign** — translates local credentials (UiTM Diploma, STPM, UTM degree) to global equivalents
-- **Got a Job → Graduate** — one-click transfer of student profile to Candidate portal
+- **Readiness Score** — 0-100 career readiness with gap analysis, breakdown by dimension, gaps and strengths (ReadinessAgent)
+- **Career Roadmap** — 3 tailored paths with year-by-year milestones and honest Malaysian salary ranges (NavigatorAgent)
+- **Living Portfolio** — add projects, GitHub, certs, competitions with tech stack, cert ID, URL, and AI summary; feeds readiness score and carries to Candidate portal
+- **Transcript Viewer** — full semester records with CGPA calculator; add subjects manually
+- **Internship Matcher** — ranked by fit AND absorption rate, not just allowance (InternMatchAgent)
+- **Resume Builder** — auto-populates from Portfolio + Transcript, A4 preview, PDF print, DOCX download (ResumeAgent)
+- **SkorAlign** — translates local credentials (MUET, SKM, STPM, UiTM Diploma) to global equivalents employers anywhere understand
+- **Lokal Route** — net take-home KL vs hometown after real cost of living; so rural students aren't fooled by headline numbers
+- **AI Career Coach** — urgency-aware nudges and conversational Q&A grounded in the student's actual profile (NudgeAgent + CoachChat)
+- **Got a Job → Graduate** — 3-step transfer of student profile to Candidate portal; portfolio, transcript, and readiness score all carry over
 
 ### For Candidates
 Serves both fresh graduates entering the workforce for the first time and working professionals ready to switch companies or level up.
@@ -172,12 +176,16 @@ Serves both fresh graduates entering the workforce for the first time and workin
 - **Gig Work Credentialing** — GigBridgeAgent rewrites gig history (Grab, Foodpanda, freelance) into credentials HR systems understand
 
 ### For Employers
-- **Trajectory Search** — finds candidates by growth curve; surfaces TVET and self-taught talent keyword filters miss
-- **Candidate Profile** — expandable full profile: education, experience, skills, portfolio highlight
-- **The Watcher** — platform-internal flight risk signals from consented staff activity (no LinkedIn scraping)
-- **The Buddy** — Day 30/60/90 check-in scheduler with conversation scripts; mark done/skip
-- **Workforce Resilience Planner** — interactive calculator: headcount + attrition + retirement → 5-year projection
-- **Re-Engage** — warmlist of past candidates who've grown into current openings; editable draft + CareerLuhh chatbox
+- **Trajectory Search** — finds candidates by growth curve; surfaces TVET and self-taught talent keyword filters miss (TrajectoryMatchAgent)
+- **Talent Radar** — weekly digest of hidden-gem candidates flagged by learning velocity and non-traditional background (TalentRadarAgent)
+- **Candidate Profile** — expandable full profile: education, experience, skills, certifications, portfolio highlight, open-to-work status
+- **Job Posting Management** — post and manage active listings with full applicant tracker per role
+- **Internship Listings** — post and manage internship placements; employer side of the two-sided internship marketplace
+- **Saved Candidates** — bookmark candidate profiles for later outreach
+- **The Watcher** — platform-internal flight risk signals from consented staff activity only; no LinkedIn scraping, PDPA 2010 compliant
+- **The Buddy** — Day 30/60/90 check-in scheduler with conversation scripts; mark done or skip per new hire (OnboardingAgent)
+- **Workforce Resilience Planner** — interactive calculator: headcount + attrition + retirement → 5-year projection (WorkforceAgent)
+- **Re-Engage** — warmlist of past candidates who've grown into current openings; editable draft + in-platform chatbox with threaded replies
 
 ### For Everyone
 - **Public Job Board** — browse 20 listings across 8 industries without logging in

@@ -66,18 +66,21 @@
 ### Step 2 — Modules Covered
 | Module | Audience | Implementation |
 |---|---|---|
-| Career Path Navigator | Candidate | PathfinderAgent → `/student/roadmap` + `/candidate/next-move` |
-| Living Portfolio | Candidate | `/student/portfolio` + `/candidate/portfolio` — tech stack, cert ID, GitHub URL |
-| AI Career Coach | Candidate | CoachAgent — urgency-aware advice on dashboard |
-| Fair Pay Engine | Candidate | PayBenchmarkAgent → `/candidate/salary` — benchmark + negotiation script |
-| Smart Talent Matching | Employer | TrajectoryMatchAgent → `/employer/search` + AI Matched tab on job board |
-| Talent Retention Signals | Employer | RetentionSignalAgent → `/employer/dashboard` alerts |
-| Talent Re-Engagement | Employer | ReEngagementAgent → `/employer/re-engage` warmlist |
-| Onboarding Success Predictor | Employer | OnboardingAgent → `/employer/onboarding` new hire tracker |
-| Workforce Resilience Planner | Employer | WorkforceAgent → `/employer/workforce` 30-year plan |
-| Adaptive Readiness Profile | University/Student | ReadinessAgent → student dashboard score |
-| Live Internship Marketplace | University/Student | InternMatchAgent → `/student/internships` matched listings |
-| Lifelong Outcome Loop | University/Student | Student → Candidate transfer at `/student/graduate` tracks full arc |
+| Career Path Navigator | Candidate | NavigatorAgent → `/student/roadmap` (3 paths, year-by-year milestones) + `/candidate/next-move` (safe / growth / bold forks with upskilling cost) |
+| Living Portfolio | Candidate + Student | `/student/portfolio` — labeled "Living Portfolio"; add project / GitHub / cert / competition, tech stack, cert ID, URL, AI summary. `/candidate/portfolio` — auto-built from parsed resume; experience, projects, certs, skill graph |
+| AI Career Coach | Candidate + Student | NudgeAgent + CoachChat — urgency-aware coach reads full Career Profile; Q&A on dashboard for both student and candidate portals |
+| Fair Pay Engine | Candidate | SalaryAgent → `/candidate/salary` — market rate benchmark bar vs current salary + negotiation script |
+| Smart Talent Matching | Employer | TrajectoryMatchAgent → `/employer/search` + TalentRadarAgent weekly digest on dashboard |
+| Talent Retention Signals | Employer | RetentionSignalAgent → `/employer/dashboard` + `/employer/workforce` Watcher — in-platform signals only, PDPA 2010 consent-gated |
+| Talent Re-Engagement | Employer | `/employer/re-engage` — warmlist + editable draft + in-platform chatbox with threaded replies |
+| Onboarding Success Predictor | Employer | OnboardingAgent → `/employer/onboarding` — Day 30/60/90 check-ins with conversation scripts, mark done/skip per hire |
+| Workforce Resilience Planner | Employer | WorkforceAgent → `/employer/workforce` — interactive 5-year headcount + attrition + retirement calculator |
+| Adaptive Readiness Profile | University/Student | ReadinessAgent → `/student/dashboard` — score 0–100 with breakdown, gaps, strengths, next actions |
+| Live Internship Marketplace | University/Student + Employer | Student side: InternMatchAgent → `/student/internships` ranked by fit + absorption rate. Employer side: `/employer/internships` — post listings, manage applicants, track active postings |
+| Lifelong Outcome Loop | University/Student | `/student/graduate` — 3-step transfer wizard; portfolio, transcript, readiness score, CGPA all carry to Candidate portal |
+| Credential Bridge (wildcard) | Student/Candidate | SkorAlignAgent → `/student/qualifications` — translates MUET, SKM, STPM, local degrees to global equivalents |
+| Lokal Route (wildcard) | Student/Candidate | LokalRouteAgent → `/student/lokal` + `/candidate/lokal` — gross salary minus real COL; KL vs hometown net take-home |
+| Gig Ledger (wildcard) | Candidate | GigBridgeAgent → `/candidate/gig` — rewrites gig history (Grab, Foodpanda, freelance) into CV-ready credentials |
 
 ### Scoring Alignment
 | Criterion | Weight | How We Address It |

@@ -5,6 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CareerLuhh — System Proposal · Talentbank Hackathon 2026</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#1040C0',
+        primaryTextColor: '#ffffff',
+        primaryBorderColor: '#121212',
+        lineColor: '#121212',
+        secondaryColor: '#F0C020',
+        tertiaryColor: '#F5F4F0',
+        background: '#F5F4F0',
+        mainBkg: '#F5F4F0',
+        nodeBorder: '#121212',
+        clusterBkg: '#ffffff',
+        titleColor: '#121212',
+        edgeLabelBackground: '#F5F4F0',
+        fontFamily: 'Outfit, sans-serif',
+        fontSize: '13px'
+      }
+    });
+  </script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Outfit', sans-serif; background: #CCCBC4; color: #121212; }
@@ -453,21 +476,21 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td><strong>Career Path Navigator</strong></td><td>Candidate</td><td>NavigatorAgent → /student/roadmap · /candidate/next-move</td><td><span class="badge badge-fill-blue">Primary</span></td></tr>
-      <tr><td><strong>Living Portfolio</strong></td><td>Candidate</td><td>/student/portfolio + /candidate/portfolio — tech stack, cert ID, GitHub URL</td><td><span class="badge badge-blue">Built</span></td></tr>
-      <tr><td><strong>AI Career Coach</strong></td><td>Candidate</td><td>NudgeAgent + CoachChat — urgency-aware coach, conversational layer on dashboard</td><td><span class="badge badge-fill-blue">Primary</span></td></tr>
-      <tr><td><strong>Fair Pay Engine</strong></td><td>Candidate</td><td>SalaryAgent → /candidate/salary — market rate benchmark + negotiation script</td><td><span class="badge badge-blue">Built</span></td></tr>
-      <tr><td><strong>Smart Talent Matching</strong></td><td>Employer</td><td>TrajectoryMatchAgent → /employer/search — growth-curve matching, not keyword</td><td><span class="badge badge-fill-blue">Primary</span></td></tr>
-      <tr><td><strong>Talent Retention Signals</strong></td><td>Employer</td><td>RetentionSignalAgent → /employer/dashboard — PDPA-compliant in-platform alerts</td><td><span class="badge badge-blue">Built</span></td></tr>
-      <tr><td><strong>Talent Re-Engagement</strong></td><td>Employer</td><td>/employer/re-engage — warmlist + editable draft + in-platform chatbox</td><td><span class="badge badge-blue">Built</span></td></tr>
-      <tr><td><strong>Onboarding Success Predictor</strong></td><td>Employer</td><td>OnboardingAgent → /employer/onboarding — Day 30/60/90 check-ins with scripts</td><td><span class="badge badge-blue">Built</span></td></tr>
-      <tr><td><strong>Workforce Resilience Planner</strong></td><td>Employer</td><td>WorkforceAgent → /employer/workforce — interactive 5-year headcount projection</td><td><span class="badge badge-blue">Built</span></td></tr>
-      <tr><td><strong>Adaptive Readiness Profile</strong></td><td>University</td><td>ReadinessAgent → /student/dashboard — score + gap breakdown + next actions</td><td><span class="badge badge-blue">Built</span></td></tr>
-      <tr><td><strong>Live Internship Marketplace</strong></td><td>University</td><td>InternMatchAgent → /student/internships — ranked by fit and absorption rate</td><td><span class="badge badge-blue">Built</span></td></tr>
-      <tr><td><strong>Lifelong Outcome Loop</strong></td><td>University</td><td>Student → Candidate transfer at /student/graduate — full arc profile tracking</td><td><span class="badge badge-fill-blue">Primary</span></td></tr>
-      <tr style="background:rgba(208,32,32,0.03);"><td><strong>Credential Bridge ✦</strong></td><td>Wildcard</td><td>SkorAlignAgent — translates Malaysian qualifications to global equivalents</td><td><span class="badge badge-red">Wildcard</span></td></tr>
-      <tr style="background:rgba(208,32,32,0.03);"><td><strong>Lokal Route ✦</strong></td><td>Wildcard</td><td>LokalRouteAgent — gross salary minus real COL: KL vs hometown net take-home</td><td><span class="badge badge-red">Wildcard</span></td></tr>
-      <tr style="background:rgba(208,32,32,0.03);"><td><strong>Gig Ledger ✦</strong></td><td>Wildcard</td><td>GigBridgeAgent → /candidate/gig — rewrites gig history into CV-ready credentials</td><td><span class="badge badge-red">Wildcard</span></td></tr>
+      <tr><td><strong>Career Path Navigator</strong></td><td>Candidate</td><td>NavigatorAgent → /student/roadmap (3 paths, year-by-year) · /candidate/next-move (safe / growth / bold forks with upskilling cost)</td><td><span class="badge badge-fill-blue">Primary</span></td></tr>
+      <tr><td><strong>Living Portfolio</strong></td><td>Candidate</td><td>/student/portfolio — labeled "Living Portfolio"; add project / GitHub / cert / competition, tech stack, cert ID, URL, AI summary. /candidate/portfolio — auto-built from parsed resume; experience, projects, certs, skill graph</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>AI Career Coach</strong></td><td>Candidate</td><td>NudgeAgent + CoachChat conversational layer — urgency-aware coach reads full Career Profile; suggestions and direct Q&amp;A on both student and candidate dashboards</td><td><span class="badge badge-fill-blue">Primary</span></td></tr>
+      <tr><td><strong>Fair Pay Engine</strong></td><td>Candidate</td><td>SalaryAgent → /candidate/salary — market rate benchmark bar vs current salary + negotiation script ready to use in the room</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Smart Talent Matching</strong></td><td>Employer</td><td>TrajectoryMatchAgent → /employer/search — growth-curve matching, surfaces TVET + self-taught talent. TalentRadarAgent weekly digest on dashboard</td><td><span class="badge badge-fill-blue">Primary</span></td></tr>
+      <tr><td><strong>Talent Retention Signals</strong></td><td>Employer</td><td>RetentionSignalAgent → /employer/dashboard alerts + /employer/workforce Watcher section — in-platform signals only, PDPA 2010 consent-gated, no external scraping</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Talent Re-Engagement</strong></td><td>Employer</td><td>/employer/re-engage — warmlist of past candidates who've grown since last contact; editable draft + in-platform chatbox with threaded replies</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Onboarding Success Predictor</strong></td><td>Employer</td><td>OnboardingAgent → /employer/onboarding — Day 30 / 60 / 90 manager check-ins with ready-made conversation scripts; mark done or skip per hire</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Workforce Resilience Planner</strong></td><td>Employer</td><td>WorkforceAgent → /employer/workforce — interactive 5-year headcount + attrition + retirement calculator with projection output</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Lifelong Outcome Loop</strong></td><td>University</td><td>/student/graduate — 3-step transfer wizard; portfolio, transcript, readiness score, and CGPA all carry over to Candidate portal; nothing starts from scratch</td><td><span class="badge badge-fill-blue">Primary</span></td></tr>
+      <tr><td><strong>Adaptive Readiness Profile</strong></td><td>University</td><td>ReadinessAgent → /student/dashboard — readiness score 0–100 with breakdown per dimension, gap list, strengths, and ranked next actions</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr><td><strong>Live Internship Marketplace</strong></td><td>University</td><td>Two-sided: Student → /student/internships (InternMatchAgent, ranked by fit + absorption rate, expandable detail + apply). Employer → /employer/internships (post listings, manage applicants, track active postings)</td><td><span class="badge badge-blue">Built</span></td></tr>
+      <tr style="background:rgba(208,32,32,0.03);"><td><strong>Credential Bridge ✦</strong></td><td>Wildcard</td><td>SkorAlignAgent → /student/qualifications — translates MUET, SKM, STPM, UTM degree to global equivalents with employer-readable descriptions; copy for resume</td><td><span class="badge badge-red">Wildcard</span></td></tr>
+      <tr style="background:rgba(208,32,32,0.03);"><td><strong>Lokal Route ✦</strong></td><td>Wildcard</td><td>LokalRouteAgent → /student/lokal + /candidate/lokal — gross salary minus real cost of living: KL vs hometown; shows what you actually keep, not the headline number</td><td><span class="badge badge-red">Wildcard</span></td></tr>
+      <tr style="background:rgba(208,32,32,0.03);"><td><strong>Gig Ledger ✦</strong></td><td>Wildcard</td><td>GigBridgeAgent → /candidate/gig — rewrites gig work history (Grab, Foodpanda, freelance) into CV-ready credentials HR systems understand</td><td><span class="badge badge-red">Wildcard</span></td></tr>
     </tbody>
   </table>
 
@@ -609,6 +632,155 @@
   <div class="pg-footer">
     <span>CareerLuhh · careerluhh.vercel.app</span>
     <span>github.com/snsyaqirah/CareerLuhh · Page 6</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAGE 7 · DIAGRAMS — AGENT COLLABORATION + SYSTEM ARCHITECTURE
+     ══════════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-num bg-blue">09</div>
+    <div>
+      <p class="t-label">System Diagrams</p>
+      <h2 class="t-h1">Agent Collaboration Flow</h2>
+    </div>
+  </div>
+
+  <p class="t-small mb16" style="opacity:0.65;">How the 16 agents connect across the three portals — data flows from Portfolio + Transcript into the Student pipeline, graduates into the Candidate pipeline, and consented signals flow to the Employer portal.</p>
+
+  <pre class="mermaid" style="background:white; border:2px solid #121212; padding:16px;">
+graph TD
+    subgraph Student["🎓 Student Portal"]
+        S5[Portfolio + Transcript] -->|data| S1[ReadinessAgent]
+        S5 -->|data| S6[ResumeAgent]
+        S1 -->|score| S2[NudgeAgent]
+        S1 -->|gaps| S3[NavigatorAgent]
+        S3 -->|path| S4[InternMatchAgent]
+        S4 -->|graduate| C1
+    end
+
+    subgraph Candidate["💼 Candidate Portal"]
+        C1[Career Profile] --> C2[JobMatchAgent]
+        C2 -->|matched roles| C3[InterviewPrepAgent]
+        C1 --> C4[AdvisorAgent]
+        C4 -->|plan| C5[SalaryAgent]
+        C6[ResumeOCRAgent] -->|parsed data| C1
+        C1 --> C7[NudgeAgent]
+    end
+
+    subgraph Employer["🏢 Employer Portal"]
+        E1[TrajectoryMatchAgent] -->|candidates| E2[TalentRadarAgent]
+        E3[RetentionSignalAgent] -->|alerts| E4[OnboardingAgent]
+        E5[WorkforceAgent] -->|projections| E3
+        C1 -.->|consented signals| E3
+    end
+
+    C2 -.->|job listings| E1
+  </pre>
+
+  <div class="sec-hd mt24">
+    <div class="sec-num bg-yellow" style="color:var(--ink);">10</div>
+    <div>
+      <p class="t-label">Architecture</p>
+      <h2 class="t-h2">System Architecture · Stage 1 → Stage 2</h2>
+    </div>
+  </div>
+
+  <pre class="mermaid" style="background:white; border:2px solid #121212; padding:16px;">
+graph LR
+    subgraph Client["Browser"]
+        LP[Landing Page /]
+        JP[Public Jobs /jobs]
+        SP[Student Portal /student/*]
+        CP[Candidate Portal /candidate/*]
+        EP[Employer Portal /employer/*]
+    end
+
+    subgraph NextJS["Next.js 15 App Router"]
+        Auth[Auth Context — localStorage]
+        MockData[Mock Data Layer — lib/mock-data/]
+        Shell[PortalShell — Shared Layout]
+        Guide[DemoGuide — Stage 1 Page Guide]
+    end
+
+    subgraph Stage2["Stage 2 — Backend Blueprint"]
+        API[Next.js API Routes]
+        Gemini[Gemini 2.0 Flash — Agent Engine]
+        Neon[Neon PostgreSQL — Prisma ORM]
+        NextAuth[NextAuth.js v5]
+    end
+
+    Client --> NextJS
+    MockData -.->|replaces with| API
+    Auth -.->|replaces with| NextAuth
+    API --> Gemini
+    API --> Neon
+  </pre>
+
+  <div class="pg-footer">
+    <span>CareerLuhh · System Proposal · Stage 1</span>
+    <span>Page 7</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAGE 8 · USER JOURNEY DIAGRAM
+     ══════════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="sec-hd">
+    <div class="sec-num bg-red">11</div>
+    <div>
+      <p class="t-label">System Diagrams</p>
+      <h2 class="t-h1">User Journey</h2>
+    </div>
+  </div>
+
+  <p class="t-small mb16" style="opacity:0.65;">End-to-end user path across all three portals — from first registration as a student, through internship and graduation, to active job hunting, application, and employer-side talent management.</p>
+
+  <pre class="mermaid" style="background:white; border:2px solid #121212; padding:16px;">
+journey
+    title CareerLuhh — User Paths
+    section Student
+      Register as Student: 5: Student
+      Complete onboarding profile: 4: Student
+      Add portfolio items: 5: Student, ResumeAgent
+      View readiness score + gaps: 5: Student, ReadinessAgent
+      Explore career roadmap paths: 5: Student, NavigatorAgent
+      Apply to matched internship: 4: Student, InternMatchAgent
+      Build resume from portfolio: 5: Student, ResumeAgent
+      Graduate — transfer to Candidate: 5: Student
+    section Candidate
+      Browse AI-matched jobs: 5: Candidate, JobMatchAgent
+      See skills gap per role: 5: Candidate
+      Get interview tips: 4: Candidate, InterviewPrepAgent
+      Track applications: 4: Candidate
+      Benchmark salary: 5: Candidate, SalaryAgent
+      Get 6-month next-move plan: 4: Candidate, AdvisorAgent
+      Credential gig work: 4: Candidate, GigBridgeAgent
+    section Employer
+      Search by trajectory: 5: Employer, TrajectoryMatchAgent
+      Review talent radar digest: 4: Employer, TalentRadarAgent
+      Receive retention alerts: 5: Employer, RetentionSignalAgent
+      Run check-in scheduler: 4: Employer, OnboardingAgent
+      Re-engage past candidates: 4: Employer
+      Run Resilience Planner: 5: Employer, WorkforceAgent
+  </pre>
+
+  <div style="margin-top:20px; background:var(--ink); color:white; padding:14px 18px; display:flex; justify-content:space-between; align-items:center;">
+    <div>
+      <p style="font-size:15px; font-weight:900; text-transform:uppercase; letter-spacing:-0.5px;">CareerLuhh</p>
+      <p class="t-tiny" style="opacity:0.55; margin-top:2px;">One profile. Three portals. The full arc of a career — visible for the first time.</p>
+    </div>
+    <div style="text-align:right;">
+      <p class="t-tiny" style="color:var(--blue); opacity:1;">careerluhh.vercel.app</p>
+      <p class="t-tiny" style="opacity:0.4; margin-top:2px;">github.com/snsyaqirah/CareerLuhh</p>
+    </div>
+  </div>
+
+  <div class="pg-footer">
+    <span>CareerLuhh · System Proposal · Stage 1</span>
+    <span>Page 8 · End</span>
   </div>
 </div>
 
